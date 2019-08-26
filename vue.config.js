@@ -1,14 +1,13 @@
 'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
-
-
+const defaultConfig = require('./src/api/globalconfig.js')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = defaultSettings.title || 'vue Element Admin' // page title
+const name = defaultSettings.title || 'Sanxin Cms' // page title
 // If your port is set to 80,
 // use administrator privileges to execute the command line.
 // For example, Mac: sudo npm run
@@ -35,15 +34,15 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    // proxy: {
-    //   [process.env.VUE_APP_BASE_API]: {
-    //     target: defaultConfig.baseURL,
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       ['^' + process.env.VUE_APP_BASE_API]: '/'
-    //     }
-    //   }
-    // },
+    proxy: {
+      [process.env.VUE_APP_BASE_API]: {
+        target: defaultConfig.baseURL,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API]: '/'
+        }
+      }
+    }
     // after: require('./mock/mock-server.js')
   },
   configureWebpack: {

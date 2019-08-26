@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import { getToken } from '@/utils/auth'
 
-export function getInfo(token) {
+export function getInfo() {
   return request({
     url: '/user/getInfo',
     method: 'post',
@@ -20,6 +20,7 @@ export function getMenus(roleid){
 export function logout() {
   return request({
     url: '/loginOut',
-    method: 'post'
+    method: 'post',
+     params: {"token":getToken()}
   })
 }

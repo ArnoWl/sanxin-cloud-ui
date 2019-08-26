@@ -5,6 +5,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
+import { constantRoutes} from '@/router'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -31,33 +32,18 @@ router.beforeEach(async(to, from, next) => {
         next()
       } else {
         try {
-          // get user info
-          // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-          store.dispatch('user/getInfo').then(res =>  { // 拉取user_info
-            const data=res.data;
-            if(data.status){
-              const roleid = data.roleid;
-              store.dispatch('user/getMenus',roleid).then(mres =>  { // 拉取user_info
-                const mdata=mres.data;
-                if(mdata.status){
-                  router.addRoutes(store.getters.addRouters)
-                  next({ ...to, replace: true })
-                }else{
-                   this.$message({
-                    message: data.msg,
-                    type: 'warning'
-                  });
-                }
-              })
-            }else{
-               this.$message({
-                message: data.msg,
-                type: 'warning'
-              });
-            }
+          await store.dispatch('user/getInfo').then(async res =>  { // 拉取user_info
+            const roles = res.roles
+            // console.log("allMenum::",constantRoutes)
+            const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+
+            // dynamically add accessible routes
+            router.addRoutes(accessRoutes)
+            // router.addRoutes(constantRoutes)
+            next({ ...to, replace: true })
+
           })
         } catch (error) {
-          // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
           Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
@@ -67,7 +53,6 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()
@@ -80,6 +65,5 @@ router.beforeEach(async(to, from, next) => {
 })
 
 router.afterEach(() => {
-  // finish progress bar
   NProgress.done()
 })

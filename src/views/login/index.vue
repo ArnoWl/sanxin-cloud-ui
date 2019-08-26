@@ -61,6 +61,8 @@
 import LangSelect from '@/components/LangSelect'
 import axios from 'axios'
 import { setToken } from '@/utils/auth'
+import qs from 'qs'
+
 export default {
   name: 'Login',
   components: { LangSelect },
@@ -94,6 +96,18 @@ export default {
       showDialog: false,
       redirect: undefined,
       otherQuery: {}
+    }
+  },
+  watch: {
+    $route: {
+      handler: function(route) {
+        const query = route.query
+        if (query) {
+          this.redirect = query.redirect
+          this.otherQuery = this.getOtherQuery(query)
+        }
+      },
+      immediate: true
     }
   },
   created() {
@@ -136,19 +150,19 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          const params = {
+            'username': this.loginForm.username,
+            'password': this.loginForm.password
+          }
           axios({
             method: 'post',
             url: this.Global.baseURL + 'login',
-            data: {
-              'username': this.loginForm.username,
-              'password': this.loginForm.password
-            }
+            data: qs.stringify(params)
           }).then((response) => {
             const data = response.data
             if (data.status) {
-              console.log('登陆:' + response.data.data)
               setToken(response.data.data)
-              this.$router.push({ path: '/' })
+              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
             } else {
               this.$message({
                 message: data.msg,
@@ -165,6 +179,14 @@ export default {
           return false
         }
       })
+    },
+    getOtherQuery(query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== 'redirect') {
+          acc[cur] = query[cur]
+        }
+        return acc
+      }, {})
     }
   }
 }
