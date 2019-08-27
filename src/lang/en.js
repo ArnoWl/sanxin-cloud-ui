@@ -171,5 +171,24 @@ export default {
     tagsView: 'Open Tags-View',
     fixedHeader: 'Fixed Header',
     sidebarLogo: 'Sidebar Logo'
+  },
+  advert: {
+    nickName: 'name',
+    phone: 'contact information',
+    address: 'region',
+    addressDetail: 'detailed address',
+    companyName: 'company name',
+    licenseCode: 'business license number',
+    licenseImg: 'licensed photos',
+    companyImg: 'company photos',
+    statusName: 'state',
+    createTime: 'application time',
+    checkTime: 'check time',
+    detail: 'detail',
+    handle: 'operation'
+  },
+  status: {
+    pass: 'pass',
+    reject: 'reject'
   }
 }

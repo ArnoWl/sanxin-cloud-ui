@@ -521,5 +521,29 @@ export const asyncRoutes = [
     ]
   },
 
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/404', hidden: true },
+
+  {
+    path: '/apply',
+    component: 'layout/Layout',
+    name: 'Apply',
+    meta: {
+      title: 'Apply',
+      icon: 'check'
+    },
+    children: [
+      {
+        path: 'advert',
+        component: () => import('@/views/apply/advert'),
+        name: 'AdvertApply',
+        meta: { title: 'advertApply' }
+      },
+      {
+        path: 'business',
+        component: () => import('@/views/apply/business'),
+        name: 'BusinessApply',
+        meta: { title: 'businessApply' }
+      }
+    ]
+  }
 ]

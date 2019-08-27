@@ -227,7 +227,38 @@ export const constantRoutes = [
       }
     ]
   },
-
+  {
+    path: '/apply',
+    component: Layout,
+    redirect: '/apply/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Apply',
+    meta: {
+      title: 'apply',
+      icon: 'lock',
+      roles: ['1', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'advert',
+        component: () => import('@/views/apply/advert'),
+        name: 'Advert',
+        meta: {
+          title: 'advertApply',
+          roles: ['1'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'business',
+        component: () => import('@/views/apply/business'),
+        name: 'Business',
+        meta: {
+          title: 'businessApply',
+          roles: ['1'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
   {
     path: '/error',
     component: Layout,
@@ -391,7 +422,6 @@ export const constantRoutes = [
 
   { path: '*', redirect: '/404', hidden: true }
 ]
-
 
 export const asyncRoutes = []
 /**
