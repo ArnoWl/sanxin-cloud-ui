@@ -1,6 +1,14 @@
 import request from '@/utils/request'
 import { getToken } from '@/utils/auth'
 
+export function login(params) {
+  return request({
+    url: '/login',
+    method: 'post',
+    params: params
+  })
+}
+
 export function getInfo() {
   return request({
     url: '/user/getInfo',

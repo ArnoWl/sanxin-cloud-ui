@@ -36,3 +36,11 @@ export function deleteRole(id) {
     method: 'delete'
   })
 }
+
+export function queryUserList(params) {
+  return request({
+    url: '/role/querySysUserList',
+    method: 'post',
+    params: params
+  })
+}

@@ -59,9 +59,6 @@
 
 <script>
 import LangSelect from '@/components/LangSelect'
-import axios from 'axios'
-import { setToken } from '@/utils/auth'
-import qs from 'qs'
 
 export default {
   name: 'Login',
@@ -150,30 +147,21 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          const params = {
-            'username': this.loginForm.username,
-            'password': this.loginForm.password
-          }
-          axios({
-            method: 'post',
-            url: this.Global.baseURL + 'login',
-            data: qs.stringify(params)
-          }).then((response) => {
-            const data = response.data
-            if (data.status) {
-              setToken(response.data.data)
-              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-            } else {
-              this.$message({
-                message: data.msg,
-                type: 'warning'
-              })
-            }
-            this.loading = false
-          }).catch((error) => {
-            console.log(error)
-            this.loading = false
-          })
+          this.$store.dispatch('user/login', this.loginForm)
+            .then((data) => {
+              if (data.status) {
+                this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+              } else {
+                this.$message({
+                  message: data.msg,
+                  type: 'warning'
+                })
+              }
+              this.loading = false
+            })
+            .catch(() => {
+              this.loading = false
+            })
         } else {
           console.log('error submit!!')
           return false
