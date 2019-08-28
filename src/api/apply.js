@@ -8,10 +8,18 @@ export function advertList(query) {
   })
 }
 
-export function handleAdverStatus(query) {
+export function handleAdvertStatus(query) {
   return request({
     url: '/advert/handleStatus',
     method: 'post',
+    params: query
+  })
+}
+
+export function getAdvertDetail(query) {
+  return request({
+    url: '/advert/getAdvertDetail',
+    method: 'get',
     params: query
   })
 }

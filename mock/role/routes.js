@@ -543,6 +543,20 @@ export const asyncRoutes = [
         component: () => import('@/views/apply/business'),
         name: 'BusinessApply',
         meta: { title: 'businessApply' }
+      },
+      {
+        path: 'advertDetail/:id(\\d+)',
+        component: () => import('@/views/apply/advertDetail'),
+        name: 'AdvertDetail',
+        meta: { title: 'advertDetail' },
+        hidden: true
+      },
+      {
+        path: 'businessDetail/:id(\\d+)',
+        component: () => import('@/views/apply/businessDetail'),
+        name: 'BusinessDetail',
+        meta: { title: 'businessDetail' },
+        hidden: true
       }
     ]
   }

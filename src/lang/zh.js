@@ -65,7 +65,9 @@ export default {
     profile: '个人中心',
     apply: '申请管理',
     advertApply: '广告申请',
-    businessApply: '加盟商申请'
+    businessApply: '加盟商申请',
+    advertDetail: '广告详情',
+    businessDetail: '加盟详情'
   },
   navbar: {
     dashboard: '首页',
@@ -197,6 +199,12 @@ export default {
     checkTime: '审核时间',
     detail: '详情',
     handle: '操作'
+  },
+  business: {
+    cardType: '证件类型',
+    cardNo: '证件号码',
+    baseMsg: '基本信息',
+    businessMsg: '资料'
   },
   status: {
     pass: '通过',

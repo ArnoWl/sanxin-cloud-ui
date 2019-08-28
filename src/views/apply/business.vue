@@ -23,11 +23,6 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
-      <!--<el-table-column
-        prop="addressDetail"
-        label="日期"
-        width="180">
-      </el-table-column>-->
       <el-table-column :label="$t('advert.nickName')" width="60px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.nickName }}</span>
@@ -38,14 +33,14 @@
           <span>{{ scope.row.phone }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('advert.address')" width="150px" align="center">
+      <el-table-column :label="$t('business.cardType')" width="100px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.address }}</span>
+          <span>{{ scope.row.cardTypeName }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('advert.addressDetail')" width="150px" align="center">
+      <el-table-column :label="$t('business.cardNo')" width="150px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.addressDetail }}</span>
+          <span>{{ scope.row.cardNo }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('advert.companyName')" width="150px" align="center">
@@ -58,34 +53,25 @@
           <span>{{ scope.row.licenseCode }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('advert.licenseImg')" width="150px" align="center">
-        <template slot-scope="scope">
-          <img :src="scope.row.licenseImg" width="40" height="40" class="head_pic">
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('advert.companyImg')" width="150px" align="center">
-        <template slot-scope="scope">
-          <img :src="scope.row.companyImg" width="40" height="40" class="head_pic">
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('advert.createTime')" min-width="140px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-        </template>
-      </el-table-column>
       <el-table-column :label="$t('advert.checkTime')" min-width="140px" align="center">
         <template slot-scope="scope">
           <span v-if="scope.row.status!='1'">{{ scope.row.checkTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
+      <el-table-column :label="$t('advert.statusName')" min-width="140px" align="center">
+        <template slot-scope="scope">
+          <span v-if="scope.row.status === 1">{{ $t('status.apply') }}</span>
+          <span v-if="scope.row.status === 2">{{ $t('status.success') }}</span>
+          <span v-if="scope.row.status === 3">{{ $t('status.fail') }}</span>
+        </template>
+      </el-table-column>
       <el-table-column :label="$t('advert.handle')" width="150px" align="center">
-        <template slot-scope="{row}">
-          <el-button v-if=" row.status=='1'" size="mini" type="primary" @click="handleApplyStatus(row,2)">
-            {{ $t('status.pass') }}
-          </el-button>
-          <el-button v-if=" row.status=='1'" size="mini" type="danger" @click="handleApplyStatus(row,3)">
-            {{ $t('status.reject') }}
-          </el-button>
+        <template slot-scope="scope">
+          <router-link :to="'/apply/businessDetail/'+scope.row.id">
+            <el-button type="primary" size="small" icon="el-icon-edit">
+              {{ $t('advert.detail') }}
+            </el-button>
+          </router-link>
         </template>
       </el-table-column>
     </el-table>
@@ -152,6 +138,7 @@ export default {
         id: row.id,
         status: status
       }
+      this.listLoading = true
       handleBusinessStatus(query).then(response => {
         if (response.status) {
           this.$message({

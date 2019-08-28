@@ -55,16 +55,18 @@
       </el-table-column>
       <el-table-column :label="$t('advert.statusName')" min-width="140px" align="center">
         <template slot-scope="scope">
-          <span v-if="scope.row.status === 1">申请中</span>
-          <span v-if="scope.row.status === 2">成功</span>
-          <span v-if="scope.row.status === 3">驳回</span>
+          <span v-if="scope.row.status === 1">{{ $t('status.apply') }}</span>
+          <span v-if="scope.row.status === 2">{{ $t('status.success') }}</span>
+          <span v-if="scope.row.status === 3">{{ $t('status.fail') }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('advert.handle')" width="150px" align="center">
-        <template slot-scope="{row}">
-          <el-button size="mini" type="primary" @click="showDetail(row)">
-            {{ $t('advert.detail') }}
-          </el-button>
+        <template slot-scope="scope">
+          <router-link :to="'/apply/advertDetail/'+scope.row.id">
+            <el-button type="primary" size="small" icon="el-icon-edit">
+              {{ $t('advert.detail') }}
+            </el-button>
+          </router-link>
         </template>
       </el-table-column>
     </el-table>

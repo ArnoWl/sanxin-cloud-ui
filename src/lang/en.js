@@ -173,22 +173,31 @@ export default {
     sidebarLogo: 'Sidebar Logo'
   },
   advert: {
-    nickName: 'name',
-    phone: 'contact information',
-    address: 'region',
-    addressDetail: 'detailed address',
-    companyName: 'company name',
-    licenseCode: 'business license number',
-    licenseImg: 'licensed photos',
-    companyImg: 'company photos',
-    statusName: 'state',
-    createTime: 'application time',
-    checkTime: 'check time',
-    detail: 'detail',
-    handle: 'operation'
+    nickName: 'Name',
+    phone: 'Contact Information',
+    address: 'Region',
+    addressDetail: 'Detailed Address',
+    companyName: 'Company Name',
+    licenseCode: 'Business License Number',
+    licenseImg: 'Licensed Photos',
+    companyImg: 'Company Photos',
+    statusName: 'State',
+    createTime: 'Application Time',
+    checkTime: 'Check Time',
+    detail: 'Detail',
+    handle: 'Operation'
+  },
+  business: {
+    cardType: 'Document Type',
+    cardNo: 'Identification Number',
+    baseMsg: 'Essential Information',
+    businessMsg: 'Data'
   },
   status: {
-    pass: 'pass',
-    reject: 'reject'
+    pass: 'Pass',
+    reject: 'Reject',
+    apply: 'In Application',
+    success: 'Success',
+    fail: 'Fail'
   }
 }

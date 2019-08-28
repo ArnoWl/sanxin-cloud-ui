@@ -256,6 +256,20 @@ export const constantRoutes = [
           title: 'businessApply',
           roles: ['1'] // or you can only set roles in sub nav
         }
+      },
+      {
+        path: 'advertDetail/:id(\\d+)',
+        component: () => import('@/views/apply/advertDetail'),
+        name: 'AdvertDetail',
+        meta: { title: 'advertDetail', activeMenu: '/apply/advert', roles: ['1'] },
+        hidden: true
+      },
+      {
+        path: 'businessDetail/:id(\\d+)',
+        component: () => import('@/views/apply/businessDetail'),
+        name: 'BusinessDetail',
+        meta: { title: 'businessDetail', activeMenu: '/apply/business', roles: ['1'] },
+        hidden: true
       }
     ]
   },
