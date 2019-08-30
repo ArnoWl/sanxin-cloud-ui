@@ -68,8 +68,18 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rulesAdd" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
         <el-input v-model="temp.id" type="hidden" readonly />
-        <el-form-item :label="$t('permission.rolename')" prop="login">
+        <el-form-item :label="$t('permission.rolename')" prop="name">
           <el-input v-model="temp.name" />
+        </el-form-item>
+        <el-form-item :label="$t('permission.menu')" prop="menuids">
+          <el-tree
+            :data="menusList"
+            show-checkbox
+            node-key="id"
+            :default-expand-all=true
+            :default-checked-keys="checkData"
+            :props="defaultProps">
+          </el-tree>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -86,10 +96,9 @@
 </template>
 
 <script>
-import { addUser, queryRoleList, updateRoleStatus } from '@/api/role'
+import { addUser, queryRoleList, updateRoleStatus, queryMenus } from '@/api/role'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
-import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 const statusTypeOptions = [
   { key: '1', display_name: 'OPEN' },
@@ -118,10 +127,8 @@ export default {
   },
   data() {
     return {
-      rolelist: [],
       tableKey: 0,
       list: null,
-      total: 0,
       listLoading: true,
       listQuery: {
         name: '',
@@ -143,6 +150,12 @@ export default {
       rulesAdd: {
         name: [{ required: true, message: 'login cannot be empty', trigger: 'blur' }]
       },
+      menusList: [],
+      checkData: [],
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      },
       downloadLoading: false
     }
   },
@@ -151,16 +164,40 @@ export default {
   },
   created() {
     this.getList()
-    this.getRolelist()
   },
   methods: {
     getList() {
       this.listLoading = true
       queryRoleList(this.listQuery).then(response => {
-        this.list = response.data
+        if (response.status) {
+          this.list = response.data
+        } else {
+          this.$notify({
+            title: 'ERROR',
+            message: response.msg,
+            type: 'error',
+            duration: 2000
+          })
+        }
         setTimeout(() => {
           this.listLoading = false
         }, 1 * 1000)
+      })
+    },
+    getAllMenus(roleid) {
+      queryMenus(roleid).then(response => {
+        console.log(response)
+        if (response.status) {
+          this.menusList = response.data.menusList
+          this.checkData = response.data.checkData
+        } else {
+          this.$notify({
+            title: 'ERROR',
+            message: response.msg,
+            type: 'error',
+            duration: 2000
+          })
+        }
       })
     },
     handleFilter() {
@@ -168,7 +205,7 @@ export default {
       this.getList()
     },
     handleUpdate(row) {
-      row.password = ''
+      this.getAllMenus(row.id)
       this.temp = Object.assign({}, row) // copy obj
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
@@ -177,6 +214,7 @@ export default {
       })
     },
     handleAdd() {
+      this.getAllMenus(null)
       this.temp = Object.assign({}, [])
       this.dialogStatus = 'create'
       this.dialogFormVisible = true

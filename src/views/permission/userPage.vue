@@ -194,15 +194,23 @@ export default {
   },
   created() {
     this.getList()
-    this.getRolelist()
   },
   methods: {
     getList() {
       this.listLoading = true
       queryUserList(this.listQuery).then(response => {
-        this.list = response.data.records
-        this.total = response.data.total
-        // Just to simulate the time of the request
+        if (response.status) {
+          this.list = response.data.records
+          this.total = response.data.total
+          // Just to simulate the time of the request
+        } else {
+          this.$notify({
+            title: 'ERROR',
+            message: response.msg,
+            type: 'error',
+            duration: 2000
+          })
+        }
         setTimeout(() => {
           this.listLoading = false
         }, 1 * 1000)
@@ -211,14 +219,23 @@ export default {
     getRolelist() { // 初始化下拉框动态数据
       const obj = []
       queryRoleList().then(res => {
-        // 关键的是将后台返回的数据进行遍历，并封装好
-        res.data.forEach((item, index) => {
-          obj.push({
-            id: item.id,
-            name: item.name
+        if (!res.status) {
+          this.$notify({
+            title: 'ERROR',
+            message: res.msg,
+            type: 'error',
+            duration: 2000
           })
-        })
-        this.rolelist = obj
+        } else {
+          // 关键的是将后台返回的数据进行遍历，并封装好
+          res.data.forEach((item, index) => {
+            obj.push({
+              id: item.id,
+              name: item.name
+            })
+          })
+          this.rolelist = obj
+        }
       })
     },
     handleFilter() {
@@ -227,6 +244,7 @@ export default {
     },
     handleUpdate(row) {
       row.password = ''
+      this.getRolelist()
       this.temp = Object.assign({}, row) // copy obj
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
@@ -235,6 +253,7 @@ export default {
       })
     },
     handleAdd() {
+      this.getRolelist()
       this.temp = Object.assign({}, [])
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
