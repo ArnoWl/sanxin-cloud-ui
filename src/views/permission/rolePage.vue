@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.login" :placeholder="$t('permission.rolename')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="listQuery.name" :placeholder="$t('permission.rolename')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
 
       <el-select v-model="listQuery.status" :placeholder="$t('permission.status')" clearable class="filter-item" style="width: 130px">
         <el-option v-for="item in statusTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
@@ -53,11 +53,11 @@
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
-        <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
+        <template slot-scope="{row}" v-if='row.id !=1'>
+          <el-button  type="primary" size="mini" @click="handleUpdate(row)">
             {{ $t('permission.edituser') }}
           </el-button>
-          <el-button size="mini" :type="row.status === 1 ? 'danger' : 'success'" @click="updateUserStatus(row)">
+          <el-button  size="mini" :type="row.status === 1 ? 'danger' : 'success'" @click="updateRoleStatus(row)">
             {{ row.status === 1 ? 'CLOSE' : 'OPEN' }}
           </el-button>
         </template>
@@ -100,12 +100,12 @@
 </template>
 
 <script>
-import { queryUserList, queryRoleList,addUser,updateUserStatus } from '@/api/role'
-import waves from '@/directive/waves' // waves directive
-import { parseTime } from '@/utils'
-import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+  import { addUser, queryRoleList, queryUserList, updateRoleStatus } from '@/api/role'
+  import waves from '@/directive/waves' // waves directive
+  import { parseTime } from '@/utils'
+  import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
-const statusTypeOptions = [
+  const statusTypeOptions = [
   { key: '1', display_name: 'OPEN' },
   { key: '0', display_name: 'CLOSE' }
 ]
@@ -141,17 +141,13 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        login: '',
+        name: '',
         status: ''
       },
       showReviewer: false,
       temp: {
         id: null,
-        login:"",
-        password:"",
-        roleid:null,
-        name:"",
-        phone:""
+        name:''
       },
       statusTypeOptions,
       dialogFormVisible: false,
@@ -162,13 +158,9 @@ export default {
       },
       dialogPvVisible: false,
       rulesAdd: {
-        login: [{ required: true, message: 'login cannot be empty', trigger: 'blur' }],
-        password: [{ required: true, message: 'password cannot be empty', trigger: 'blur' }],
-        roleid: [{ required: true, message: 'please select roles', trigger: 'blur' }]
+        name: [{ required: true, message: 'login cannot be empty', trigger: 'blur' }]
       },
       rulesUpdate: {
-        login: [{ required: true, message: 'login cannot be empty', trigger: 'blur' }],
-        roleid: [{ required: true, message: 'please select roles', trigger: 'blur' }]
       },
       downloadLoading: false
     }
@@ -185,7 +177,6 @@ export default {
       this.listLoading = true
       queryRoleList(this.listQuery).then(response => {
         this.list = response.data
-        // Just to simulate the time of the request
         setTimeout(() => {
           this.listLoading = false
         }, 1 * 1000)
@@ -262,22 +253,24 @@ export default {
         }
       })
     },
-    updateUserStatus(row){
+    updateRoleStatus(row){
       const status=row.status==1?0:1
       const params={
         "id":row.id,
         "status":status
       }
-      updateUserStatus(params).then(data => {
+      updateRoleStatus(params).then(data => {
         if(data.status){
           this.$notify({
             title: 'SUCCESS',
             message: data.msg,
             type: 'success',
-            duration: 2000
+            duration: 2000,
+            onClose: () => {
+              this.listQuery.page = 1
+              this.getList()
+            }
           })
-          this.listQuery.page = 1
-          this.getList()
         }else{
           this.$notify({
             title: 'ERROR',

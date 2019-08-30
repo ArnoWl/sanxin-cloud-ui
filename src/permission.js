@@ -33,8 +33,8 @@ router.beforeEach(async(to, from, next) => {
       } else {
         try {
           await store.dispatch('user/getInfo').then(async res => { // 拉取user_info
-            const roles = res.roles
-            await store.dispatch('permission/generateRoutes', roles).then(async res => {
+            const roleid = res.roleid
+            await store.dispatch('permission/generateRoutes',roleid).then(async res => {
               // dynamically add accessible routes
               router.addRoutes(res)
               next({ ...to, replace: true })

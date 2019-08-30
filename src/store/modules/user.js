@@ -1,14 +1,13 @@
-import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getInfo, login, logout } from '@/api/user'
+import { getToken, removeToken, setToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
-import { Message } from 'element-ui'
 
 const state = {
   token: getToken(),
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: ''
 }
 
 const mutations = {
@@ -59,16 +58,10 @@ const actions = {
         if (!data) {
           reject('Verification failed, please Login again.')
         }
-        const roles = data.roles
-
-        // roles must be a non-empty array
-        if (!roles || roles.length <= 0) {
-          reject('role is empty')
-        }
-        commit('SET_ROLES',roles)
+        commit('SET_ROLES', data.roleid)
         commit('SET_NAME', data.nickname)
         commit('SET_AVATAR', data.headurl)
-        commit('SET_INTRODUCTION',data.introduction)
+        commit('SET_INTRODUCTION', data.introduction)
         resolve(data)
       }).catch(error => {
         reject(error)

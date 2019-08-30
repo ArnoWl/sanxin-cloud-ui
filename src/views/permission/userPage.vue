@@ -253,7 +253,6 @@ export default {
             'name': this.temp.name,
             'phone': this.temp.phone
           }
-          console.log(params)
           addUser(params).then((res) => {
             const data = res
             if (data.status) {
@@ -261,10 +260,12 @@ export default {
                 title: 'SUCCESS',
                 message: data.msg,
                 type: 'success',
-                duration: 2000
+                duration: 2000,
+                onClose: () => {
+                  this.listQuery.page = 1
+                  this.getList()
+                }
               })
-              this.listQuery.page = 1
-              this.getList()
             } else {
               this.$notify({
                 title: 'ERROR',
@@ -290,10 +291,12 @@ export default {
             title: 'SUCCESS',
             message: data.msg,
             type: 'success',
-            duration: 2000
+            duration: 2000,
+            onClose: () => {
+              this.listQuery.page = 1
+              this.getList()
+            }
           })
-          this.listQuery.page = 1
-          this.getList()
         } else {
           this.$notify({
             title: 'ERROR',
@@ -302,7 +305,6 @@ export default {
             duration: 2000
           })
         }
-        this.dialogFormVisible = false
       })
       console.log(params)
     },

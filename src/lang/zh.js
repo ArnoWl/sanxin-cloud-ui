@@ -102,7 +102,10 @@ export default {
     phone: '联系方式',
     createtime: '创建时间',
     rolename: '角色',
-    adduser: '添加操作员'
+    adduser: '添加操作员',
+    edituser :'编辑',
+    password:'密码',
+    nickname:'姓名'
   },
   guide: {
     description: '引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。本 Demo 是基于',

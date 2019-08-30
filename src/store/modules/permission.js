@@ -12,10 +12,10 @@ export function filterAsyncRoutes(routes) {
   const res = []
   routes.forEach(route => {
     const tmp = { ...route }
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children)
-      }
-      res.push(tmp)
+    if (tmp.children) {
+      tmp.children = filterAsyncRoutes(tmp.children)
+    }
+    res.push(tmp)
   })
   return res
 }
@@ -36,16 +36,16 @@ const actions = {
   generateRoutes: function({ commit }, roles) {
     return new Promise(resolve => {
       const arr = []
-      queryMyroleMenus(1).then(response => {
+      queryMyroleMenus(roles).then(response => {
         const { data } = response
         for (var i = 0; i < data.length; i++) {
           const childlist = data[i].childList
           const children = []
           for (var c = 0; c < childlist.length; c++) {
-            let url = childlist[c].url
+            const url = childlist[c].url
             const child = {
               path: url,
-              component: () => import(`@/views${url}` ),
+              component: () => import(`@/views${url}`),
               name: url,
               meta: {
                 title: childlist[c].menuname
@@ -69,7 +69,6 @@ const actions = {
         var page404 = { path: '*', redirect: '/404', hidden: true }
         arr.push(page404)
         const accessedRoutes = filterAsyncRoutes(arr)
-        console.log('::', accessedRoutes)
         commit('SET_ROUTES', accessedRoutes)
         resolve(accessedRoutes)
       })

@@ -63,10 +63,11 @@ export function addUser(params) {
 /**
  * 查询角色列表不用分页
  */
-export function queryRoleList() {
+export function queryRoleList(params) {
   return request({
     url: '/role/queryRoleList',
-    method: 'post'
+    method: 'post',
+    params: params
   })
 }
 
@@ -89,5 +90,13 @@ export function queryMyroleMenus(roleid) {
     url: '/role/queryMyroleMenus',
     method: 'post',
     params: { 'roleid': roleid }
+  })
+}
+
+export function updateRoleStatus(params) {
+  return request({
+    url: '/role/updateRoleStatus',
+    method: 'put',
+    params: params
   })
 }
