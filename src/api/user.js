@@ -29,6 +29,6 @@ export function logout() {
   return request({
     url: '/loginOut',
     method: 'post',
-     params: {"token":getToken()}
+    params: {"token":getToken()}
   })
 }

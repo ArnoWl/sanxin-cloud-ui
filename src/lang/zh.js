@@ -62,12 +62,7 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
     externalLink: '外链',
-    profile: '个人中心',
-    apply: '申请管理',
-    advertApply: '广告申请',
-    businessApply: '加盟商申请',
-    advertDetail: '广告详情',
-    businessDetail: '加盟详情'
+    profile: '个人中心'
   },
   navbar: {
     dashboard: '首页',
@@ -106,7 +101,8 @@ export default {
     name: '名称',
     phone: '联系方式',
     createtime: '创建时间',
-    rolename: '角色'
+    rolename: '角色',
+    adduser: '添加操作员'
   },
   guide: {
     description: '引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。本 Demo 是基于',
@@ -184,33 +180,5 @@ export default {
     tagsView: '开启 Tags-View',
     fixedHeader: '固定 Header',
     sidebarLogo: '侧边栏 Logo'
-  },
-  advert: {
-    nickName: '姓名',
-    phone: '联系方式',
-    address: '地区',
-    addressDetail: '详细地址',
-    companyName: '公司名称',
-    licenseCode: '营业执照号',
-    licenseImg: '执照照片',
-    companyImg: '公司照片',
-    statusName: '状态',
-    createTime: '申请时间',
-    checkTime: '审核时间',
-    detail: '详情',
-    handle: '操作'
-  },
-  business: {
-    cardType: '证件类型',
-    cardNo: '证件号码',
-    baseMsg: '基本信息',
-    businessMsg: '资料'
-  },
-  status: {
-    pass: '通过',
-    reject: '驳回',
-    apply: '申请中',
-    success: '成功',
-    fail: '驳回'
   }
 }

@@ -5,7 +5,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
-import { constantRoutes} from '@/router'
+import { constantRoutes } from '@/router'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -32,16 +32,13 @@ router.beforeEach(async(to, from, next) => {
         next()
       } else {
         try {
-          await store.dispatch('user/getInfo').then(async res =>  { // 拉取user_info
+          await store.dispatch('user/getInfo').then(async res => { // 拉取user_info
             const roles = res.roles
-            // console.log("allMenum::",constantRoutes)
-            const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
-
-            // dynamically add accessible routes
-            router.addRoutes(accessRoutes)
-            // router.addRoutes(constantRoutes)
-            next({ ...to, replace: true })
-
+            await store.dispatch('permission/generateRoutes', roles).then(async res => {
+              // dynamically add accessible routes
+              router.addRoutes(res)
+              next({ ...to, replace: true })
+            })
           })
         } catch (error) {
           await store.dispatch('user/resetToken')

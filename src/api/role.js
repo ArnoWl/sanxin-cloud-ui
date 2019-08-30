@@ -37,10 +37,57 @@ export function deleteRole(id) {
   })
 }
 
+/**
+ * 查询操作员列表分页
+ * @param params
+ */
 export function queryUserList(params) {
   return request({
     url: '/role/querySysUserList',
     method: 'post',
     params: params
+  })
+}
+
+/**
+ * 添加操作员
+ * @param params
+ */
+export function addUser(params) {
+  return request({
+    url: '/role/addUser',
+    method: 'post',
+    params: params
+  })
+}
+/**
+ * 查询角色列表不用分页
+ */
+export function queryRoleList() {
+  return request({
+    url: '/role/queryRoleList',
+    method: 'post'
+  })
+}
+
+export function updateUserStatus(params) {
+  return request({
+    url: '/role/updateUserStatus',
+    method: 'post',
+    params: params
+  })
+}
+export function queryMenus(roleid) {
+  return request({
+    url: '/role/queryMenus',
+    method: 'post',
+    params: { 'roleid': roleid }
+  })
+}
+export function queryMyroleMenus(roleid) {
+  return request({
+    url: '/role/queryMyroleMenus',
+    method: 'post',
+    params: { 'roleid': roleid }
   })
 }

@@ -1,36 +1,22 @@
-import { asyncRoutes, constantRoutes } from '@/router'
-
-/**
- * Use meta.role to determine if the current user has permission
- * @param roles
- * @param route
- */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
-  } else {
-    return true
-  }
-}
+import { queryMyroleMenus } from '@/api/role'
+import { constantRoutes } from '@/router'
+/* Layout */
+import Layout from '@/layout'
 
 /**
  * Filter asynchronous routing tables by recursion
  * @param routes asyncRoutes
  * @param roles
  */
-export function filterAsyncRoutes(routes, roles) {
+export function filterAsyncRoutes(routes) {
   const res = []
-
   routes.forEach(route => {
     const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
       if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
+        tmp.children = filterAsyncRoutes(tmp.children)
       }
       res.push(tmp)
-    }
   })
-
   return res
 }
 
@@ -47,16 +33,46 @@ const mutations = {
 }
 
 const actions = {
-  generateRoutes({ commit }, roles) {
+  generateRoutes: function({ commit }, roles) {
     return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('1')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+      const arr = []
+      queryMyroleMenus(1).then(response => {
+        const { data } = response
+        for (var i = 0; i < data.length; i++) {
+          const childlist = data[i].childList
+          const children = []
+          for (var c = 0; c < childlist.length; c++) {
+            let url = childlist[c].url
+            const child = {
+              path: url,
+              component: () => import(`@/views${url}` ),
+              name: url,
+              meta: {
+                title: childlist[c].menuname
+              }
+            }
+            children.push(child)
+          }
+          const main = {
+            path: '/' + data[i].url,
+            component: Layout,
+            alwaysShow: true, // will always show the root menu
+            name: data[i].url,
+            meta: {
+              title: data[i].menuname,
+              icon: data[i].icon
+            },
+            children: children
+          }
+          arr.push(main)
+        }
+        var page404 = { path: '*', redirect: '/404', hidden: true }
+        arr.push(page404)
+        const accessedRoutes = filterAsyncRoutes(arr)
+        console.log('::', accessedRoutes)
+        commit('SET_ROUTES', accessedRoutes)
+        resolve(accessedRoutes)
+      })
     })
   }
 }
