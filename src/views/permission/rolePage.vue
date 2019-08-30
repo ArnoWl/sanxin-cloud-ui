@@ -53,11 +53,11 @@
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
-        <template slot-scope="{row}" v-if='row.id !=1'>
-          <el-button  type="primary" size="mini" @click="handleUpdate(row)">
+        <template v-if="row.id !=1" slot-scope="{row}">
+          <el-button type="primary" size="mini" @click="handleUpdate(row)">
             {{ $t('permission.edituser') }}
           </el-button>
-          <el-button  size="mini" :type="row.status === 1 ? 'danger' : 'success'" @click="updateRoleStatus(row)">
+          <el-button size="mini" :type="row.status === 1 ? 'danger' : 'success'" @click="updateRoleStatus(row)">
             {{ row.status === 1 ? 'CLOSE' : 'OPEN' }}
           </el-button>
         </template>
@@ -66,24 +66,10 @@
 
     <!--弹出框-->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm" :rules="dialogStatus==='create'?rulesAdd:rulesUpdate" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
-        <el-input type="text" v-model="temp.id" readonly  />
-        <el-form-item :label="$t('permission.login')" prop="login">
-          <el-input v-model="temp.login" />
-        </el-form-item>
-        <el-form-item :label="$t('permission.password')" prop="password" >
-          <el-input v-model="temp.password" />
-        </el-form-item>
-        <el-form-item :label="$t('permission.rolename')" prop="roleid">
-          <el-select v-model="temp.roleid" class="filter-item" placeholder="Please select">
-            <el-option v-for="item in rolelist" :key="item.id" :label="item.name" :value="item.id" />
-          </el-select>
-        </el-form-item>
-        <el-form-item :label="$t('permission.nickname')" prop="name">
+      <el-form ref="dataForm" :rules="rulesAdd" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
+        <el-input v-model="temp.id" type="hidden" readonly />
+        <el-form-item :label="$t('permission.rolename')" prop="login">
           <el-input v-model="temp.name" />
-        </el-form-item>
-        <el-form-item :label="$t('permission.phone')" prop="phone">
-          <el-input v-model="temp.phone" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -100,12 +86,12 @@
 </template>
 
 <script>
-  import { addUser, queryRoleList, queryUserList, updateRoleStatus } from '@/api/role'
-  import waves from '@/directive/waves' // waves directive
-  import { parseTime } from '@/utils'
-  import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import { addUser, queryRoleList, updateRoleStatus } from '@/api/role'
+import waves from '@/directive/waves' // waves directive
+import { parseTime } from '@/utils'
+import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
-  const statusTypeOptions = [
+const statusTypeOptions = [
   { key: '1', display_name: 'OPEN' },
   { key: '0', display_name: 'CLOSE' }
 ]
@@ -117,7 +103,6 @@ const statusTypeKeyValue = statusTypeOptions.reduce((acc, cur) => {
 
 export default {
   name: 'ComplexTable',
-  components: { Pagination },
   directives: { waves },
   filters: {
     statusFilter(status) {
@@ -133,21 +118,19 @@ export default {
   },
   data() {
     return {
-      rolelist:[],
+      rolelist: [],
       tableKey: 0,
       list: null,
       total: 0,
       listLoading: true,
       listQuery: {
-        page: 1,
-        limit: 10,
         name: '',
         status: ''
       },
       showReviewer: false,
       temp: {
         id: null,
-        name:''
+        name: ''
       },
       statusTypeOptions,
       dialogFormVisible: false,
@@ -159,8 +142,6 @@ export default {
       dialogPvVisible: false,
       rulesAdd: {
         name: [{ required: true, message: 'login cannot be empty', trigger: 'blur' }]
-      },
-      rulesUpdate: {
       },
       downloadLoading: false
     }
@@ -182,25 +163,12 @@ export default {
         }, 1 * 1000)
       })
     },
-    getRolelist() { // 初始化下拉框动态数据
-      const obj = []
-      queryRoleList().then(res => {
-        // 关键的是将后台返回的数据进行遍历，并封装好
-        res.data.forEach((item, index) => {
-          obj.push({
-            id: item.id,
-            name: item.name
-          })
-        })
-        this.rolelist = obj
-      })
-    },
     handleFilter() {
       this.listQuery.page = 1
       this.getList()
     },
     handleUpdate(row) {
-      row.password=""
+      row.password = ''
       this.temp = Object.assign({}, row) // copy obj
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
@@ -219,18 +187,18 @@ export default {
     createData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          const params={
-            "id":this.temp.id,
-            "login":this.temp.login,
-            "password":this.temp.password,
-            "roleid":this.temp.roleid,
-            "name":this.temp.name,
-            "phone":this.temp.phone
+          const params = {
+            'id': this.temp.id,
+            'login': this.temp.login,
+            'password': this.temp.password,
+            'roleid': this.temp.roleid,
+            'name': this.temp.name,
+            'phone': this.temp.phone
           }
           console.log(params)
           addUser(params).then((res) => {
-            const data=res
-            if(data.status){
+            const data = res
+            if (data.status) {
               this.$notify({
                 title: 'SUCCESS',
                 message: data.msg,
@@ -239,8 +207,7 @@ export default {
               })
               this.listQuery.page = 1
               this.getList()
-
-            }else{
+            } else {
               this.$notify({
                 title: 'ERROR',
                 message: data.msg,
@@ -253,25 +220,23 @@ export default {
         }
       })
     },
-    updateRoleStatus(row){
-      const status=row.status==1?0:1
-      const params={
-        "id":row.id,
-        "status":status
+    updateRoleStatus(row) {
+      const status = row.status == 1 ? 0 : 1
+      const params = {
+        'id': row.id,
+        'status': status
       }
       updateRoleStatus(params).then(data => {
-        if(data.status){
+        if (data.status) {
           this.$notify({
             title: 'SUCCESS',
             message: data.msg,
             type: 'success',
-            duration: 2000,
-            onClose: () => {
-              this.listQuery.page = 1
-              this.getList()
-            }
+            duration: 2000
           })
-        }else{
+          this.listQuery.page = 1
+          this.getList()
+        } else {
           this.$notify({
             title: 'ERROR',
             message: data.msg,
@@ -281,7 +246,6 @@ export default {
         }
         this.dialogFormVisible = false
       })
-      console.log(params)
     },
     formatJson(filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => {
