@@ -100,3 +100,11 @@ export function updateRoleStatus(params) {
     params: params
   })
 }
+
+export function updateRoles(params) {
+  return request({
+    url: '/role/updateRoles',
+    method: 'put',
+    params: params
+  })
+}

@@ -55,6 +55,7 @@ const actions = {
           }
           const main = {
             path: '/' + data[i].url,
+            redirect: 'noRedirect',
             component: Layout,
             alwaysShow: true, // will always show the root menu
             name: data[i].url,

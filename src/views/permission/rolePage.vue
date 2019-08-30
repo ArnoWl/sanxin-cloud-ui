@@ -73,13 +73,14 @@
         </el-form-item>
         <el-form-item :label="$t('permission.menu')" prop="menuids">
           <el-tree
+            ref="tree"
             :data="menusList"
             show-checkbox
             node-key="id"
-            :default-expand-all=true
+            :default-expand-all="true"
             :default-checked-keys="checkData"
-            :props="defaultProps">
-          </el-tree>
+            :props="defaultProps"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -96,7 +97,7 @@
 </template>
 
 <script>
-import { addUser, queryRoleList, updateRoleStatus, queryMenus } from '@/api/role'
+import { updateRoles, queryRoleList, updateRoleStatus, queryMenus } from '@/api/role'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 
@@ -148,7 +149,7 @@ export default {
       },
       dialogPvVisible: false,
       rulesAdd: {
-        name: [{ required: true, message: 'login cannot be empty', trigger: 'blur' }]
+        name: [{ required: true, message: 'Role name cannot be empty', trigger: 'blur' }]
       },
       menusList: [],
       checkData: [],
@@ -224,17 +225,15 @@ export default {
     },
     createData() {
       this.$refs['dataForm'].validate((valid) => {
+        const menuids = this.$refs.tree.getCheckedKeys()
         if (valid) {
           const params = {
             'id': this.temp.id,
-            'login': this.temp.login,
-            'password': this.temp.password,
-            'roleid': this.temp.roleid,
-            'name': this.temp.name,
-            'phone': this.temp.phone
+            'name':this.temp.name,
+            'menuids': menuids.join(',')
           }
           console.log(params)
-          addUser(params).then((res) => {
+          updateRoles(params).then((res) => {
             const data = res
             if (data.status) {
               this.$notify({

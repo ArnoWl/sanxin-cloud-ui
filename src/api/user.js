@@ -1,5 +1,4 @@
 import request from '@/utils/request'
-import { getToken } from '@/utils/auth'
 
 export function login(params) {
   return request({
