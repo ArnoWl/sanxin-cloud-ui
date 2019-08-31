@@ -56,7 +56,7 @@ service.interceptors.response.use(
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === '1001') {
         // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
+        MessageBox.confirm('Please login again,'+res.msg, 'Confirm logout', {
           confirmButtonText: 'Re-Login',
           cancelButtonText: 'Cancel',
           type: 'warning'
@@ -68,7 +68,7 @@ service.interceptors.response.use(
       } else {
         Message({
           message: res.msg || 'Error',
-          type: 'error',
+          type: 'warning',
           duration: 1.5 * 1000,
           onClose: () => {
             return Promise.reject(res.msg || 'Error')
@@ -80,7 +80,6 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err' + error) // for debug
     Message({
       message: error.message,
       type: 'error',

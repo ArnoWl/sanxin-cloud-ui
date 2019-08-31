@@ -100,6 +100,7 @@
 import { updateRoles, queryRoleList, updateRoleStatus, queryMenus } from '@/api/role'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
+import store from '@/store'
 
 const statusTypeOptions = [
   { key: '1', display_name: 'OPEN' },
@@ -206,7 +207,8 @@ export default {
       this.getList()
     },
     handleUpdate(row) {
-      this.getAllMenus(row.id)
+      console.log("rooo:",store.getters.roles)
+      this.getAllMenus(store.getters.roles)
       this.temp = Object.assign({}, row) // copy obj
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
@@ -226,13 +228,25 @@ export default {
     createData() {
       this.$refs['dataForm'].validate((valid) => {
         const menuids = this.$refs.tree.getCheckedKeys()
+        if (menuids == null || menuids.length < 1) {
+          this.$notify({
+            title: 'ERROR',
+            message: '请选择菜单权限',
+            type: 'error',
+            duration: 2000
+          })
+          return
+        }
+        var menus = menuids.join(',')
+        this.$refs.tree.getHalfCheckedNodes().forEach(l => {
+          menus = menus + ',' + l.id
+        })
         if (valid) {
           const params = {
             'id': this.temp.id,
-            'name':this.temp.name,
-            'menuids': menuids.join(',')
+            'name': this.temp.name,
+            'menuids': menus
           }
-          console.log(params)
           updateRoles(params).then((res) => {
             const data = res
             if (data.status) {
