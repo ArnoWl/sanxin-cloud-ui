@@ -55,14 +55,14 @@
       </el-table-column>
       <el-table-column :label="$t('advert.statusName')" min-width="60px" align="center">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.status === 1" type="primary" size="small">{{ $t('status.apply') }}</el-tag>
+          <el-tag v-if="scope.row.status === 1" type="info" size="small">{{ $t('status.apply') }}</el-tag>
           <el-tag v-if="scope.row.status === 2" type="success" size="small">{{ $t('status.success') }}</el-tag>
           <el-tag v-if="scope.row.status === 3" type="danger" size="small">{{ $t('status.fail') }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column :label="$t('status.handle')" width="150px" align="center">
         <template slot-scope="scope">
-          <router-link :to="'/apply/advertDetail/'+scope.row.id">
+          <router-link :to="'/apply/agentDetail/'+scope.row.id">
             <el-button type="primary" size="small" icon="el-icon-edit">
               {{ $t('advert.detail') }}
             </el-button>
@@ -78,7 +78,7 @@
 <script>
 
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-import { advertList } from '@/api/apply'
+import { agentList } from '@/api/apply'
 import waves from '@/directive/waves' // waves directive
 
 export default {
@@ -113,7 +113,7 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      advertList(this.listQuery).then(response => {
+      agentList(this.listQuery).then(response => {
         this.list = response.data.records
         this.total = response.data.total
         // Just to simulate the time of the request

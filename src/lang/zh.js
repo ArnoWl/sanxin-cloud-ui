@@ -62,7 +62,10 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
     externalLink: '外链',
-    profile: '个人中心'
+    profile: '个人中心',
+    advertDetail: '广告详情',
+    businessDetail: '加盟详情',
+    agentDetail: '代理详情'
   },
   navbar: {
     dashboard: '首页',
@@ -103,9 +106,9 @@ export default {
     createtime: '创建时间',
     rolename: '角色',
     adduser: '添加操作员',
-    edituser :'编辑',
-    password:'密码',
-    nickname:'姓名'
+    edituser: '编辑',
+    password: '密码',
+    nickname: '姓名'
   },
   guide: {
     description: '引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。本 Demo 是基于',
@@ -183,5 +186,64 @@ export default {
     tagsView: '开启 Tags-View',
     fixedHeader: '固定 Header',
     sidebarLogo: '侧边栏 Logo'
+  },
+  advert: {
+    nickName: '姓名',
+    phone: '联系方式',
+    address: '地区',
+    addressDetail: '详细地址',
+    companyName: '公司名称',
+    licenseCode: '营业执照号',
+    licenseImg: '执照照片',
+    companyImg: '公司照片',
+    statusName: '状态',
+    createTime: '申请时间',
+    checkTime: '审核时间',
+    detail: '详情'
+  },
+  agent: {
+    pass: '设置密码'
+  },
+  business: {
+    cardType: '证件类型',
+    cardNo: '证件号码',
+    baseMsg: '基本信息',
+    businessMsg: '资料',
+    cardFront: '正面',
+    cardBack: '反面',
+    passPort: '护照'
+  },
+  customer: {
+    phone: '联系方式',
+    email: '邮箱',
+    nickName: '昵称',
+    areaCode: '区号',
+    isReal: '实名',
+    statusName: '状态',
+    createTime: '注册时间',
+    money: '余额',
+    hour: '时长',
+    deposit: '押金',
+    freeze: '冻结',
+    unfreeze: '解冻',
+    resetPass: '重置交易密码',
+    restPay: '重置登录密码',
+    handleStatusTip: '确认操作当前用户状态?',
+    payWord: '交易密码',
+    passWord: '登录密码'
+  },
+  status: {
+    pass: '通过',
+    reject: '驳回',
+    apply: '申请中',
+    success: '成功',
+    fail: '驳回',
+    cancel: '取消',
+    confirm: '确定',
+    yes: '是',
+    no: '否',
+    handle: '操作',
+    effective: '有效',
+    invalid: '无效'
   }
 }

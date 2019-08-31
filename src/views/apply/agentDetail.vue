@@ -27,9 +27,9 @@
           <img :src="postForm.companyImg" width="165" height="110" class="head_pic">
         </el-form-item>
         <el-form-item :label="$t('advert.statusName')">
-          <el-tag v-if="postForm.status === 1" type="primary" size="small">{{ $t('status.apply') }}</el-tag>
-          <el-tag v-if="postForm.status === 2" type="success" size="small">{{ $t('status.success') }}</el-tag>
-          <el-tag v-if="postForm.status === 3" type="danger" size="small">{{ $t('status.fail') }}</el-tag>
+          <el-button v-if="postForm.status === 1" type="primary" size="small">{{ $t('status.apply') }}</el-button>
+          <el-button v-if="postForm.status === 2" type="success" size="small">{{ $t('status.success') }}</el-button>
+          <el-button v-if="postForm.status === 3" type="danger" size="small">{{ $t('status.fail') }}</el-button>
         </el-form-item>
         <el-form-item :label="$t('advert.createTime')">
           <span>{{ postForm.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
@@ -38,16 +38,32 @@
           <span v-if="postForm.status != 1">{{ postForm.checkTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </el-form-item>
         <el-form-item v-if="postForm.status == 1">
-          <el-button type="primary" @click="onSubmit(2)">{{ $t('status.pass') }}</el-button>
+          <el-button type="primary" @click="handleAddPass(2)">{{ $t('status.pass') }}</el-button>
           <el-button type="danger" @click="onSubmit(3)">{{ $t('status.fail') }}</el-button>
         </el-form-item>
       </el-form>
     </div>
+
+    <el-dialog :visible.sync="dialogVisible">
+      <el-form :model="postForm" label-width="80px" label-position="left">
+        <el-form-item :label="$t('agent.pass')">
+          <el-input v-model="postForm.passWord" />
+        </el-form-item>
+      </el-form>
+      <div style="text-align:right;">
+        <el-button type="danger" @click="dialogVisible=false">
+          {{ $t('status.cancel') }}
+        </el-button>
+        <el-button type="primary" @click="onSubmit(2)">
+          {{ $t('status.confirm') }}
+        </el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { handleAdvertStatus, getAdvertDetail } from '@/api/apply'
+import { handleAgentStatus, getAgentDetail } from '@/api/apply'
 
 const defaultForm = {
   nickName: '', // 姓名
@@ -60,7 +76,8 @@ const defaultForm = {
   companyImg: '', // 公司照片地址
   status: '', // 申请状态
   createTime: undefined,
-  checkTime: undefined
+  checkTime: undefined,
+  passWord: ''
 }
 export default {
   name: 'AdvertDetail',
@@ -68,7 +85,8 @@ export default {
     return {
       postForm: Object.assign({}, defaultForm),
       loading: false,
-      id: 0
+      id: 0,
+      dialogVisible: false
     }
   },
   created() {
@@ -81,25 +99,29 @@ export default {
       const query = {
         id: this.id
       }
-      getAdvertDetail(query).then(response => {
+      getAgentDetail(query).then(response => {
         this.postForm = response.data
       }).catch(err => {
         console.log(err)
       })
     },
+    handleAddPass() {
+      this.dialogVisible = true
+    },
     onSubmit(status) {
-      console.log(this.id)
       const query = {
         id: this.id,
-        status: status
+        status: status,
+        passWord: this.postForm.passWord
       }
       this.listLoading = true
-      handleAdvertStatus(query).then(response => {
+      handleAgentStatus(query).then(response => {
         if (response.status) {
           this.$message({
             message: response.msg,
             type: 'success'
           })
+          this.dialogVisible = false
         } else {
           this.$message({
             message: response.msg,

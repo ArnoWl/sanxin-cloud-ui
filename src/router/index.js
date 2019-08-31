@@ -76,6 +76,35 @@ export const constantRoutes = [
         meta: { title: 'dashboard', icon: 'dashboard', affix: true }
       }
     ]
+  },
+  {
+    path: '/apply',
+    component: Layout,
+    redirect: 'apply',
+    hidden: true,
+    children: [
+      {
+        path: 'advertDetail/:id(\\d+)',
+        component: () => import('@/views/apply/advertDetail'),
+        name: 'AdvertDetail',
+        meta: { title: 'advertDetail' },
+        hidden: true
+      },
+      {
+        path: 'businessDetail/:id(\\d+)',
+        component: () => import('@/views/apply/businessDetail'),
+        name: 'BusinessDetail',
+        meta: { title: 'businessDetail' },
+        hidden: true
+      },
+      {
+        path: 'agentDetail/:id(\\d+)',
+        component: () => import('@/views/apply/agentDetail'),
+        name: 'AgentDetail',
+        meta: { title: 'agentDetail' },
+        hidden: true
+      }
+    ]
   }
 ]
 const createRouter = () => new Router({

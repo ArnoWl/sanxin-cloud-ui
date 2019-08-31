@@ -53,19 +53,19 @@
           <span>{{ scope.row.licenseCode }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('advert.checkTime')" min-width="140px" align="center">
+      <el-table-column :label="$t('advert.createTime')" min-width="100px" align="center">
         <template slot-scope="scope">
-          <span v-if="scope.row.status!='1'">{{ scope.row.checkTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ scope.row.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('advert.statusName')" min-width="140px" align="center">
+      <el-table-column :label="$t('advert.statusName')" min-width="60px" align="center">
         <template slot-scope="scope">
-          <span v-if="scope.row.status === 1">{{ $t('status.apply') }}</span>
-          <span v-if="scope.row.status === 2">{{ $t('status.success') }}</span>
-          <span v-if="scope.row.status === 3">{{ $t('status.fail') }}</span>
+          <el-tag v-if="scope.row.status === 1" type="info" size="small">{{ $t('status.apply') }}</el-tag>
+          <el-tag v-if="scope.row.status === 2" type="success" size="small">{{ $t('status.success') }}</el-tag>
+          <el-tag v-if="scope.row.status === 3" type="danger" size="small">{{ $t('status.fail') }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('advert.handle')" width="150px" align="center">
+      <el-table-column :label="$t('status.handle')" width="150px" align="center">
         <template slot-scope="scope">
           <router-link :to="'/apply/businessDetail/'+scope.row.id">
             <el-button type="primary" size="small" icon="el-icon-edit">

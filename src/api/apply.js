@@ -32,9 +32,41 @@ export function businessList(query) {
   })
 }
 
+export function getBusinessDetail(query) {
+  return request({
+    url: '/business/getBusinessDetail',
+    method: 'get',
+    params: query
+  })
+}
+
 export function handleBusinessStatus(query) {
   return request({
     url: '/business/handleStatus',
+    method: 'post',
+    params: query
+  })
+}
+
+export function agentList(query) {
+  return request({
+    url: '/agent/list',
+    method: 'get',
+    params: query
+  })
+}
+
+export function getAgentDetail(query) {
+  return request({
+    url: '/agent/getAgentDetail',
+    method: 'get',
+    params: query
+  })
+}
+
+export function handleAgentStatus(query) {
+  return request({
+    url: '/agent/handleStatus',
     method: 'post',
     params: query
   })
