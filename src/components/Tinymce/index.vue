@@ -16,9 +16,11 @@ import editorImage from './components/EditorImage'
 import plugins from './plugins'
 import toolbar from './toolbar'
 import load from './dynamicLoadScript'
+import { getLanguage, getToken } from '@/utils/auth'
 
 // why use this cdn, detail see https://github.com/PanJiaChen/tinymce-all-in-one
 const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js'
+const defaultConfig = require('@/api/globalconfig.js')
 
 export default {
   name: 'Tinymce',
@@ -139,6 +141,10 @@ export default {
         imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
         default_link_target: '_blank',
         link_title: false,
+        automatic_uploads: true,
+        images_upload_url: defaultConfig.baseURL,
+        images_upload_base_path: '/uploadOne',
+        images_upload_credentials: true,
         nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
         init_instance_callback: editor => {
           if (_this.value) {
@@ -154,40 +160,37 @@ export default {
           editor.on('FullscreenStateChanged', (e) => {
             _this.fullscreen = e.state
           })
-        }
-        // 整合七牛上传
+        },
         // images_dataimg_filter(img) {
-        //   setTimeout(() => {
-        //     const $image = $(img);
-        //     $image.removeAttr('width');
-        //     $image.removeAttr('height');
-        //     if ($image[0].height && $image[0].width) {
-        //       $image.attr('data-wscntype', 'image');
-        //       $image.attr('data-wscnh', $image[0].height);
-        //       $image.attr('data-wscnw', $image[0].width);
-        //       $image.addClass('wscnph');
-        //     }
-        //   }, 0);
-        //   return img
         // },
-        // images_upload_handler(blobInfo, success, failure, progress) {
-        //   progress(0);
-        //   const token = _this.$store.getters.token;
-        //   getToken(token).then(response => {
-        //     const url = response.data.qiniu_url;
-        //     const formData = new FormData();
-        //     formData.append('token', response.data.qiniu_token);
-        //     formData.append('key', response.data.qiniu_key);
-        //     formData.append('file', blobInfo.blob(), url);
-        //     upload(formData).then(() => {
-        //       success(url);
-        //       progress(100);
-        //     })
-        //   }).catch(err => {
-        //     failure('出现未知问题，刷新页面，或者联系程序员')
-        //     console.log(err);
-        //   });
-        // },
+        images_upload_handler(blobInfo, success, failure, progress) {
+          var xhr, formData
+
+          xhr = new XMLHttpRequest()
+          xhr.withCredentials = false
+          xhr.open('POST', defaultConfig.baseURL + '/uploadOne')
+          xhr.setRequestHeader('languageToken', getLanguage())
+          xhr.setRequestHeader('sanxinToken', getToken())
+
+          xhr.onload = function() {
+            var data
+            if (xhr.status !== 200) {
+              failure('HTTP Error: ' + xhr.status)
+              return
+            }
+            data = JSON.parse(xhr.responseText)
+            if (!data || typeof data.data !== 'string') {
+              failure('Invalid JSON: ' + xhr.responseText)
+              return
+            }
+            success(data.data)
+          }
+
+          formData = new FormData()
+          formData.append('file', blobInfo.blob(), blobInfo.filename())
+
+          xhr.send(formData)
+        }
       })
     },
     destroyTinymce() {

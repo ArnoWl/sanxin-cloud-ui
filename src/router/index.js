@@ -80,7 +80,6 @@ export const constantRoutes = [
   {
     path: '/apply',
     component: Layout,
-    redirect: 'apply',
     hidden: true,
     children: [
       {
@@ -102,6 +101,27 @@ export const constantRoutes = [
         component: () => import('@/views/apply/agentDetail'),
         name: 'AgentDetail',
         meta: { title: 'agentDetail' },
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/system',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'agreementDetail/:id(\\d+)',
+        component: () => import('@/views/system/agreementDetail'),
+        name: 'AgreementDetail',
+        meta: { title: 'agreementDetail' },
+        hidden: true
+      },
+      {
+        path: 'guideDetail/:type(\\d+)',
+        component: () => import('@/views/system/guideDetail'),
+        name: 'GuideDetail',
+        meta: { title: 'guideDetail' },
         hidden: true
       }
     ]

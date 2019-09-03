@@ -65,7 +65,9 @@ export default {
     profile: '个人中心',
     advertDetail: '广告详情',
     businessDetail: '加盟详情',
-    agentDetail: '代理详情'
+    agentDetail: '代理详情',
+    agreementDetail: '协议详情',
+    guideDetail: '使用指南详情'
   },
   navbar: {
     dashboard: '首页',
@@ -232,6 +234,10 @@ export default {
     payWord: '交易密码',
     passWord: '登录密码'
   },
+  agreement: {
+    title: '标题',
+    createTime: '创建时间'
+  },
   status: {
     pass: '通过',
     reject: '驳回',
@@ -244,6 +250,8 @@ export default {
     no: '否',
     handle: '操作',
     effective: '有效',
-    invalid: '无效'
+    invalid: '无效',
+    edit: '编辑',
+    save: '保存'
   }
 }
