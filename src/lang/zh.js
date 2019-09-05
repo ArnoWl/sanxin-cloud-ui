@@ -67,7 +67,8 @@ export default {
     businessDetail: '加盟详情',
     agentDetail: '代理详情',
     agreementDetail: '协议详情',
-    guideDetail: '使用指南详情'
+    guideDetail: '使用指南详情',
+    editAdvert: '发布/编辑广告'
   },
   navbar: {
     dashboard: '首页',
@@ -201,7 +202,23 @@ export default {
     statusName: '状态',
     createTime: '申请时间',
     checkTime: '审核时间',
-    detail: '详情'
+    detail: '详情',
+    advertTime: '发布时间',
+    title: '标题',
+    content: '内容',
+    sort: '排序',
+    eventName: '跳转类型',
+    addAdvert: '发布广告',
+    frameImg: '首页弹窗图片',
+    img: '广告图',
+    url: '外部链接',
+    CNTitle: '中文标题',
+    ENTitle: '英文标题',
+    THAITitle: '泰文标题',
+    CNContent: '中文内容',
+    ENContent: '英文内容',
+    THAIContent: '泰文内容',
+    setFrame: '首页弹窗'
   },
   agent: {
     pass: '设置密码'
@@ -237,6 +254,32 @@ export default {
   agreement: {
     title: '标题',
     createTime: '创建时间'
+  },
+  cash: {
+    customerCash: '用户提现',
+    businessCash: '商家提现',
+    num: '提现次数',
+    scale: '提现手续费',
+    minVal: '最低提现额',
+    maxVal: '最高提现额',
+    multiple: '提现整数倍',
+    isOpen: '是否开启',
+    type: '提现限制',
+    tax: '税率',
+    payCode: '交易编号',
+    cashName: '提现人',
+    phone: '手机号',
+    bankName: '银行',
+    bankCode: '卡号',
+    cashMoney: '提现金额',
+    realMoney: '到账金额',
+    cashType: '类型',
+    statusName: '状态',
+    rejectRemark: '驳回原因',
+    createTime: '申请时间',
+    customer: '用户',
+    business: '用户',
+    addBankType: '新增银行卡类型'
   },
   status: {
     pass: '通过',

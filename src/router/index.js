@@ -125,6 +125,20 @@ export const constantRoutes = [
         hidden: true
       }
     ]
+  },
+  {
+    path: '/advert',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'editAdvert/:id',
+        component: () => import('@/views/advert/editAdvert'),
+        name: 'EditAdvert',
+        meta: { title: 'editAdvert' },
+        hidden: true
+      }
+    ]
   }
 ]
 const createRouter = () => new Router({

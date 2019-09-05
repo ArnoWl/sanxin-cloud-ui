@@ -43,15 +43,17 @@ const actions = {
           const children = []
           for (var c = 0; c < childlist.length; c++) {
             const url = childlist[c].url
-            const child = {
-              path: url,
-              component: () => import(`@/views${url}`),
-              name: url,
-              meta: {
-                title: childlist[c].menuname
+            if (childlist[c].type === 1) {
+              const child = {
+                path: url,
+                component: () => import(`@/views${url}`),
+                name: url,
+                meta: {
+                  title: childlist[c].menuname
+                }
               }
+              children.push(child)
             }
-            children.push(child)
           }
           const main = {
             path: '/' + data[i].url,

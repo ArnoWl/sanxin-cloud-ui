@@ -67,7 +67,7 @@ export default {
       languageTypeList: {
         'en': 'en',
         'zh': 'zh_CN',
-        'es': 'es_MX',
+        'es': 'th_TH',
         'ja': 'ja'
       }
     }
