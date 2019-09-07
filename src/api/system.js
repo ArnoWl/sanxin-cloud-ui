@@ -62,3 +62,27 @@ export function updateAboutUs(query) {
     params: query
   })
 }
+
+export function queryGiftHourList(query) {
+  return request({
+    url: '/system/queryGiftHourList',
+    method: 'get',
+    params: query
+  })
+}
+
+export function deleteGiftHour(query) {
+  return request({
+    url: '/system/deleteGiftHour',
+    method: 'delete',
+    params: query
+  })
+}
+
+export function updateGiftHour(query) {
+  return request({
+    url: '/system/updateGiftHour',
+    method: 'post',
+    params: query
+  })
+}

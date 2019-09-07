@@ -68,7 +68,8 @@ export default {
     agentDetail: '代理详情',
     agreementDetail: '协议详情',
     guideDetail: '使用指南详情',
-    editAdvert: '发布/编辑广告'
+    editAdvert: '发布/编辑广告',
+    editDevice: '编辑设备'
   },
   navbar: {
     dashboard: '首页',
@@ -281,6 +282,32 @@ export default {
     business: '用户',
     addBankType: '新增银行卡类型'
   },
+  gift: {
+    money: '金额',
+    hour: '时长',
+    discount: '优惠'
+  },
+  device: {
+    code: '设备编号',
+    typeName: '设备类型',
+    businessName: '所在门店',
+    businessHours: '营业时间',
+    addressDetail: '详细地址',
+    statusName: '设备状态',
+    large: '大柜机',
+    small: '小柜机',
+    timeSlot: '时间段',
+    addDevice: '添加设备'
+  },
+  date: {
+    sunday: '星期天',
+    monday: '星期一',
+    tuesday: '星期二',
+    wednesday: '星期三',
+    thursday: '星期四',
+    friday: '星期五',
+    saturday: '星期六'
+  },
   status: {
     pass: '通过',
     reject: '驳回',
@@ -295,6 +322,8 @@ export default {
     effective: '有效',
     invalid: '无效',
     edit: '编辑',
-    save: '保存'
+    save: '保存',
+    delete: '删除',
+    deleteMsg: '确认删除当前数据？'
   }
 }

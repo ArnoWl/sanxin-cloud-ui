@@ -32,6 +32,13 @@ export function businessList(query) {
   })
 }
 
+export function queryAllBusinessList() {
+  return request({
+    url: '/business/queryAllList',
+    method: 'get'
+  })
+}
+
 export function getBusinessDetail(query) {
   return request({
     url: '/business/getBusinessDetail',

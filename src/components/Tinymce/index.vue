@@ -19,7 +19,7 @@ import load from './dynamicLoadScript'
 import { getLanguage, getToken } from '@/utils/auth'
 
 // why use this cdn, detail see https://github.com/PanJiaChen/tinymce-all-in-one
-const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js'
+const tinymceCDN = 'http://47.106.131.191:8999/image-controller/files/tinymce.min.js'
 const defaultConfig = require('@/api/globalconfig.js')
 
 export default {

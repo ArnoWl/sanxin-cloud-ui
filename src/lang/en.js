@@ -62,7 +62,13 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
     externalLink: 'External Link',
-    profile: 'Profile'
+    profile: 'Profile',
+    advertDetail: 'Advert Detail',
+    businessDetail: 'Business Detail',
+    agentDetail: 'Agent Detail',
+    agreementDetail: 'Agreement Detail',
+    guideDetail: 'Guide Detail',
+    editAdvert: 'Publish/Edit Advert'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -93,7 +99,19 @@ export default {
     tips: 'In some cases, using v-permission will have no effect. For example: Element-UI  el-tab or el-table-column and other scenes that dynamically render dom. You can only do this with v-if.',
     delete: 'Delete',
     confirm: 'Confirm',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    login: 'Operator Account',
+    status: 'State',
+    search: 'Search',
+    id: 'ID',
+    name: 'name',
+    phone: 'Contact Information',
+    createtime: 'Create Time',
+    rolename: 'Role Name',
+    adduser: 'Add Operators',
+    edituser: 'Edit',
+    password: 'Pass Word',
+    nickname: 'Full Name'
   },
   guide: {
     description: 'The guide page is useful for some people who entered the project for the first time. You can briefly introduce the features of the project. Demo is based on ',
@@ -185,13 +203,34 @@ export default {
     createTime: 'Application Time',
     checkTime: 'Check Time',
     detail: 'Detail',
-    handle: 'Operation'
+    advertTime: 'Release Time',
+    title: 'Title',
+    content: 'Content',
+    sort: 'Sort',
+    eventName: 'Jump Type',
+    addAdvert: 'Publish Advert',
+    frameImg: 'Bullet Window Picture on Home Page',
+    img: 'Advert Pictures',
+    url: 'External Link',
+    CNTitle: 'Chinese Title',
+    ENTitle: 'English Title',
+    THAITitle: 'Thai Title',
+    CNContent: 'Chinese Content',
+    ENContent: 'English Content',
+    THAIContent: 'Thai Content',
+    setFrame: 'Bullet Window on Home Page'
+  },
+  agent: {
+    pass: 'Setting Password'
   },
   business: {
     cardType: 'Document Type',
     cardNo: 'Identification Number',
     baseMsg: 'Essential Information',
-    businessMsg: 'Data'
+    businessMsg: 'Data',
+    cardFront: 'Front',
+    cardBack: 'Back',
+    passPort: 'Pass Port'
   },
   status: {
     pass: 'Pass',

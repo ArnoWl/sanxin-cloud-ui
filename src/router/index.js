@@ -139,6 +139,20 @@ export const constantRoutes = [
         hidden: true
       }
     ]
+  },
+  {
+    path: '/device',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'editDevice/:id',
+        component: () => import('@/views/device/editDevice'),
+        name: 'EditDevice',
+        meta: { title: 'editDevice' },
+        hidden: true
+      }
+    ]
   }
 ]
 const createRouter = () => new Router({

@@ -1,6 +1,11 @@
 <template>
   <div class="createPost-container">
     <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
+      <sticky :z-index="10" :class-name="'sub-navbar draft'">
+        <el-button v-loading="loading" style="margin-left: 10px;" type="primary" @click="submitForm">
+          {{ $t('status.save') }}
+        </el-button>
+      </sticky>
       <div class="createPost-main-container">
         <el-row>
           <el-col :span="24">
@@ -13,7 +18,13 @@
         </el-row>
 
         <el-form-item prop="content" style="margin-bottom: 30px;">
-          <Tinymce ref="editor" v-model="postForm.content" :height="400" />
+          CN<Tinymce ref="editor" v-model="postForm.cnContent" :height="400" />
+        </el-form-item>
+        <el-form-item prop="content" style="margin-bottom: 30px;">
+          EN<Tinymce ref="editor" v-model="postForm.enContent" :height="400" />
+        </el-form-item>
+        <el-form-item prop="content" style="margin-bottom: 30px;">
+          THAI<Tinymce ref="editor" v-model="postForm.thaiContent" :height="400" />
         </el-form-item>
 
         <el-form-item align="center">
@@ -27,6 +38,7 @@
 <script>
 import Tinymce from '@/components/Tinymce'
 import MDinput from '@/components/MDinput'
+import Sticky from '@/components/Sticky' // 粘性header组件
 import { getAgreementDetail, updateAgreementDetail } from '@/api/system'
 
 const defaultForm = {
@@ -36,7 +48,7 @@ const defaultForm = {
 
 export default {
   name: 'ArticleDetail',
-  components: { Tinymce, MDinput },
+  components: { Tinymce, MDinput, Sticky },
   props: {
     isEdit: {
       type: Boolean,
@@ -96,6 +108,7 @@ export default {
       this.$refs.postForm.validate(valid => {
         if (valid) {
           this.loading = true
+          this.postForm.createTime = null
           updateAgreementDetail(this.postForm).then(response => {
             if (response.status) {
               this.$notify({

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form ref="postForm" :model="postForm" :rules="rules" label-width="150px">
+    <el-form ref="dataForm" :model="postForm" :rules="rules" label-width="150px">
       <div class="app-container">
         <div class="form-box">
           <el-row :span="24">
@@ -95,34 +95,13 @@ const defaultForm = {
 export default {
   name: 'AdvertDetail',
   data() {
-    var checkTitle = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('请输入标题'))
-      }
-      if (value.length > 20) {
-        return callback(new Error('最多输入20位字符'))
-      }
-    }
-    var checkContent = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('请输入内容'))
-      }
-      if (value.length > 100) {
-        return callback(new Error('最多输入100位字符'))
-      }
-    }
-    var checkUrl = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('请输入链接'))
-      }
-    }
     return {
       postForm: Object.assign({}, defaultForm),
       loading: false,
       id: 0,
       param: {}, // 表单要提交的数据
       eventType: {},
-      ruleForm: {
+      dataForm: {
         cnTitle: '',
         enTitle: '',
         thaiTitle: '',
@@ -132,13 +111,33 @@ export default {
         url: ''
       },
       rules: {
-        cnTitle: [{ validator: checkTitle, trigger: 'blur' }],
-        enTitle: [{ validator: checkTitle, trigger: 'blur' }],
-        thaiTitle: [{ validator: checkTitle, trigger: 'blur' }],
-        cnContent: [{ validator: checkContent, trigger: 'blur' }],
-        enContent: [{ validator: checkContent, trigger: 'blur' }],
-        thaiContent: [{ validator: checkContent, trigger: 'blur' }],
-        url: [{ validator: checkUrl, trigger: 'blur' }]
+        cnTitle: [
+          { required: true, message: '请输入标题', trigger: 'blur' },
+          { min: 0, max: 20, message: '最多输入20位字符', trigger: 'blur' }
+        ],
+        enTitle: [
+          { required: true, message: '请输入标题', trigger: 'blur' },
+          { min: 0, max: 20, message: '最多输入20位字符', trigger: 'blur' }
+        ],
+        thaiTitle: [
+          { required: true, message: '请输入标题', trigger: 'blur' },
+          { min: 0, max: 20, message: '最多输入20位字符', trigger: 'blur' }
+        ],
+        cnContent: [
+          { required: true, message: '请输入内容', trigger: 'blur' },
+          { min: 0, max: 100, message: '最多输入100位字符', trigger: 'blur' }
+        ],
+        enContent: [
+          { required: true, message: '请输入内容', trigger: 'blur' },
+          { min: 0, max: 100, message: '最多输入100位字符', trigger: 'blur' }
+        ],
+        thaiContent: [
+          { required: true, message: '请输入内容', trigger: 'blur' },
+          { min: 0, max: 100, message: '最多输入100位字符', trigger: 'blur' }
+        ],
+        url: [
+          { required: true, message: '请输入链接', trigger: 'blur' }
+        ]
       }
     }
   },
@@ -185,17 +184,21 @@ export default {
     },
     onSave() {
       this.postForm.createTime = null
-      handleEditAdvertContent(this.postForm).then(response => {
-        if (response.status) {
-          this.$message({
-            message: response.msg,
-            type: 'success'
-          })
-          this.getData()
-        } else {
-          this.$message({
-            message: response.msg,
-            type: 'error'
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          handleEditAdvertContent(this.postForm).then(response => {
+            if (response.status) {
+              this.$message({
+                message: response.msg,
+                type: 'success'
+              })
+              this.getData()
+            } else {
+              this.$message({
+                message: response.msg,
+                type: 'error'
+              })
+            }
           })
         }
       })
