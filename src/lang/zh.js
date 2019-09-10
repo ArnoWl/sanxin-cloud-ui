@@ -308,6 +308,17 @@ export default {
     friday: '星期五',
     saturday: '星期六'
   },
+  payment: {
+    alipay: '支付宝',
+    partner: '商户号',
+    partnerAccount: 'Ali账号',
+    privateKey: 'Ali私钥',
+    aliPublicKey: '支付公钥',
+    aliPrivateKey: '支付私钥',
+    returnUrl: '回调域名',
+    refundPublicKey: '退款公钥',
+    refundPrivateKey: '退款私钥'
+  },
   status: {
     pass: '通过',
     reject: '驳回',

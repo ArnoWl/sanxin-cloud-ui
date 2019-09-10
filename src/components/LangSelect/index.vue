@@ -11,16 +11,18 @@
         English
       </el-dropdown-item>
       <el-dropdown-item :disabled="language==='es'" command="es">
-        Español
+        ภาษาไทย
       </el-dropdown-item>
-      <el-dropdown-item :disabled="language==='ja'" command="ja">
-        日本語
-      </el-dropdown-item>
+      <!--      <el-dropdown-item :disabled="language==='ja'" command="ja">-->
+      <!--        日本語-->
+      <!--      </el-dropdown-item>-->
     </el-dropdown-menu>
   </el-dropdown>
 </template>
 
 <script>
+import { setLanguage } from '@/utils/auth'
+
 export default {
   computed: {
     language() {
@@ -31,6 +33,21 @@ export default {
     handleSetLanguage(lang) {
       this.$i18n.locale = lang
       this.$store.dispatch('app/setLanguage', lang)
+      var language = ''
+      switch (lang) {
+        case 'zh':
+          language = 'CN'
+          break
+        case 'en':
+          language = 'EN'
+          break
+        case 'es':
+          language = 'THAI'
+          break
+        default:
+          break
+      }
+      setLanguage(language)
       this.$message({
         message: 'Switch Language Success',
         type: 'success'
