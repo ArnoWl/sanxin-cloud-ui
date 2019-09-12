@@ -46,10 +46,11 @@
               <el-form-item :label="$t('business.cardFront')" :inline-message="true" style="margin-bottom: 20px;">
                 <el-upload
                   class="avatar-uploader"
-                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :action="actionUrl"
+                  name="file"
                   :show-file-list="false"
                   :on-success="handleCardFrontSuccess"
-                  :before-upload="beforeUpload"
+                  :headers="headers"
                 >
                   <img v-if="postForm.cardFront" :src="postForm.cardFront" class="avatar">
                   <i v-else class="el-icon-plus avatar-uploader-icon" />
@@ -60,10 +61,11 @@
               <el-form-item :label="$t('business.cardBack')" style="margin-bottom: 20px;">
                 <el-upload
                   class="avatar-uploader"
-                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :action="actionUrl"
+                  name="file"
                   :show-file-list="false"
                   :on-success="handleCardBackSuccess"
-                  :before-upload="beforeUpload"
+                  :headers="headers"
                 >
                   <img v-if="postForm.cardBack" :src="postForm.cardBack" class="avatar">
                   <i v-else class="el-icon-plus avatar-uploader-icon" />
@@ -75,12 +77,13 @@
             <el-form-item :label="$t('business.passPort')" :inline-message="true" style="margin-bottom: 20px;">
               <el-upload
                 class="avatar-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                :action="actionUrl"
+                name="file"
                 :show-file-list="false"
                 :on-success="handlePassPortSuccess"
-                :before-upload="beforeUpload"
+                :headers="headers"
               >
-                <img v-if="postForm.cardFront" :src="postForm.cardFront" class="avatar">
+                <img v-if="postForm.passPort" :src="postForm.passPort" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon" />
               </el-upload>
             </el-form-item>
@@ -88,10 +91,11 @@
           <el-form-item :label="$t('advert.licenseImg')" style="margin-bottom: 20px;">
             <el-upload
               class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
+              :action="actionUrl"
+              name="file"
               :show-file-list="false"
               :on-success="handleLicenseSuccess"
-              :before-upload="beforeUpload"
+              :headers="headers"
             >
               <img v-if="postForm.licenseImg" :src="postForm.licenseImg" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
@@ -100,13 +104,41 @@
           <el-form-item :label="$t('advert.companyImg')" style="margin-bottom: 20px;">
             <el-upload
               class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
+              :action="actionUrl"
+              name="file"
               :show-file-list="false"
               :on-success="handleCompanySuccess"
-              :before-upload="beforeUpload"
+              :headers="headers"
             >
               <img v-if="postForm.companyImg" :src="postForm.companyImg" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
+            </el-upload>
+          </el-form-item>
+          <el-form-item :label="$t('business.headUrl')" style="margin-bottom: 20px;">
+            <el-upload
+              class="avatar-uploader"
+              :action="actionUrl"
+              name="file"
+              :show-file-list="false"
+              :on-success="handleHeadUrlSuccess"
+              :headers="headers"
+            >
+              <img v-if="postForm.headUrl" :src="postForm.headUrl" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon" />
+            </el-upload>
+          </el-form-item>
+          <el-form-item :label="$t('business.coverUrl')">
+            <el-upload
+              :action="actionUrl"
+              multiple
+              accept="image/*"
+              list-type="picture-card"
+              :file-list="coverUrlList"
+              :on-success="handlePictureCardPreview"
+              :on-remove="handleRemove"
+              :headers="headers"
+            >
+              <i class="el-icon-plus" />
             </el-upload>
           </el-form-item>
         </el-tab-pane>
@@ -124,6 +156,8 @@
 
 <script>
 import { handleBusinessStatus, getBusinessDetail, handleEditBusiness } from '@/api/apply'
+import { getLanguage, getToken } from '@/utils/auth'
+const defaultConfig = require('@/api/globalconfig.js')
 const defaultForm = {
   nickName: '', // 姓名
   phone: '', // 联系方式
@@ -171,18 +205,24 @@ export default {
       id: 0,
       activeName: 'directly',
       param: {}, // 表单要提交的数据
+      coverUrlList: [],
       ruleForm: {
         nickName: '',
         phone: '',
         companyName: '',
         licenseCode: ''
       },
+      actionUrl: defaultConfig.baseURL + 'uploadOne',
       rules: {
         nickName: [{ validator: checkName, trigger: 'blur' }],
         phone: [{ validator: checkPhone, trigger: 'blur' }],
         addressDetail: [{ validator: checkAddressDetail, trigger: 'blur' }],
         companyName: [{ validator: checkCompanyName, trigger: 'blur' }],
         licenseCode: [{ validator: checkLicenseCode, trigger: 'blur' }]
+      },
+      headers: {
+        'languageToken': getLanguage(),
+        'sanxinToken': getToken()
       }
     }
   },
@@ -193,37 +233,44 @@ export default {
   },
   methods: {
     getData() {
+      this.coverUrlList = []
       const query = {
         id: this.id
       }
       getBusinessDetail(query).then(response => {
         this.postForm = response.data
         this.postForm.cardType = response.data.cardType.toString()
+        console.log(this.postForm.coverUrlList)
+        for (let t = 0; t < this.postForm.coverUrlList.length; t++) {
+          this.coverUrlList.push({ name: this.postForm.coverUrlList[t], url: this.postForm.coverUrlList[t] })
+        }
       }).catch(err => {
         console.log(err)
       })
     },
     handleCardFrontSuccess(res, file) {
-      this.postForm.card = URL.createObjectURL(file.raw)
+      this.postForm.cardFront = file.response.data
     },
     handleCardBackSuccess(res, file) {
-      this.postForm.card = URL.createObjectURL(file.raw)
+      this.postForm.cardBack = file.response.data
     },
     handleLicenseSuccess(res, file) {
-      this.postForm.licenseImg = URL.createObjectURL(file.raw)
+      this.postForm.uplicenseImg = file.response.data
     },
     handleCompanySuccess(res, file) {
-      this.postForm.licenseImg = URL.createObjectURL(file.raw)
+      this.postForm.licenseImg = file.response.data
     },
     handlePassPortSuccess(res, file) {
-      this.postForm.passPort = URL.createObjectURL(file.raw)
+      this.postForm.passPort = file.response.data
     },
-    beforeUpload(file) {
-      const isLt2M = file.size / 1024 / 1024 < 2
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isLt2M
+    handleHeadUrlSuccess(res, file) {
+      this.postForm.headUrl = file.response.data
+    },
+    handleRemove(file, fileList) {
+      this.coverUrlList = fileList
+    },
+    handlePictureCardPreview(file) {
+      this.coverUrlList.push({ name: file.data, url: file.data })
     },
     onSubmit(status) {
       const query = {
@@ -260,19 +307,22 @@ export default {
       }
       this.postForm.createTime = null
       this.postForm.checkTime = null
-      // 然后通过下面的方式把内容通过axios来传到后台
-      handleEditBusiness(this.postForm, config).then(response => {
+      this.param = Object.assign({}, this.postForm)
+      this.param.coverUrlList = []
+      this.param.coverUrl = null
+      for (let t = 0; t < this.coverUrlList.length; t++) {
+        if (t === 0) {
+          this.param.coverUrlList = this.coverUrlList[0].url
+        } else {
+          this.param.coverUrlList += ',' + this.coverUrlList[t].url
+        }
+      }
+      handleEditBusiness(this.param, config).then(response => {
         if (response.status) {
-          this.$message({
-            message: response.msg,
-            type: 'success'
-          })
+          this.$message({ message: response.msg, type: 'success' })
           this.getData()
         } else {
-          this.$message({
-            message: response.msg,
-            type: 'error'
-          })
+          this.$message({ message: response.msg, type: 'error' })
         }
       })
     }
@@ -303,5 +353,19 @@ export default {
     width: 178px;
     height: 178px;
     display: block;
+  }
+
+  .el-upload-list--picture .el-upload-list__item{
+    width: 375px;
+    height: 255px;
+  }
+
+  .el-upload-list--picture .el-upload-list__item-thumbnail {
+    width: 100%;
+    height: 100%;
+  }
+
+  .el-upload-list .el-upload-list--picture li{
+    display:inline
   }
 </style>

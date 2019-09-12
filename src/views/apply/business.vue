@@ -67,11 +67,25 @@
       </el-table-column>
       <el-table-column :label="$t('status.handle')" width="150px" align="center">
         <template slot-scope="scope">
-          <router-link :to="'/apply/businessDetail/'+scope.row.id">
-            <el-button type="primary" size="small" icon="el-icon-edit">
-              {{ $t('advert.detail') }}
+          <el-dropdown>
+            <el-button type="primary">
+              {{ $t('status.handle') }}<i class="el-icon-arrow-down el-icon--right" />
             </el-button>
-          </router-link>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>
+                <router-link :to="'/apply/businessDetail/'+scope.row.id">
+                  <span v-if="scope.row.status != 2">{{ $t('advert.detail') }}</span>
+                  <span v-if="scope.row.status == 2">{{ $t('business.editDetail') }}</span>
+                </router-link>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <span v-if="scope.row.status == 2" @click="showUpdateLogin(scope.row)">{{ $t('business.editLoginPass') }}</span>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <span v-if="scope.row.status == 2" @click="showUpdatePay(scope.row)">{{ $t('business.editPayPass') }}</span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </template>
       </el-table-column>
     </el-table>
@@ -83,7 +97,7 @@
 <script>
 
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-import { businessList, handleBusinessStatus } from '@/api/apply'
+import { businessList, handleBusinessStatus, resetLoginPass, resetPayPass } from '@/api/apply'
 import waves from '@/directive/waves' // waves directive
 
 export default {
@@ -156,6 +170,44 @@ export default {
           this.listLoading = false
         }, 1.5 * 1000)
         row.status = status
+      })
+    },
+    showUpdateLogin(row) {
+      this.$confirm(this.$t('business.sureReset'), 'Tips', {
+        confirmButtonText: this.$t('status.confirm'),
+        cancelButtonText: this.$t('status.cancel'),
+        type: 'info'
+      }).then(() => {
+        const data = {
+          id: row.id
+        }
+        resetLoginPass(data).then(response => {
+          if (response.status) {
+            this.$message({ type: 'success', message: response.msg })
+          } else {
+            this.$message({ type: 'error', message: response.msg })
+          }
+        })
+      }).catch(() => {
+      })
+    },
+    showUpdatePay(row) {
+      this.$confirm(this.$t('business.sureReset'), 'Tips', {
+        confirmButtonText: this.$t('status.confirm'),
+        cancelButtonText: this.$t('status.cancel'),
+        type: 'info'
+      }).then(() => {
+        const data = {
+          id: row.id
+        }
+        resetPayPass(data).then(response => {
+          if (response.status) {
+            this.$message({ type: 'success', message: response.msg })
+          } else {
+            this.$message({ type: 'error', message: response.msg })
+          }
+        })
+      }).catch(() => {
       })
     },
     sortChange(data) {

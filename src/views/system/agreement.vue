@@ -12,7 +12,9 @@
     >
       <el-table-column :label="$t('agreement.title')" min-width="60px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.title }}</span>
+          <span>CN:{{ scope.row.cnTitle }}</span><br>
+          <span>EN:{{ scope.row.enTitle }}</span><br>
+          <span>THAI:{{ scope.row.thaiTitle }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('agreement.createTime')" min-width="60px" align="center">

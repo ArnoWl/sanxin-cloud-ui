@@ -55,6 +55,14 @@ export function handleBusinessStatus(query) {
   })
 }
 
+export function handleEditBusiness(query) {
+  return request({
+    url: '/business/handleEditBusiness',
+    method: 'post',
+    params: query
+  })
+}
+
 export function agentList(query) {
   return request({
     url: '/agent/list',
@@ -74,6 +82,30 @@ export function getAgentDetail(query) {
 export function handleAgentStatus(query) {
   return request({
     url: '/agent/handleStatus',
+    method: 'post',
+    params: query
+  })
+}
+
+export function resetLoginPass(query) {
+  return request({
+    url: '/business/resetLoginPass',
+    method: 'post',
+    params: query
+  })
+}
+
+export function resetPayPass(query) {
+  return request({
+    url: '/business/resetPayPass',
+    method: 'post',
+    params: query
+  })
+}
+
+export function resetAgentLoginPass(query) {
+  return request({
+    url: '/agent/resetLoginPass',
     method: 'post',
     params: query
   })

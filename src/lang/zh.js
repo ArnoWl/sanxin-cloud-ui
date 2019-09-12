@@ -231,7 +231,13 @@ export default {
     businessMsg: '资料',
     cardFront: '正面',
     cardBack: '反面',
-    passPort: '护照'
+    passPort: '护照',
+    editDetail: '编辑商家资料',
+    headUrl: '头像',
+    coverUrl: '门店Banner',
+    editLoginPass: '重置登录密码',
+    editPayPass: '重置支付密码',
+    sureReset: '确定重置吗？初始密码为888888'
   },
   customer: {
     phone: '联系方式',

@@ -1,35 +1,45 @@
 <template>
-  <div class="createPost-container">
+  <div class="app-container">
     <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
       <sticky :z-index="10" :class-name="'sub-navbar draft'">
         <el-button v-loading="loading" style="margin-left: 10px;" type="primary" @click="submitForm">
           {{ $t('status.save') }}
         </el-button>
       </sticky>
-      <div class="createPost-main-container">
-        <el-row>
-          <el-col :span="24">
-            <el-form-item style="margin-bottom: 40px;" prop="title">
-              <MDinput v-model="postForm.title" :maxlength="100" name="name" required>
-                {{ $t('agreement.title') }}
-              </MDinput>
-            </el-form-item>
-          </el-col>
-        </el-row>
+      <div class="app-container">
+        <div class="form-box">
+          <el-row :span="24">
+            <el-col :span="8">
+              <el-form-item :label="$t('advert.CNTitle')" prop="title">
+                <el-input v-model="postForm.cnTitle" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item :label="$t('advert.ENTitle')" prop="title">
+                <el-input v-model="postForm.enTitle" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item :label="$t('advert.THAITitle')" prop="title">
+                <el-input v-model="postForm.thaiTitle" />
+              </el-form-item>
+            </el-col>
+          </el-row>
 
-        <el-form-item prop="content" style="margin-bottom: 30px;">
-          CN<Tinymce ref="editor" v-model="postForm.cnContent" :height="400" />
-        </el-form-item>
-        <el-form-item prop="content" style="margin-bottom: 30px;">
-          EN<Tinymce ref="editor" v-model="postForm.enContent" :height="400" />
-        </el-form-item>
-        <el-form-item prop="content" style="margin-bottom: 30px;">
-          THAI<Tinymce ref="editor" v-model="postForm.thaiContent" :height="400" />
-        </el-form-item>
+          <el-form-item prop="content" style="margin-bottom: 30px;">
+            CN<Tinymce ref="editor" v-model="postForm.cnContent" :height="400" />
+          </el-form-item>
+          <el-form-item prop="content" style="margin-bottom: 30px;">
+            EN<Tinymce ref="editor" v-model="postForm.enContent" :height="400" />
+          </el-form-item>
+          <el-form-item prop="content" style="margin-bottom: 30px;">
+            THAI<Tinymce ref="editor" v-model="postForm.thaiContent" :height="400" />
+          </el-form-item>
 
-        <el-form-item align="center">
-          <el-button type="primary" @click="submitForm()">{{ $t('status.save') }}</el-button>
-        </el-form-item>
+          <el-form-item align="center">
+            <el-button type="primary" @click="submitForm()">{{ $t('status.save') }}</el-button>
+          </el-form-item>
+        </div>
       </div>
     </el-form>
   </div>
@@ -37,7 +47,6 @@
 
 <script>
 import Tinymce from '@/components/Tinymce'
-import MDinput from '@/components/MDinput'
 import Sticky from '@/components/Sticky' // 粘性header组件
 import { getAgreementDetail, updateAgreementDetail } from '@/api/system'
 
@@ -48,7 +57,7 @@ const defaultForm = {
 
 export default {
   name: 'ArticleDetail',
-  components: { Tinymce, MDinput, Sticky },
+  components: { Tinymce, Sticky },
   props: {
     isEdit: {
       type: Boolean,
@@ -135,41 +144,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "~@/styles/mixin.scss";
-.createPost-container {
-  position: relative;
-
-  .createPost-main-container {
-    padding: 40px 45px 20px 50px;
-
-    .postInfo-container {
-      position: relative;
-      @include clearfix;
-      margin-bottom: 10px;
-
-      .postInfo-container-item {
-        float: left;
-      }
-    }
-  }
-
-  .word-counter {
-    width: 40px;
-    position: absolute;
-    right: 10px;
-    top: 0px;
-  }
-}
-
-.article-textarea /deep/ {
-  textarea {
-    padding-right: 40px;
-    resize: none;
-    border: none;
-    border-radius: 0px;
-    border-bottom: 1px solid #bfcbd9;
-  }
-}
-</style>

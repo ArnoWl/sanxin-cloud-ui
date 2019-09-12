@@ -230,7 +230,13 @@ export default {
     businessMsg: 'ข้อมูล',
     cardFront: 'หน้า',
     cardBack: 'หลัง',
-    passPort: 'ผ่านพอร์ต'
+    passPort: 'ผ่านพอร์ต',
+    editDetail: 'แก้ไขข้อมูลทางธุรกิจ',
+    headUrl: 'พระพักตร์',
+    coverUrl: 'ป้ายร้าน',
+    editLoginPass: 'รีเซ็ตรหัสผ่านเข้าสู่ระบบ',
+    editPayPass: 'ตั้งค่ารหัสผ่านการชำระเงิน',
+    sureReset: 'คุณแน่ใจหรือว่าตั้งค่าใหม่ รหัสผ่านเริ่มต้นสำหรับ'
   },
   customer: {
     phone: 'รายละเอียดการติดต่อ',

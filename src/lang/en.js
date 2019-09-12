@@ -230,7 +230,13 @@ export default {
     businessMsg: 'Data',
     cardFront: 'Front',
     cardBack: 'Back',
-    passPort: 'Pass Port'
+    passPort: 'Pass Port',
+    editDetail: 'Editing Business Information',
+    headUrl: 'Head Portrait',
+    coverUrl: 'Shop Banner',
+    editLoginPass: 'Reset login password',
+    editPayPass: 'Reset Payment Password',
+    sureReset: 'Are you sure about the reset? The initial password is 888888'
   },
   customer: {
     phone: 'Contact Information',
