@@ -228,6 +228,7 @@ export default {
     cardType: '证件类型',
     cardNo: '证件号码',
     baseMsg: '基本信息',
+    businessTime: '营业时间',
     businessMsg: '资料',
     cardFront: '正面',
     cardBack: '反面',
@@ -237,7 +238,9 @@ export default {
     coverUrl: '门店Banner',
     editLoginPass: '重置登录密码',
     editPayPass: '重置支付密码',
-    sureReset: '确定重置吗？初始密码为888888'
+    sureReset: '确定重置吗？初始密码为888888',
+    realName: '姓名',
+    nickName: '昵称'
   },
   customer: {
     phone: '联系方式',

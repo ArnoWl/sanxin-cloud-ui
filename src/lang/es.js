@@ -227,6 +227,7 @@ export default {
     cardType: 'ประเภทไฟล์',
     cardNo: 'หมายเลขประจำตัว',
     baseMsg: 'ข้อมูลพื้นฐาน',
+    businessTime: 'ชั่วโมงธุรกิจ',
     businessMsg: 'ข้อมูล',
     cardFront: 'หน้า',
     cardBack: 'หลัง',
@@ -236,7 +237,9 @@ export default {
     coverUrl: 'ป้ายร้าน',
     editLoginPass: 'รีเซ็ตรหัสผ่านเข้าสู่ระบบ',
     editPayPass: 'ตั้งค่ารหัสผ่านการชำระเงิน',
-    sureReset: 'คุณแน่ใจหรือว่าตั้งค่าใหม่ รหัสผ่านเริ่มต้นสำหรับ'
+    sureReset: 'คุณแน่ใจหรือว่าตั้งค่าใหม่ รหัสผ่านเริ่มต้นสำหรับ',
+    realName: 'เนม',
+    nickName: 'ชื่อเล่น'
   },
   customer: {
     phone: 'รายละเอียดการติดต่อ',

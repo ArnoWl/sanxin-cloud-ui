@@ -227,6 +227,7 @@ export default {
     cardType: 'Document Type',
     cardNo: 'Identification Number',
     baseMsg: 'Essential Information',
+    businessTime: 'Business Hours',
     businessMsg: 'Data',
     cardFront: 'Front',
     cardBack: 'Back',
@@ -236,7 +237,9 @@ export default {
     coverUrl: 'Shop Banner',
     editLoginPass: 'Reset login password',
     editPayPass: 'Reset Payment Password',
-    sureReset: 'Are you sure about the reset? The initial password is 888888'
+    sureReset: 'Are you sure about the reset? The initial password is 888888',
+    realName: 'Full name',
+    nickName: 'Nickname'
   },
   customer: {
     phone: 'Contact Information',

@@ -25,7 +25,7 @@
     >
       <el-table-column :label="$t('advert.nickName')" width="60px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.nickName }}</span>
+          <span>{{ scope.row.realName }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('advert.phone')" width="110px" align="center">

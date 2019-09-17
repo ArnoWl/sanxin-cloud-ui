@@ -5,8 +5,11 @@
         <el-tab-pane :label="$t('business.baseMsg')" name="directly">
           <div class="app-container">
             <div class="form-box">
-              <el-form-item :label="$t('advert.nickName')" prop="nickName">
+              <el-form-item :label="$t('business.nickName')" prop="nickName">
                 <el-input v-model="postForm.nickName" />
+              </el-form-item>
+              <el-form-item :label="$t('business.realName')" prop="realName">
+                <el-input v-model="postForm.realName" />
               </el-form-item>
               <el-form-item :label="$t('advert.phone')" prop="phone">
                 <el-input v-model="postForm.phone" />
@@ -30,6 +33,36 @@
               </el-form-item>
               <el-form-item :label="$t('advert.createTime')">
                 <span>{{ postForm.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+              </el-form-item>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane :label="$t('business.businessTime')" name="timeDire">
+          <div class="app-container">
+            <div class="form-box">
+              <el-form-item :label="$t('device.businessHours')" prop="status">
+                <el-select v-model="postForm.startDay">
+                  <el-option
+                    v-for="item in dateList"
+                    :key="item.value"
+                    :label="item.name"
+                    :value="item.value"
+                  />
+                </el-select>
+                <el-select v-model="postForm.endDay">
+                  <el-option
+                    v-for="item in dateList"
+                    :key="item.value"
+                    :label="item.name"
+                    :value="item.value"
+                  />
+                </el-select>
+                <el-time-picker
+                  v-model="hourTime"
+                  is-range
+                  format="HH:mm"
+                  value-format="HH:mm"
+                />
               </el-form-item>
             </div>
           </div>
@@ -179,6 +212,11 @@ export default {
         return callback(new Error('请输入姓名'))
       }
     }
+    var checkNickName = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入昵称'))
+      }
+    }
     var checkPhone = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('请输入联系方式'))
@@ -206,7 +244,18 @@ export default {
       activeName: 'directly',
       param: {}, // 表单要提交的数据
       coverUrlList: [],
+      hourTime: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+      dateList: [
+        { value: 0, name: this.$t('date.sunday') },
+        { value: 1, name: this.$t('date.monday') },
+        { value: 2, name: this.$t('date.tuesday') },
+        { value: 3, name: this.$t('date.wednesday') },
+        { value: 4, name: this.$t('date.thursday') },
+        { value: 5, name: this.$t('date.friday') },
+        { value: 6, name: this.$t('date.saturday') }
+      ],
       ruleForm: {
+        realName: '',
         nickName: '',
         phone: '',
         companyName: '',
@@ -214,7 +263,8 @@ export default {
       },
       actionUrl: defaultConfig.baseURL + 'uploadOne',
       rules: {
-        nickName: [{ validator: checkName, trigger: 'blur' }],
+        realName: [{ validator: checkName, trigger: 'blur' }],
+        nickName: [{ validator: checkNickName, trigger: 'blur' }],
         phone: [{ validator: checkPhone, trigger: 'blur' }],
         addressDetail: [{ validator: checkAddressDetail, trigger: 'blur' }],
         companyName: [{ validator: checkCompanyName, trigger: 'blur' }],
@@ -240,7 +290,8 @@ export default {
       getBusinessDetail(query).then(response => {
         this.postForm = response.data
         this.postForm.cardType = response.data.cardType.toString()
-        console.log(this.postForm.coverUrlList)
+        this.$set(this.hourTime, 0, this.postForm.startTime)
+        this.$set(this.hourTime, 1, this.postForm.endTime)
         for (let t = 0; t < this.postForm.coverUrlList.length; t++) {
           this.coverUrlList.push({ name: this.postForm.coverUrlList[t], url: this.postForm.coverUrlList[t] })
         }
@@ -310,6 +361,9 @@ export default {
       this.param = Object.assign({}, this.postForm)
       this.param.coverUrlList = []
       this.param.coverUrl = null
+      this.param.startTime = this.hourTime[0]
+      this.param.endTime = this.hourTime[1]
+      this.param.hourTime = null
       for (let t = 0; t < this.coverUrlList.length; t++) {
         if (t === 0) {
           this.param.coverUrlList = this.coverUrlList[0].url

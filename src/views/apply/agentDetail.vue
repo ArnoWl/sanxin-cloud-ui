@@ -3,7 +3,7 @@
     <div class="form-box">
       <el-form ref="form" :model="postForm" label-width="150px">
         <el-form-item :label="$t('advert.nickName')">
-          <span>{{ postForm.nickName }}</span>
+          <span>{{ postForm.realName }}</span>
         </el-form-item>
         <el-form-item :label="$t('advert.phone')">
           <span>{{ postForm.phone }}</span>

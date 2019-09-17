@@ -54,16 +54,6 @@
           />
         </template>
       </el-table-column>
-      <el-table-column :label="$t('device.businessHours')" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.hourTime }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('device.addressDetail')" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.addressDetail }}</span>
-        </template>
-      </el-table-column>
       <el-table-column :label="$t('status.handle')" align="center">
         <template slot-scope="scope">
           <router-link :to="'/device/editDevice/'+scope.row.id">

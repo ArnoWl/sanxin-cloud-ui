@@ -27,33 +27,6 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item :label="$t('device.businessHours')" prop="status">
-            <el-select v-model="postForm.startDay">
-              <el-option
-                v-for="item in dateList"
-                :key="item.value"
-                :label="item.name"
-                :value="item.value"
-              />
-            </el-select>
-            <el-select v-model="postForm.endDay">
-              <el-option
-                v-for="item in dateList"
-                :key="item.value"
-                :label="item.name"
-                :value="item.value"
-              />
-            </el-select>
-            <el-time-picker
-              v-model="postForm.hourTime"
-              is-range
-              format="HH:mm"
-              value-format="HH:mm"
-            />
-          </el-form-item>
-          <el-form-item :label="$t('device.addressDetail')" prop="addressDetail">
-            <el-input v-model="postForm.addressDetail" type="textarea" />
-          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSave()">{{ $t('status.save') }}</el-button>
           </el-form-item>
@@ -67,8 +40,7 @@
 import { getDeviceDetail, handleEditDevice } from '@/api/device'
 import { queryAllBusinessList } from '@/api/apply'
 const defaultForm = {
-  type: '1',
-  hourTime: ['08:00', '20:00']
+  type: '1'
 }
 export default {
   name: 'EditDevice',
@@ -83,15 +55,6 @@ export default {
       loading: false,
       id: 0,
       param: {}, // 表单要提交的数据
-      dateList: [
-        { value: 0, name: this.$t('date.sunday') },
-        { value: 1, name: this.$t('date.monday') },
-        { value: 2, name: this.$t('date.tuesday') },
-        { value: 3, name: this.$t('date.wednesday') },
-        { value: 4, name: this.$t('date.thursday') },
-        { value: 5, name: this.$t('date.friday') },
-        { value: 6, name: this.$t('date.saturday') }
-      ],
       businessList: {},
       statusState: false,
       rules: {
@@ -119,7 +82,6 @@ export default {
       getDeviceDetail(query).then(response => {
         this.postForm = response.data
         this.postForm.type = response.data.type.toString()
-        this.postForm.hourTime = this.postForm.hourTime.split('-')
         this.statusState = this.postForm.status === 1
       }).catch(err => {
         console.log(err)
@@ -134,14 +96,6 @@ export default {
     },
     onSave() {
       this.postForm.createTime = null
-      if (this.postForm.hourTime == null) {
-        this.$message({
-          message: 'Time cannot be empty',
-          type: 'error'
-        })
-        return
-      }
-      this.postForm.hourTime = this.postForm.hourTime[0] + '-' + this.postForm.hourTime[1]
       if (this.statusState) {
         this.postForm.status = 1
       } else {
