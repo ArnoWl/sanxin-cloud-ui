@@ -309,7 +309,7 @@ export default {
     addDevice: '添加设备'
   },
   date: {
-    sunday: '星期天',
+    sunday: '星期日',
     monday: '星期一',
     tuesday: '星期二',
     wednesday: '星期三',

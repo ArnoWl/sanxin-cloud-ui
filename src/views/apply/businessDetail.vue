@@ -246,7 +246,7 @@ export default {
       coverUrlList: [],
       hourTime: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
       dateList: [
-        { value: 0, name: this.$t('date.sunday') },
+        { value: 7, name: this.$t('date.sunday') },
         { value: 1, name: this.$t('date.monday') },
         { value: 2, name: this.$t('date.tuesday') },
         { value: 3, name: this.$t('date.wednesday') },
