@@ -327,6 +327,12 @@ export default {
     refundPublicKey: 'คืนกุญแจสาธารณะ',
     refundPrivateKey: 'คืนคีย์ส่วนตัว'
   },
+  homePage: {
+    powerNum: 'ชาร์จสมบัติ',
+    orderMoney: 'จำนวนการสั่งซื้อ',
+    cashMoney: 'จำนวนเงินที่ถอนเงินสด',
+    depositMoney: 'เงินฝาก'
+  },
   status: {
     pass: 'ผ่าน',
     reject: 'ปฏิเสธ',

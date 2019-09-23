@@ -328,6 +328,12 @@ export default {
     refundPublicKey: '退款公钥',
     refundPrivateKey: '退款私钥'
   },
+  homePage: {
+    powerNum: '充电宝',
+    orderMoney: '订单金额',
+    cashMoney: '提现金额',
+    depositMoney: '押金'
+  },
   status: {
     pass: '通过',
     reject: '驳回',

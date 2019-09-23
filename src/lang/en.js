@@ -327,6 +327,12 @@ export default {
     refundPublicKey: 'Refund public key',
     refundPrivateKey: 'Refund private key'
   },
+  homePage: {
+    powerNum: 'Power Bank',
+    orderMoney: 'Order amount',
+    cashMoney: 'Withdrawal Amount',
+    depositMoney: 'Deposit'
+  },
   status: {
     pass: 'Pass',
     reject: 'Reject',
