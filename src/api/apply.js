@@ -1,5 +1,29 @@
 import request from '@/utils/request'
 
+export function feedbackList(query) {
+  return request({
+    url: '/system/feedbackList',
+    method: 'get',
+    params: query
+  })
+}
+
+export function getFeedbackDetail(query) {
+  return request({
+    url: '/system/getFeedbackDetail',
+    method: 'get',
+    params: query
+  })
+}
+
+export function handleFeedbackStatus(query) {
+  return request({
+    url: '/system/handleFeedbackStatus',
+    method: 'post',
+    params: query
+  })
+}
+
 export function advertList(query) {
   return request({
     url: '/advert/list',

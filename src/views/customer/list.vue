@@ -81,12 +81,14 @@
               <el-dropdown-item v-else-if="scope.row.status == 0" @click.native="handleEditStatus(scope.row, 1)">{{ $t('customer.unfreeze') }}</el-dropdown-item>
               <el-dropdown-item @click.native="showUpdatePay(scope.row)">{{ $t('customer.resetPass') }}</el-dropdown-item>
               <el-dropdown-item @click.native="showUpdatePass(scope.row)">{{ $t('customer.restPay') }}</el-dropdown-item>
+              <el-dropdown-item>
+                <router-link :to="'/customer/amountDetails/'+scope.row.id">{{ $t('customer.amountDetails') }}</router-link>
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </template>
       </el-table-column>
     </el-table>
-
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
     <!--修改交易密码-->
@@ -106,7 +108,7 @@
       </div>
     </el-dialog>
 
-    <!--修改登录面膜-->
+    <!--修改登录密码-->
     <el-dialog :visible.sync="updatePassVisible">
       <el-form ref="updateForm" :model="updateForm" :rules="updateRules" label-width="80px" label-position="left">
         <el-form-item :label="$t('customer.passWord')" prop="passWord">
@@ -174,7 +176,6 @@ export default {
       customerList(this.listQuery).then(response => {
         this.list = response.data.records
         this.total = response.data.total
-        // Just to simulate the time of the request
         setTimeout(() => {
           this.listLoading = false
         }, 1.5 * 1000)

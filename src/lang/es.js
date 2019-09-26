@@ -66,9 +66,11 @@ export default {
     advertDetail: 'รายละเอียดโฆษณา',
     businessDetail: 'รายละเอียดธุรกิจ',
     agentDetail: 'รายละเอียดตัวแทน',
+    feedbackDetail: 'ข้อผิดพลาดรายละเอียดข้อเสนอแนะ',
     agreementDetail: 'รายละเอียดข้อตกลง',
     guideDetail: 'รายละเอียดคู่มือ',
-    editAdvert: 'ปล่อยโฆษณาบัญชีแยกประเภท'
+    editAdvert: 'ปล่อยโฆษณาบัญชีแยกประเภท',
+    amountDetails: 'รายละเอียดจำนวนเงิน'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -190,6 +192,16 @@ export default {
     fixedHeader: 'Fixed Header',
     sidebarLogo: 'Sidebar Logo'
   },
+  feedback: {
+    bussinessName: 'ชื่อร้าน',
+    realName: 'นาม',
+    content: 'เนื้อหา',
+    createTime: 'เวลาสมัคร',
+    statusName: 'สภาพ',
+    sort: 'อันดับ',
+    detail: 'รายละเอียด',
+    backUrl: 'ภาพคำติชม'
+  },
   advert: {
     nickName: 'นาม',
     phone: 'รายละเอียดการติดต่อ',
@@ -258,7 +270,21 @@ export default {
     restPay: 'รีเซ็ตรหัสผ่านเข้าสู่ระบบ',
     handleStatusTip: 'ยืนยันสถานะผู้ใช้ปัจจุบันของการดำเนินงาน?',
     payWord: 'รหัสผ่าน',
-    passWord: 'รหัสผ่านเข้าสู่ระบบ'
+    passWord: 'รหัสผ่านเข้าสู่ระบบ',
+    amountDetails: 'รายละเอียดจำนวนเงิน'
+  },
+  moneyDetail: {
+    nickName: 'ชื่อเล่น',
+    payCode: 'หมายเลขคำสั่งการทำธุรกรรม',
+    type: 'ประเภทการดำเนินงาน',
+    original: 'จำนวนเงินสุดท้าย',
+    cost: 'จำนวนของการดำเนินการนี้',
+    last: 'ยอดดุลสุดท้าย',
+    createTime: 'เวลาลงทะเบียน',
+    remark: 'ลักษณะ',
+    isout: 'ประเภทรายได้และค่าใช้จ่าย',
+    income: 'รายได้',
+    expenditure: 'รายจ่าย'
   },
   agreement: {
     title: 'ชื่อหนังสือ',

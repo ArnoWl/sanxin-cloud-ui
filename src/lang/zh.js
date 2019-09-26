@@ -66,10 +66,12 @@ export default {
     advertDetail: '广告详情',
     businessDetail: '加盟详情',
     agentDetail: '代理详情',
+    feedbackDetail: '故障反馈详情',
     agreementDetail: '协议详情',
     guideDetail: '使用指南详情',
     editAdvert: '发布/编辑广告',
-    editDevice: '编辑设备'
+    editDevice: '编辑设备',
+    amountDetails: '金额明细'
   },
   navbar: {
     dashboard: '首页',
@@ -191,6 +193,16 @@ export default {
     fixedHeader: '固定 Header',
     sidebarLogo: '侧边栏 Logo'
   },
+  feedback: {
+    bussinessName: '店铺名称',
+    realName: '姓名',
+    content: '内容',
+    createTime: '申请时间',
+    statusName: '状态',
+    sort: '排序',
+    detail: '详情',
+    backUrl: '反馈照片'
+  },
   advert: {
     nickName: '姓名',
     phone: '联系方式',
@@ -259,7 +271,21 @@ export default {
     restPay: '重置登录密码',
     handleStatusTip: '确认操作当前用户状态?',
     payWord: '交易密码',
-    passWord: '登录密码'
+    passWord: '登录密码',
+    amountDetails: '金额明细'
+  },
+  moneyDetail: {
+    nickName: '姓名',
+    payCode: '交易单号',
+    type: '操作类型',
+    original: '上一次金额',
+    cost: '本次操作金额',
+    last: '最后结余',
+    createTime: '注册时间',
+    remark: '描述',
+    isout: '收支类型',
+    income: '收入',
+    expenditure: '支出'
   },
   agreement: {
     title: '标题',

@@ -66,9 +66,11 @@ export default {
     advertDetail: 'Advert Detail',
     businessDetail: 'Business Detail',
     agentDetail: 'Agent Detail',
+    feedbackDetail: 'Feedback Detail',
     agreementDetail: 'Agreement Detail',
     guideDetail: 'Guide Detail',
-    editAdvert: 'Publish/Edit Advert'
+    editAdvert: 'Publish/Edit Advert',
+    amountDetails: 'Amount Details'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -190,6 +192,16 @@ export default {
     fixedHeader: 'Fixed Header',
     sidebarLogo: 'Sidebar Logo'
   },
+  feedback: {
+    bussinessName: 'Bussiness Name',
+    realName: 'Name',
+    content: 'Content',
+    createTime: 'Application Time',
+    statusName: 'State',
+    sort: 'Sort',
+    detail: 'Detail',
+    backUrl: 'Feedback photos'
+  },
   advert: {
     nickName: 'Name',
     phone: 'Contact Information',
@@ -258,7 +270,21 @@ export default {
     restPay: 'Reset login password',
     handleStatusTip: 'Confirm the current user status of the operation?',
     payWord: 'Transaction password',
-    passWord: 'Login password'
+    passWord: 'Login password',
+    amountDetails: 'Amount Details'
+  },
+  moneyDetail: {
+    nickName: 'Name',
+    payCode: 'Transaction order number',
+    type: 'Operation type',
+    original: 'Last amount',
+    cost: 'The amount of this operation',
+    last: 'Final balance',
+    createTime: 'Registration time',
+    remark: 'Description',
+    isout: 'Income and expenditure type',
+    income: 'Income',
+    expenditure: 'Expenditure'
   },
   agreement: {
     title: 'Title',

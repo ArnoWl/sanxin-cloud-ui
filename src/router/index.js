@@ -102,6 +102,27 @@ export const constantRoutes = [
         name: 'AgentDetail',
         meta: { title: 'agentDetail' },
         hidden: true
+      },
+      {
+        path: 'feedbackDetail/:id(\\d+)',
+        component: () => import('@/views/apply/feedbackDetail'),
+        name: 'FeedbackDetail',
+        meta: { title: 'feedbackDetail' },
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/customer',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'amountDetails/:cid(\\d+)',
+        component: () => import('@/views/customer/amountDetails'),
+        name: 'AmountDetails',
+        meta: { title: 'amountDetails' },
+        hidden: true
       }
     ]
   },

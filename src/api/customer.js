@@ -31,3 +31,11 @@ export function handleUpdatePassWord(data) {
     params: data
   })
 }
+
+export function customerAmountDetails(query) {
+  return request({
+    url: '/customer/amountDetails',
+    method: 'get',
+    params: query
+  })
+}
