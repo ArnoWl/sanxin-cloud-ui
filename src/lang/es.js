@@ -70,7 +70,9 @@ export default {
     agreementDetail: 'รายละเอียดข้อตกลง',
     guideDetail: 'รายละเอียดคู่มือ',
     editAdvert: 'ปล่อยโฆษณาบัญชีแยกประเภท',
-    amountDetails: 'รายละเอียดจำนวนเงิน'
+    amountDetails: 'รายละเอียดจำนวนเงิน',
+    depositDetails: 'รายละเอียดการฝาก',
+    timeDetails: 'ระยะเวลา'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -271,7 +273,33 @@ export default {
     handleStatusTip: 'ยืนยันสถานะผู้ใช้ปัจจุบันของการดำเนินงาน?',
     payWord: 'รหัสผ่าน',
     passWord: 'รหัสผ่านเข้าสู่ระบบ',
-    amountDetails: 'รายละเอียดจำนวนเงิน'
+    amountDetails: 'รายละเอียดจำนวนเงิน',
+    depositDetails: 'รายละเอียดการฝาก',
+    timeDetails: 'ระยะเวลา'
+  },
+  depositDetails: {
+    nickName: 'ชื่อเล่น',
+    payCode: 'หมายเลขคำสั่งการทำธุรกรรม',
+    type: 'ประเภทการชำระเงิน',
+    cost: 'จำนวนของการดำเนินการนี้',
+    createTime: 'เวลาลงทะเบียน',
+    remark: 'ลักษณะ',
+    isout: 'ประเภทรายได้และค่าใช้จ่าย',
+    income: 'รายได้',
+    expenditure: 'รายจ่าย'
+  },
+  timeDetails: {
+    nickName: 'ชื่อเล่น',
+    payCode: 'หมายเลขคำสั่งการทำธุรกรรม',
+    type: 'ประเภทการดำเนินงาน',
+    original: 'จำนวนเงินสุดท้าย',
+    cost: 'จำนวนของการดำเนินการนี้',
+    last: 'ยอดดุลสุดท้าย',
+    createTime: 'เวลาลงทะเบียน',
+    remark: 'ลักษณะ',
+    isout: 'ประเภทรายได้และค่าใช้จ่าย',
+    income: 'รายได้',
+    expenditure: 'รายจ่าย'
   },
   moneyDetail: {
     nickName: 'ชื่อเล่น',

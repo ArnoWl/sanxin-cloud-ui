@@ -71,7 +71,10 @@ export default {
     guideDetail: '使用指南详情',
     editAdvert: '发布/编辑广告',
     editDevice: '编辑设备',
-    amountDetails: '金额明细'
+    amountDetails: '金额明细',
+    depositDetails: '押金明细',
+    timeDetails: '时长明细',
+    orderDetail: '订单详情'
   },
   navbar: {
     dashboard: '首页',
@@ -236,6 +239,35 @@ export default {
   agent: {
     pass: '设置密码'
   },
+  corder: {
+    orderCode: '订单号',
+    payCode: '支付单号',
+    transCode: '交易单号',
+    terminalId: '设备编号',
+    rentMoney: '租金总额',
+    hour: '扣除时长',
+    payMoney: '支付金额',
+    realMoney: '实际支付',
+    orderStatus: '订单状态',
+    buy: '是否购买充电宝',
+    payTypeName: '支付方式',
+    createTime: '下单时间',
+    confirmTime: '确认去支付时间',
+    payendTime: '支付截止时间',
+    payTime: '支付完成时间',
+    returnTime: '归还时间',
+    orderFromChannel: '订单来源渠道',
+    terminalMoney: '购买充电宝价格',
+    depositMoney: '购买充电宝扣除押金金额',
+    rentAddr: '租借地点',
+    returnAddr: '归还地点',
+    overTime: '交易完成时间',
+    statusName: '订单状态',
+    phone: '会员账号',
+    cNickName: '会员昵称',
+    bNickName: '店铺名称',
+    detail: '详情'
+  },
   business: {
     cardType: '证件类型',
     cardNo: '证件号码',
@@ -272,7 +304,22 @@ export default {
     handleStatusTip: '确认操作当前用户状态?',
     payWord: '交易密码',
     passWord: '登录密码',
-    amountDetails: '金额明细'
+    amountDetails: '金额明细',
+    depositDetails: '押金明细',
+    timeDetails: '时长明细'
+  },
+  timeDetails: {
+    nickName: '姓名',
+    payCode: '交易单号',
+    type: '操作类型',
+    original: '上一次金额',
+    cost: '本次操作金额',
+    last: '最后结余',
+    createTime: '注册时间',
+    remark: '描述',
+    isout: '收支类型',
+    income: '收入',
+    expenditure: '支出'
   },
   moneyDetail: {
     nickName: '姓名',
@@ -281,6 +328,17 @@ export default {
     original: '上一次金额',
     cost: '本次操作金额',
     last: '最后结余',
+    createTime: '注册时间',
+    remark: '描述',
+    isout: '收支类型',
+    income: '收入',
+    expenditure: '支出'
+  },
+  depositDetails: {
+    nickName: '姓名',
+    payCode: '交易单号',
+    type: '支付方式',
+    cost: '本次操作金额',
     createTime: '注册时间',
     remark: '描述',
     isout: '收支类型',

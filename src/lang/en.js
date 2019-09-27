@@ -70,7 +70,9 @@ export default {
     agreementDetail: 'Agreement Detail',
     guideDetail: 'Guide Detail',
     editAdvert: 'Publish/Edit Advert',
-    amountDetails: 'Amount Details'
+    amountDetails: 'Amount Details',
+    depositDetails: 'Deposit Details',
+    timeDetails: 'Time Details'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -271,7 +273,31 @@ export default {
     handleStatusTip: 'Confirm the current user status of the operation?',
     payWord: 'Transaction password',
     passWord: 'Login password',
-    amountDetails: 'Amount Details'
+    amountDetails: 'Amount Details',
+    depositDetails: 'Deposit Details',
+    timeDetails: 'Time Details'
+  },
+  timeDetails: {
+    nickName: 'Name',
+    payCode: 'Transaction order number',
+    type: 'payment method',
+    cost: 'The amount of this operation',
+    createTime: 'Registration time',
+    remark: 'Description',
+    isout: 'Income and expenditure type',
+    income: 'Income',
+    expenditure: 'Expenditure'
+  },
+  depositDetails: {
+    nickName: 'Name',
+    payCode: 'Transaction order number',
+    type: 'payment method',
+    cost: 'The amount of this operation',
+    createTime: 'Registration time',
+    remark: 'Description',
+    isout: 'Income and expenditure type',
+    income: 'Income',
+    expenditure: 'Expenditure'
   },
   moneyDetail: {
     nickName: 'Name',

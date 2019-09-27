@@ -39,3 +39,11 @@ export function customerAmountDetails(query) {
     params: query
   })
 }
+
+export function customerTimeDetails(query) {
+  return request({
+    url: '/customer/timeDetails',
+    method: 'get',
+    params: query
+  })
+}

@@ -123,6 +123,34 @@ export const constantRoutes = [
         name: 'AmountDetails',
         meta: { title: 'amountDetails' },
         hidden: true
+      },
+      {
+        path: 'depositDetails/:cid(\\d+)',
+        component: () => import('@/views/customer/depositDetails'),
+        name: 'DepositDetails',
+        meta: { title: 'depositDetails' },
+        hidden: true
+      },
+      {
+        path: 'timeDetails/:cid(\\d+)',
+        component: () => import('@/views/customer/timeDetails'),
+        name: 'TimeDetails',
+        meta: { title: 'timeDetails' },
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/order',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'detail/:id(\\d+)',
+        component: () => import('@/views/order/detail'),
+        name: 'OrderDetail',
+        meta: { title: 'orderDetail' },
+        hidden: true
       }
     ]
   },

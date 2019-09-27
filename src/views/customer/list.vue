@@ -84,6 +84,12 @@
               <el-dropdown-item>
                 <router-link :to="'/customer/amountDetails/'+scope.row.id">{{ $t('customer.amountDetails') }}</router-link>
               </el-dropdown-item>
+              <el-dropdown-item>
+                <router-link :to="'/customer/depositDetails/'+scope.row.id">{{ $t('customer.depositDetails') }}</router-link>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <router-link :to="'/customer/timeDetails/'+scope.row.id">{{ $t('customer.timeDetails') }}</router-link>
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </template>
