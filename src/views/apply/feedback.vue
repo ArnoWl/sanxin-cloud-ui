@@ -45,9 +45,8 @@
       </el-table-column>
       <el-table-column :label="$t('feedback.statusName')" min-width="60px" align="center">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.status === 1" type="primary" size="small">{{ $t('status.apply') }}</el-tag>
-          <el-tag v-if="scope.row.status === 2" type="success" size="small">{{ $t('status.success') }}</el-tag>
-          <el-tag v-if="scope.row.status === 3" type="danger" size="small">{{ $t('status.fail') }}</el-tag>
+          <el-tag v-if="scope.row.status === 0" type="primary" size="small">{{ $t('status.apply') }}</el-tag>
+          <el-tag v-if="scope.row.status === 1" type="success" size="small">{{ $t('status.pass') }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column :label="$t('status.handle')" width="150px" align="center">

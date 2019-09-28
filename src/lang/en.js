@@ -72,7 +72,8 @@ export default {
     editAdvert: 'Publish/Edit Advert',
     amountDetails: 'Amount Details',
     depositDetails: 'Deposit Details',
-    timeDetails: 'Time Details'
+    timeDetails: 'Time Details',
+    orderDetail: 'Order Details'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -236,6 +237,37 @@ export default {
   },
   agent: {
     pass: 'Setting Password'
+  },
+  corder: {
+    orderCode: 'Order number',
+    payCode: 'Payment order number',
+    transCode: 'Transaction order number',
+    terminalId: 'Device ID',
+    rentMoney: 'Total rent',
+    hour: 'Deduction time',
+    payMoney: 'Payment amount',
+    realMoney: 'Actual payment',
+    orderStatus: 'Order Status',
+    buy: 'Whether to buy a charging treasure',
+    payTypeName: 'Payment method',
+    createTime: 'Order time',
+    confirmTime: 'Confirm payment time',
+    payendTime: 'Payment deadline',
+    payTime: 'Payment completion time',
+    returnTime: 'Return time',
+    orderFromChannel: 'Order source channel',
+    terminalMoney: 'Buy charging treasure price',
+    depositMoney: 'Purchase charging treasure deducting the amount of the deposit',
+    rentAddr: 'Rental location',
+    returnAddr: 'Return location',
+    overTime: 'Transaction completion time',
+    statusName: 'Order Status',
+    phone: 'Member account',
+    cNickName: 'Member nickname',
+    bNickName: 'Store Name',
+    detail: 'Detail',
+    buyed: 'Bought',
+    nobuy: 'Not purchased'
   },
   business: {
     cardType: 'Document Type',

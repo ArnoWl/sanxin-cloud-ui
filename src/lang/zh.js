@@ -266,7 +266,9 @@ export default {
     phone: '会员账号',
     cNickName: '会员昵称',
     bNickName: '店铺名称',
-    detail: '详情'
+    detail: '详情',
+    buyed: '已购买',
+    nobuy: '未购买'
   },
   business: {
     cardType: '证件类型',

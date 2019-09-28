@@ -2,45 +2,154 @@
   <div class="app-container">
     <div class="form-box">
       <el-form ref="form" :model="postForm" label-width="150px">
-        <el-form-item :label="$t('advert.nickName')">
-          <span>{{ postForm.realName }}</span>
+        <el-row :span="16">
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.orderCode')" prop="title">
+              <el-button v-if="postForm.orderCode != null">{{ postForm.orderCode }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.orderStatus')" prop="title">
+              <el-button v-if="postForm.orderStatus != null" type="success" size="small">{{ postForm.statusName }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.orderFromChannel')" prop="title">
+              <el-button v-if="postForm.orderFromChannel != null" type="primary" size="small">{{ postForm.orderFromChannel }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.payTypeName')">
+              <el-button v-if="postForm.payTypeName != null" type="primary" size="small">{{ postForm.payTypeName }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.bNickName')" prop="title">
+              <el-button v-if="postForm.bNickName != null">{{ postForm.bNickName }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.terminalId')" prop="title">
+              <el-button v-if="postForm.terminalId != null">{{ postForm.terminalId }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.cNickName')" prop="title">
+              <el-button v-if="postForm.cNickName != null">{{ postForm.cNickName }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.phone')" prop="title">
+              <el-button v-if="postForm.phone != null">{{ postForm.phone }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.transCode')" prop="title">
+              <el-button v-if="postForm.transCode != null">{{ postForm.transCode }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.payCode')" prop="title">
+              <el-button v-if="postForm.payCode != null">{{ postForm.payCode }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.payMoney')" prop="title">
+              <el-button v-if="postForm.payMoney != null">{{ postForm.payMoney }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.realMoney')" prop="title">
+              <el-button v-if="postForm.realMoney != null">{{ postForm.realMoney }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.rentMoney')" prop="title">
+              <el-button v-if="postForm.rentMoney != null">{{ postForm.rentMoney }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.hour')" prop="title">
+              <el-button v-if="postForm.hour != null">{{ postForm.hour }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.rentAddr')">
+              <el-button v-if="postForm.rentAddr != null">{{ postForm.rentAddr }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.returnAddr')">
+              <el-button v-if="postForm.returnAddr != null">{{ postForm.returnAddr }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.createTime')">
+              <el-button>{{ postForm.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('corder.confirmTime')">
+              <el-button v-if="postForm.confirmTime != null">{{ postForm.confirmTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col v-if="postForm.payTime != null" :span="8">
+            <el-form-item :label="$t('corder.payTime')">
+              <el-button>{{ postForm.payTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col v-if="postForm.returnTime != null" :span="8">
+            <el-form-item :label="$t('corder.returnTime')">
+              <el-button>{{ postForm.returnTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :span="16">
+          <el-col v-if="postForm.payendTime != null" :span="8">
+            <el-form-item :label="$t('corder.payendTime')">
+              <el-button>{{ postForm.payendTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col v-if="postForm.overTime != null" :span="8">
+            <el-form-item :label="$t('corder.overTime')">
+              <el-button>{{ postForm.overTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item :label="$t('corder.buy')" prop="title">
+          <el-button v-if="postForm.buy === 1" type="danger" size="small">{{ $t('corder.buyed') }}</el-button>
+          <el-button v-if="postForm.buy === 0" type="primary" size="small">{{ $t('corder.nobuy') }}</el-button>
         </el-form-item>
-        <el-form-item :label="$t('orderDetail.phone')">
-          <span>{{ postForm.phone }}</span>
-        </el-form-item>
-        <el-form-item :label="$t('advert.address')">
-          <span>{{ postForm.address }}</span>
-        </el-form-item>
-        <el-form-item :label="$t('advert.addressDetail')">
-          <span>{{ postForm.addressDetail }}</span>
-        </el-form-item>
-        <el-form-item :label="$t('advert.companyName')">
-          <span>{{ postForm.companyName }}</span>
-        </el-form-item>
-        <el-form-item :label="$t('advert.licenseCode')">
-          <span>{{ postForm.licenseCode }}</span>
-        </el-form-item>
-        <el-form-item :label="$t('advert.licenseImg')" style="margin-bottom: 20px;">
-          <img :src="postForm.licenseImg" width="165" height="110" class="head_pic">
-        </el-form-item>
-        <el-form-item :label="$t('advert.companyImg')" style="margin-bottom: 20px;">
-          <img :src="postForm.companyImg" width="165" height="110" class="head_pic">
-        </el-form-item>
-        <el-form-item :label="$t('advert.statusName')">
-          <el-button v-if="postForm.status === 1" type="primary" size="small">{{ $t('status.apply') }}</el-button>
-          <el-button v-if="postForm.status === 2" type="success" size="small">{{ $t('status.success') }}</el-button>
-          <el-button v-if="postForm.status === 3" type="danger" size="small">{{ $t('status.fail') }}</el-button>
-        </el-form-item>
-        <el-form-item :label="$t('advert.createTime')">
-          <span>{{ postForm.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-        </el-form-item>
-        <el-form-item :label="$t('advert.checkTime')">
-          <span v-if="postForm.status != 1">{{ postForm.checkTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-        </el-form-item>
-        <el-form-item v-if="postForm.status == 1">
-          <el-button type="primary" @click="handleAddPass(2)">{{ $t('status.pass') }}</el-button>
-          <el-button type="danger" @click="onSubmit(3)">{{ $t('status.fail') }}</el-button>
-        </el-form-item>
+        <el-row v-if="postForm.buy === 1" :span="16">
+          <el-col v-if="postForm.terminalMoney != null" :span="8">
+            <el-form-item :label="$t('corder.terminalMoney')" prop="title">
+              <el-button>{{ postForm.terminalMoney }}</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col v-if="postForm.depositMoney != null" :span="8">
+            <el-form-item :label="$t('corder.depositMoney')" prop="title">
+              <el-button>{{ postForm.depositMoney }}</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
     </div>
 

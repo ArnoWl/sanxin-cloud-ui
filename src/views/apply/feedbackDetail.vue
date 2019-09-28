@@ -12,19 +12,19 @@
           <span>{{ postForm.content }}</span>
         </el-form-item>
         <el-form-item :label="$t('feedback.backUrl')" style="margin-bottom: 20px;">
-          <img :src="postForm.backUrl" width="165" height="110" class="head_pic">
+          <span v-for="item in postForm.backUrlList" :key="item" style="margin:0px 2px;">
+            <img :src="item" width="165" height="110" class="head_pic">
+          </span>
         </el-form-item>
         <el-form-item :label="$t('feedback.statusName')">
-          <el-tag v-if="postForm.status === 1" type="primary" size="small">{{ $t('status.apply') }}</el-tag>
-          <el-tag v-if="postForm.status === 2" type="success" size="small">{{ $t('status.success') }}</el-tag>
-          <el-tag v-if="postForm.status === 3" type="danger" size="small">{{ $t('status.fail') }}</el-tag>
+          <el-tag v-if="postForm.status === 0" type="primary" size="small">{{ $t('status.apply') }}</el-tag>
+          <el-tag v-if="postForm.status === 1" type="success" size="small">{{ $t('status.pass') }}</el-tag>
         </el-form-item>
         <el-form-item :label="$t('feedback.createTime')">
           <span>{{ postForm.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </el-form-item>
-        <el-form-item v-if="postForm.status == 1">
-          <el-button type="primary" @click="onSubmit(2)">{{ $t('status.pass') }}</el-button>
-          <el-button type="danger" @click="onSubmit(3)">{{ $t('status.fail') }}</el-button>
+        <el-form-item v-if="postForm.status == 0">
+          <el-button type="primary" @click="onSubmit(1)">{{ $t('status.pass') }}</el-button>
         </el-form-item>
       </el-form>
     </div>

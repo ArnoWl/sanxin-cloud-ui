@@ -72,7 +72,8 @@ export default {
     editAdvert: 'ปล่อยโฆษณาบัญชีแยกประเภท',
     amountDetails: 'รายละเอียดจำนวนเงิน',
     depositDetails: 'รายละเอียดการฝาก',
-    timeDetails: 'ระยะเวลา'
+    timeDetails: 'ระยะเวลา',
+    orderDetail: 'รายละเอียดการสั่งซื้อ'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -236,6 +237,37 @@ export default {
   },
   agent: {
     pass: 'ตั้งค่ารหัสผ่าน'
+  },
+  corder: {
+    orderCode: 'หมายเลขสั่งซื้อ',
+    payCode: 'หมายเลขคำสั่งจ่ายเงิน',
+    transCode: 'หมายเลขคำสั่งการทำธุรกรรม',
+    terminalId: 'หมายเลขอุปกรณ์',
+    rentMoney: 'รวมค่าเช่า',
+    hour: 'ลดเวลา',
+    payMoney: 'จำนวนเงินที่ชำระ',
+    realMoney: 'จ่ายจริง',
+    orderStatus: 'สถานะการสั่งซื้อ',
+    buy: 'ไม่ว่าจะซื้อสมบัติชาร์จ',
+    payTypeName: 'วิธีการชำระเงิน',
+    createTime: 'เวลาสั่งซื้อ',
+    confirmTime: 'ยืนยันเวลาชำระเงิน',
+    payendTime: 'กำหนดเวลาชำระเงิน',
+    payTime: 'เวลาชำระเงินเสร็จสมบูรณ์',
+    returnTime: 'ส่งคืนเวลา',
+    orderFromChannel: 'ช่องทางการสั่งซื้อ',
+    terminalMoney: 'ซื้อชาร์จสมบัติราคา',
+    depositMoney: 'ซื้อสมบัติชาร์จหักจำนวนเงินฝาก',
+    rentAddr: 'สถานที่ให้เช่า',
+    returnAddr: 'สถานที่ส่งคืน',
+    overTime: 'เวลาในการทำธุรกรรม',
+    statusName: 'สถานะการสั่งซื้อ',
+    phone: 'บัญชีสมาชิก',
+    cNickName: 'ชื่อเล่นของสมาชิก',
+    bNickName: 'ชื่อร้าน',
+    detail: 'รายละเอียด',
+    buyed: 'สั่งซื้อ',
+    nobuy: 'ไม่ได้ซื้อ'
   },
   business: {
     cardType: 'ประเภทไฟล์',
