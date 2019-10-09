@@ -12,7 +12,7 @@
           <span>{{ postForm.content }}</span>
         </el-form-item>
         <el-form-item :label="$t('feedback.backUrl')" style="margin-bottom: 20px;">
-          <span v-for="item in postForm.backUrlList" :key="item" style="margin:0px 2px;">
+          <span v-for="item in postForm.url" :key="item" style="margin:0px 2px;">
             <img :src="item" width="165" height="110" class="head_pic">
           </span>
         </el-form-item>
