@@ -71,6 +71,7 @@ export default {
     guideDetail: '使用指南详情',
     editAdvert: '发布/编辑广告',
     editDevice: '编辑设备',
+    deviceDetail: '设备详情',
     amountDetails: '金额明细',
     depositDetails: '押金明细',
     timeDetails: '时长明细',
@@ -392,7 +393,8 @@ export default {
     large: '大柜机',
     small: '小柜机',
     timeSlot: '时间段',
-    addDevice: '添加设备'
+    addDevice: '添加设备',
+    eject: '弹出'
   },
   date: {
     sunday: '星期日',
@@ -434,6 +436,7 @@ export default {
     effective: '有效',
     invalid: '无效',
     edit: '编辑',
+    detail: '详情',
     save: '保存',
     delete: '删除',
     deleteMsg: '确认删除当前数据？'

@@ -31,3 +31,11 @@ export function handleEditDevice(data) {
     params: data
   })
 }
+
+export function getDeviceTerminalDetail(data) {
+  return request({
+    url: '/device/getDeviceTerminalDetail',
+    method: 'get',
+    params: data
+  })
+}

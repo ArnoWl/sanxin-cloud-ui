@@ -70,6 +70,8 @@ export default {
     agreementDetail: 'Agreement Detail',
     guideDetail: 'Guide Detail',
     editAdvert: 'Publish/Edit Advert',
+    editDevice: 'Edit Device',
+    deviceDetail: 'Device Detail',
     amountDetails: 'Amount Details',
     depositDetails: 'Deposit Details',
     timeDetails: 'Time Details',
@@ -389,7 +391,8 @@ export default {
     large: 'Large cabinet',
     small: 'Cabinet Machine',
     timeSlot: 'Time Slot',
-    addDevice: 'Add Device'
+    addDevice: 'Add Device',
+    eject: 'eject'
   },
   date: {
     sunday: 'Sunday',
@@ -431,6 +434,7 @@ export default {
     effective: 'Effective',
     invalid: 'Invalid',
     edit: 'Edit',
+    detail: 'Detail',
     save: 'Save',
     delete: 'Delete',
     deleteMsg: 'Verify deletion of current data？'

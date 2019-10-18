@@ -70,6 +70,8 @@ export default {
     agreementDetail: 'รายละเอียดข้อตกลง',
     guideDetail: 'รายละเอียดคู่มือ',
     editAdvert: 'ปล่อยโฆษณาบัญชีแยกประเภท',
+    editDevice: 'อุปกรณ์แก้ไข',
+    deviceDetail: 'รายละเอียดอุปกรณ์',
     amountDetails: 'รายละเอียดจำนวนเงิน',
     depositDetails: 'รายละเอียดการฝาก',
     timeDetails: 'ระยะเวลา',
@@ -391,16 +393,17 @@ export default {
     large: 'ตู้',
     small: 'ตู้เอทีเอ็ม',
     timeSlot: 'ช่วงเวลา',
-    addDevice: 'เพิ่มอุปกรณ์'
+    addDevice: 'เพิ่มอุปกรณ์',
+    eject: 'ดีดตัว'
   },
   date: {
-    sunday: 'อาทิตย์',
+    sunday: 'วันอาทิตย์',
     monday: 'วันจันทร์',
     tuesday: 'วันอังคาร',
     wednesday: 'วันพุธ',
-    thursday: 'วันพฤหัสบดี',
+    thursday: 'วันพฤรึหัส',
     friday: 'วันศุกร์',
-    saturday: 'เสาร์'
+    saturday: 'วันสาร์'
   },
   payment: {
     alipay: 'จ่ายสมบัติ',
@@ -433,6 +436,7 @@ export default {
     effective: 'ประสิทธิผล',
     invalid: 'โมฆะ',
     edit: 'ตัดต่อ',
+    detail: 'รายละเอียด',
     save: 'เก็บรักษา',
     delete: 'ลบทิ้ง',
     deleteMsg: 'ตรวจสอบการลบข้อมูลปัจจุบัน？'

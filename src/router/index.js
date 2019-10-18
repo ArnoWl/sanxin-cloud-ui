@@ -200,6 +200,13 @@ export const constantRoutes = [
         name: 'EditDevice',
         meta: { title: 'editDevice' },
         hidden: true
+      },
+      {
+        path: 'deviceDetail/:id',
+        component: () => import('@/views/device/deviceDetail'),
+        name: 'DeviceDetail',
+        meta: { title: 'deviceDetail' },
+        hidden: true
       }
     ]
   }

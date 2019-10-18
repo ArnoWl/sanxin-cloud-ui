@@ -2,7 +2,7 @@
   <div class="app-container">
     <!--查询条件-->
     <div class="filter-container">
-      <el-input v-model="listQuery.nickName" :placeholder="$t('advert.nickName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="listQuery.code" :placeholder="$t('device.code')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-select v-model="listQuery.status" :placeholder="$t('advert.statusName')" style="width: 140px" class="filter-item" @change="handleFilter">
         <el-option :key="1" :label="$t('status.apply')" :value="1" />
         <el-option :key="2" :label="$t('status.success')" :value="2" />
@@ -59,6 +59,11 @@
           <router-link :to="'/device/editDevice/'+scope.row.id">
             <el-button type="primary" size="small">
               {{ $t('status.edit') }}
+            </el-button>
+          </router-link>
+          <router-link :to="'/device/deviceDetail/'+scope.row.id">
+            <el-button type="primary" size="small">
+              {{ $t('status.detail') }}
             </el-button>
           </router-link>
         </template>
