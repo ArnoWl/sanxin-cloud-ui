@@ -422,6 +422,12 @@ export default {
     cashMoney: '提现金额',
     depositMoney: '押金'
   },
+  address: {
+    zhName: '中文名称',
+    thaiName: '泰文名称',
+    enName: '英文名称',
+    level: 'level'
+  },
   status: {
     pass: '通过',
     reject: '驳回',

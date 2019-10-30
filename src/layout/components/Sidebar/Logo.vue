@@ -24,8 +24,8 @@ export default {
   },
   data() {
     return {
-      title: 'Sanxin Cms',
-      logo: 'http://sanxininfo.com/data/upload/admin/20181206/5c0883f3232bd.png'
+      title: 'Power Plus',
+      logo: '../logo.png'
     }
   }
 }

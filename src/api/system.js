@@ -86,3 +86,19 @@ export function updateGiftHour(query) {
     params: query
   })
 }
+
+export function addressList(query) {
+  return request({
+    url: '/address/addressList',
+    method: 'get',
+    params: query
+  })
+}
+
+export function handleAddressStatus(query) {
+  return request({
+    url: '/address/handleAddressStatus',
+    method: 'post',
+    params: query
+  })
+}

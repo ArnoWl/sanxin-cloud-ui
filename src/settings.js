@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Sanxin  Cms',
+  title: 'Power Plus',
 
   /**
    * @type {boolean} true | false
