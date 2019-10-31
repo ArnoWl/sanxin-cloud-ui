@@ -46,3 +46,34 @@ export function handleAdvertContentHomeShow(query) {
     params: query
   })
 }
+
+export function advertFindList(query) {
+  return request({
+    url: '/advert/queryAdvertFindList',
+    method: 'get',
+    params: query
+  })
+}
+
+export function getAdvertFindDetail(query) {
+  return request({
+    url: '/advert/getAdvertFindDetail',
+    method: 'get',
+    params: query
+  })
+}
+export function handleEditAdvertFind(query) {
+  return request({
+    url: '/advert/handleEditAdvertFind',
+    method: 'post',
+    params: query
+  })
+}
+
+export function handleAdvertFindStatus(query) {
+  return request({
+    url: '/advert/handleAdvertFindStatus',
+    method: 'post',
+    params: query
+  })
+}

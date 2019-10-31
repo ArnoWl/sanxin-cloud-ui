@@ -3,40 +3,6 @@
     <el-form ref="dataForm" :model="postForm" :rules="rules" label-width="150px">
       <div class="app-container">
         <div class="form-box">
-          <el-row :span="24">
-            <el-col :span="8">
-              <el-form-item :label="$t('advert.CNTitle')" prop="cnTitle">
-                <el-input v-model="postForm.cnTitle" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8">
-              <el-form-item :label="$t('advert.ENTitle')" prop="enTitle">
-                <el-input v-model="postForm.enTitle" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8">
-              <el-form-item :label="$t('advert.THAITitle')" prop="thaiTitle">
-                <el-input v-model="postForm.thaiTitle" />
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :span="24">
-            <el-col :span="8">
-              <el-form-item :label="$t('advert.CNContent')" prop="cnContent">
-                <el-input v-model="postForm.cnContent" type="textarea" :rows="2" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8">
-              <el-form-item :label="$t('advert.ENContent')" prop="enContent">
-                <el-input v-model="postForm.enContent" type="textarea" :rows="2" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8">
-              <el-form-item :label="$t('advert.THAIContent')" prop="thaiContent">
-                <el-input v-model="postForm.thaiContent" type="textarea" :rows="2" />
-              </el-form-item>
-            </el-col>
-          </el-row>
           <el-form-item :label="$t('advert.eventName')" prop="eventName">
             <el-select v-model="postForm.event" :placeholder="$t('advert.eventName')" class="filter-item">
               <el-option
@@ -52,18 +18,26 @@
           <el-form-item v-if="postForm.event === 'externalLink'" :label="$t('advert.url')" prop="url">
             <el-input v-model="postForm.url" />
           </el-form-item>
+          <el-form-item :label="$t('advert.eventName')" prop="eventName">
+            <el-select v-model="postForm.type" class="filter-item" placeholder="Please select">
+              <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id" />
+            </el-select>
+          </el-form-item>
           <el-form-item :label="$t('advert.frameImg')" style="margin-bottom: 20px;">
             <el-upload
               class="avatar-uploader"
               :action="actionUrl"
               name="file"
               :show-file-list="false"
-              :on-success="handleFrameImgSuccess"
+              :on-success="handleImgSuccess"
               :headers="headers"
             >
-              <img v-if="postForm.frameImg" :src="postForm.frameImg" class="avatar-img">
+              <img v-if="postForm.img" :src="postForm.img" class="avatar-img">
               <i v-else class="el-icon-plus avatar-uploader-img" />
             </el-upload>
+          </el-form-item>
+          <el-form-item :label="$t('advert.sort')" prop="sort">
+            <el-input v-model="postForm.sort" type="number" />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSave()">{{ $t('status.save') }}</el-button>
@@ -75,7 +49,7 @@
 </template>
 
 <script>
-import { getAdvertContentDetail, queryEventType, handleEditAdvertContent } from '@/api/advert'
+import { getAdvertFindDetail, queryEventType, handleEditAdvertFind } from '@/api/advert'
 import { getLanguage, getToken } from '@/utils/auth'
 const defaultConfig = require('@/api/globalconfig.js')
 const defaultForm = {
@@ -85,6 +59,16 @@ export default {
   data() {
     return {
       postForm: Object.assign({}, defaultForm),
+      typeList: [
+        {
+          id: 0,
+          name: 'transverse'
+        },
+        {
+          id: 1,
+          name: 'portrait'
+        }
+      ],
       loading: false,
       id: 0,
       param: {}, // 表单要提交的数据
@@ -149,7 +133,7 @@ export default {
       const query = {
         id: this.id
       }
-      getAdvertContentDetail(query).then(response => {
+      getAdvertFindDetail(query).then(response => {
         this.postForm = response.data
       }).catch(err => {
         console.log(err)
@@ -165,9 +149,6 @@ export default {
     handleRemove(file, fileList) {
       this.coverUrlList = fileList
     },
-    handleFrameImgSuccess(res, file) {
-      this.postForm.frameImg = file.response.data
-    },
     handleImgSuccess(res, file) {
       this.postForm.img = URL.createObjectURL(file.raw)
     },
@@ -182,7 +163,7 @@ export default {
       this.postForm.createTime = null
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          handleEditAdvertContent(this.postForm).then(response => {
+          handleEditAdvertFind(this.postForm).then(response => {
             if (response.status) {
               this.$message({
                 message: response.msg,

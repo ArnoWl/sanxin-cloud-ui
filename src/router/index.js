@@ -186,6 +186,13 @@ export const constantRoutes = [
         name: 'EditAdvert',
         meta: { title: 'editAdvert' },
         hidden: true
+      },
+      {
+        path: 'editAdvertList/:id',
+        component: () => import('@/views/advert/editAdvertList'),
+        name: 'EditAdvertList',
+        meta: { title: 'editAdvertList' },
+        hidden: true
       }
     ]
   },

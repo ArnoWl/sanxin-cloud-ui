@@ -2,8 +2,6 @@
   <div class="app-container">
     <!--查询条件-->
     <div class="filter-container">
-      <el-input v-model="listQuery.title" :placeholder="$t('advert.title')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-input v-model="listQuery.content" :placeholder="$t('advert.content')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-select v-model="listQuery.event" :placeholder="$t('advert.eventName')" style="width: 140px" class="filter-item" @change="handleFilter">
         <el-option
           v-for="item in eventType"
@@ -18,7 +16,7 @@
         {{ $t('table.search') }}
       </el-button>
       <el-button type="primary" icon="el-icon-edit">
-        <router-link :to="'/advert/editAdvert/-1'">
+        <router-link :to="'/advert/editAdvertList/-1'">
           {{ $t('advert.addAdvert') }}
         </router-link>
       </el-button>
@@ -34,20 +32,6 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
-      <el-table-column :label="$t('advert.title')" align="center">
-        <template slot-scope="scope">
-          <span>CN:{{ scope.row.cnTitle }}<br></span>
-          <span>EN:{{ scope.row.enTitle }}<br></span>
-          <span>THAI:{{ scope.row.thaiTitle }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('advert.content')" align="center">
-        <template slot-scope="scope">
-          <span>CN:{{ scope.row.cnContent }}<br></span>
-          <span>EN:{{ scope.row.enContent }}<br></span>
-          <span>THAI:{{ scope.row.thaiContent }}</span>
-        </template>
-      </el-table-column>
       <el-table-column :label="$t('advert.eventName')" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.event }}</span>
@@ -71,7 +55,7 @@
       </el-table-column>
       <el-table-column :label="$t('status.handle')" width="150px" align="center">
         <template slot-scope="scope">
-          <router-link :to="'/advert/editAdvert/'+scope.row.id">
+          <router-link :to="'/advert/editAdvertList/'+scope.row.id">
             <el-button type="primary" size="small">
               {{ $t('status.edit') }}
             </el-button>
@@ -96,7 +80,7 @@
 <script>
 
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-import { advertContentList, handleAdvertContentStatus, handleAdvertContentHomeShow, queryEventType } from '@/api/advert'
+import { advertFindList, handleAdvertFindStatus, queryEventType } from '@/api/advert'
 import waves from '@/directive/waves' // waves directive
 
 export default {
@@ -134,7 +118,7 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      advertContentList(this.listQuery).then(response => {
+      advertFindList(this.listQuery).then(response => {
         this.list = response.data.records
         this.total = response.data.total
         // Just to simulate the time of the request
@@ -156,7 +140,7 @@ export default {
         status: status
       }
       this.listLoading = true
-      handleAdvertContentStatus(query).then(response => {
+      handleAdvertFindStatus(query).then(response => {
         if (response.status) {
           this.$message({
             message: response.msg,
@@ -171,25 +155,6 @@ export default {
         }
       })
       this.listLoading = false
-    },
-    handleHomeShow(row) {
-      const query = {
-        id: row.id
-      }
-      handleAdvertContentHomeShow(query).then(response => {
-        if (response.status) {
-          this.$message({
-            message: response.msg,
-            type: 'success'
-          })
-          this.getList()
-        } else {
-          this.$message({
-            message: response.msg,
-            type: 'error'
-          })
-        }
-      })
     },
     handleFilter() {
       this.listQuery.page = 1
