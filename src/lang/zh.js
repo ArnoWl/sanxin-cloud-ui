@@ -70,6 +70,7 @@ export default {
     agreementDetail: '协议详情',
     guideDetail: '使用指南详情',
     editAdvert: '发布/编辑广告',
+    editAdvertList: '发布/编辑发现广告',
     editDevice: '编辑设备',
     deviceDetail: '设备详情',
     amountDetails: '金额明细',
@@ -235,7 +236,11 @@ export default {
     CNContent: '中文内容',
     ENContent: '英文内容',
     THAIContent: '泰文内容',
-    setFrame: '首页弹窗'
+    setFrame: '首页弹窗',
+    titleEmpty: '请输入标题',
+    contentEmpty: '请输入内容',
+    titleLength: '最多输入30位字符',
+    contentLength: '最多输入100位字符'
   },
   agent: {
     pass: '设置密码'
@@ -394,7 +399,8 @@ export default {
     small: '小柜机',
     timeSlot: '时间段',
     addDevice: '添加设备',
-    eject: '弹出'
+    eject: '弹出',
+    terminalPrice: '租借价格'
   },
   date: {
     sunday: '星期日',
@@ -426,7 +432,11 @@ export default {
     zhName: '中文名称',
     thaiName: '泰文名称',
     enName: '英文名称',
-    level: 'level'
+    level: 'level',
+    editAddr: '编辑地址'
+  },
+  setUp: {
+    baseName: '基础设置'
   },
   status: {
     pass: '通过',
@@ -445,6 +455,9 @@ export default {
     detail: '详情',
     save: '保存',
     delete: '删除',
-    deleteMsg: '确认删除当前数据？'
+    deleteMsg: '确认删除当前数据？',
+    proName: '省份',
+    cityName: '城市',
+    areaName: '区/县'
   }
 }

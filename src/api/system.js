@@ -102,3 +102,19 @@ export function handleAddressStatus(query) {
     params: query
   })
 }
+
+export function getBaseSetList(query) {
+  return request({
+    url: '/system/getBaseSetList',
+    method: 'get',
+    params: query
+  })
+}
+
+export function editInfoParam(query) {
+  return request({
+    url: '/system/editInfoParam',
+    method: 'post',
+    params: query
+  })
+}

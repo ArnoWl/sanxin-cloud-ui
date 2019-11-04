@@ -70,6 +70,7 @@ export default {
     agreementDetail: 'รายละเอียดข้อตกลง',
     guideDetail: 'รายละเอียดคู่มือ',
     editAdvert: 'ปล่อยโฆษณาบัญชีแยกประเภท',
+    editAdvertList: 'ปล่อยโฆษณาสำหรับบัญชีแยกประเภท',
     editDevice: 'อุปกรณ์แก้ไข',
     deviceDetail: 'รายละเอียดอุปกรณ์',
     amountDetails: 'รายละเอียดจำนวนเงิน',
@@ -235,7 +236,11 @@ export default {
     CNContent: 'เนื้อหาภาษาจีน',
     ENContent: 'เนื้อหาภาษาอังกฤษ',
     THAIContent: 'เนื้อหาภาษาไทย',
-    setFrame: 'หน้าต่างสัญลักษณ์บนหน้าแรก'
+    setFrame: 'หน้าต่างสัญลักษณ์บนหน้าแรก',
+    titleEmpty: 'กรุณาป้อนชื่อ',
+    contentEmpty: 'โปรดระบุเนื้อหา',
+    titleLength: 'ใส่อักขระบิตมากที่สุด',
+    contentLength: 'ป้อนอักขระ 100bit สูงสุด'
   },
   agent: {
     pass: 'ตั้งค่ารหัสผ่าน'
@@ -394,7 +399,8 @@ export default {
     small: 'ตู้เอทีเอ็ม',
     timeSlot: 'ช่วงเวลา',
     addDevice: 'เพิ่มอุปกรณ์',
-    eject: 'ดีดตัว'
+    eject: 'ดีดตัว',
+    terminalPrice: 'ค่าเช่า'
   },
   date: {
     sunday: 'วันอาทิตย์',
@@ -422,6 +428,16 @@ export default {
     cashMoney: 'จำนวนเงินที่ถอนเงินสด',
     depositMoney: 'เงินฝาก'
   },
+  address: {
+    zhName: 'ชื่อภาษาจีน',
+    thaiName: 'ชื่อภาษาไทย',
+    enName: 'ชื่อภาษาอังกฤษ',
+    level: 'level',
+    editAddr: 'แก้ไขที่อยู่'
+  },
+  setUp: {
+    baseName: 'การตั้งค่าพื้นฐาน'
+  },
   status: {
     pass: 'ผ่าน',
     reject: 'ปฏิเสธ',
@@ -439,6 +455,9 @@ export default {
     detail: 'รายละเอียด',
     save: 'เก็บรักษา',
     delete: 'ลบทิ้ง',
-    deleteMsg: 'ตรวจสอบการลบข้อมูลปัจจุบัน？'
+    deleteMsg: 'ตรวจสอบการลบข้อมูลปัจจุบัน？',
+    proName: 'จังหวัด',
+    cityName: 'นคร',
+    areaName: 'อำเภอและเมือง'
   }
 }

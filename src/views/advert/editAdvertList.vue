@@ -150,7 +150,7 @@ export default {
       this.coverUrlList = fileList
     },
     handleImgSuccess(res, file) {
-      this.postForm.img = URL.createObjectURL(file.raw)
+      this.postForm.img = file.response.data
     },
     beforeUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 2

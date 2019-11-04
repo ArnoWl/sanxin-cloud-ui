@@ -79,6 +79,7 @@ import { getAdvertContentDetail, queryEventType, handleEditAdvertContent } from 
 import { getLanguage, getToken } from '@/utils/auth'
 const defaultConfig = require('@/api/globalconfig.js')
 const defaultForm = {
+  frameImg: ''
 }
 export default {
   name: 'AdvertDetail',
@@ -105,28 +106,28 @@ export default {
       actionUrl: defaultConfig.baseURL + 'uploadOne',
       rules: {
         cnTitle: [
-          { required: true, message: '请输入标题', trigger: 'blur' },
-          { min: 0, max: 20, message: '最多输入20位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.titleEmpty'), trigger: 'blur' },
+          { min: 0, max: 30, message: this.$t('advert.titleLength'), trigger: 'blur' }
         ],
         enTitle: [
-          { required: true, message: '请输入标题', trigger: 'blur' },
-          { min: 0, max: 20, message: '最多输入20位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.titleEmpty'), trigger: 'blur' },
+          { min: 0, max: 30, message: this.$t('advert.titleLength'), trigger: 'blur' }
         ],
         thaiTitle: [
-          { required: true, message: '请输入标题', trigger: 'blur' },
-          { min: 0, max: 20, message: '最多输入20位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.titleEmpty'), trigger: 'blur' },
+          { min: 0, max: 30, message: this.$t('advert.titleLength'), trigger: 'blur' }
         ],
         cnContent: [
-          { required: true, message: '请输入内容', trigger: 'blur' },
-          { min: 0, max: 100, message: '最多输入100位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.contentEmpty'), trigger: 'blur' },
+          { min: 0, max: 100, message: this.$t('advert.contentLength'), trigger: 'blur' }
         ],
         enContent: [
-          { required: true, message: '请输入内容', trigger: 'blur' },
-          { min: 0, max: 100, message: '最多输入100位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.contentEmpty'), trigger: 'blur' },
+          { min: 0, max: 100, message: this.$t('advert.contentLength'), trigger: 'blur' }
         ],
         thaiContent: [
-          { required: true, message: '请输入内容', trigger: 'blur' },
-          { min: 0, max: 100, message: '最多输入100位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.contentEmpty'), trigger: 'blur' },
+          { min: 0, max: 100, message: this.$t('advert.contentLength'), trigger: 'blur' }
         ],
         url: [
           { required: true, message: '请输入链接', trigger: 'blur' }
@@ -167,9 +168,10 @@ export default {
     },
     handleFrameImgSuccess(res, file) {
       this.postForm.frameImg = file.response.data
+      console.log(this.postForm)
     },
     handleImgSuccess(res, file) {
-      this.postForm.img = URL.createObjectURL(file.raw)
+      this.postForm.img = file.response.data
     },
     beforeUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 2
@@ -188,7 +190,6 @@ export default {
                 message: response.msg,
                 type: 'success'
               })
-              this.getData()
             } else {
               this.$message({
                 message: response.msg,

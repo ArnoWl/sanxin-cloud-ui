@@ -87,6 +87,14 @@ export function handleEditBusiness(query) {
   })
 }
 
+export function handleSaveBusiness(query) {
+  return request({
+    url: '/business/handleSaveBusiness',
+    method: 'post',
+    params: query
+  })
+}
+
 export function agentList(query) {
   return request({
     url: '/agent/list',

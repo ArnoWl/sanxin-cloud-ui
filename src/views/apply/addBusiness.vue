@@ -26,14 +26,6 @@
               <el-form-item :label="$t('advert.licenseCode')" prop="licenseCode">
                 <el-input v-model="postForm.licenseCode" />
               </el-form-item>
-              <el-form-item :label="$t('advert.statusName')">
-                <el-tag v-if="postForm.status === 1" type="info" size="small">{{ $t('status.apply') }}</el-tag>
-                <el-tag v-if="postForm.status === 2" type="success" size="small">{{ $t('status.success') }}</el-tag>
-                <el-tag v-if="postForm.status === 3" type="danger" size="small">{{ $t('status.fail') }}</el-tag>
-              </el-form-item>
-              <el-form-item :label="$t('advert.createTime')">
-                <span>{{ postForm.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-              </el-form-item>
             </div>
           </div>
         </el-tab-pane>
@@ -176,11 +168,7 @@
           </el-form-item>
         </el-tab-pane>
       </el-tabs>
-      <el-form-item v-if="postForm.status == 1">
-        <el-button type="primary" @click="onSubmit(2)">{{ $t('status.pass') }}</el-button>
-        <el-button type="danger" @click="onSubmit(3)">{{ $t('status.fail') }}</el-button>
-      </el-form-item>
-      <el-form-item v-if="postForm.status == 2">
+      <el-form-item>
         <el-button type="primary" @click="onSave('form')">{{ $t('status.save') }}</el-button>
       </el-form-item>
     </el-form>
@@ -188,7 +176,7 @@
 </template>
 
 <script>
-import { handleBusinessStatus, getBusinessDetail, handleEditBusiness } from '@/api/apply'
+import { handleSaveBusiness } from '@/api/apply'
 import { getLanguage, getToken } from '@/utils/auth'
 const defaultConfig = require('@/api/globalconfig.js')
 const defaultForm = {
@@ -196,10 +184,14 @@ const defaultForm = {
   phone: '', // 联系方式
   address: '', // 地区
   addressDetail: '', // 详细地址
+  cardFront: '',
   companyName: '', // 公司名称
   licenseCode: '', // 营业执照号
+  cardBack: '',
+  passPort: '',
   licenseImg: '', // 营业执照地址
   companyImg: '', // 公司照片地址
+  headUrl: '',
   status: '', // 申请状态
   createTime: undefined,
   checkTime: undefined
@@ -244,7 +236,7 @@ export default {
       activeName: 'directly',
       param: {}, // 表单要提交的数据
       coverUrlList: [],
-      hourTime: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+      hourTime: [],
       dateList: [
         { value: 7, name: this.$t('date.sunday') },
         { value: 1, name: this.$t('date.monday') },
@@ -277,28 +269,9 @@ export default {
     }
   },
   created() {
-    this.id = this.$route.params && this.$route.params.id
-    this.getData(this.id)
     this.tempRoute = Object.assign({}, this.$route)
   },
   methods: {
-    getData() {
-      this.coverUrlList = []
-      const query = {
-        id: this.id
-      }
-      getBusinessDetail(query).then(response => {
-        this.postForm = response.data
-        this.postForm.cardType = response.data.cardType.toString()
-        this.$set(this.hourTime, 0, this.postForm.startTime)
-        this.$set(this.hourTime, 1, this.postForm.endTime)
-        for (let t = 0; t < this.postForm.coverUrlList.length; t++) {
-          this.coverUrlList.push({ name: this.postForm.coverUrlList[t], url: this.postForm.coverUrlList[t] })
-        }
-      }).catch(err => {
-        console.log(err)
-      })
-    },
     handleCardFrontSuccess(res, file) {
       this.postForm.cardFront = file.response.data
     },
@@ -323,31 +296,6 @@ export default {
     handlePictureCardPreview(file) {
       this.coverUrlList.push({ name: file.data, url: file.data })
     },
-    onSubmit(status) {
-      const query = {
-        id: this.id,
-        status: status
-      }
-      this.listLoading = true
-      handleBusinessStatus(query).then(response => {
-        if (response.status) {
-          this.$message({
-            message: response.msg,
-            type: 'success'
-          })
-        } else {
-          this.$message({
-            message: response.msg,
-            type: 'error'
-          })
-        }
-        // Just to simulate the time of the request
-        setTimeout(() => {
-          this.listLoading = false
-        }, 1.5 * 1000)
-        this.getData()
-      })
-    },
     onSave(formName) {
       // 下面append的东西就会到form表单数据的fields中；
       // this.param.append('message', formName)
@@ -371,7 +319,7 @@ export default {
           this.param.coverUrlList += ',' + this.coverUrlList[t].url
         }
       }
-      handleEditBusiness(this.param, config).then(response => {
+      handleSaveBusiness(this.param, config).then(response => {
         if (response.status) {
           this.$message({ message: response.msg, type: 'success' })
           this.getData()

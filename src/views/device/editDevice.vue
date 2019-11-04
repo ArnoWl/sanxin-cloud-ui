@@ -27,6 +27,9 @@
               />
             </el-select>
           </el-form-item>
+          <el-form-item :label="$t('device.terminalPrice')" prop="code">
+            <el-input v-model="postForm.terminalPrice" type="number" />
+          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSave()">{{ $t('status.save') }}</el-button>
           </el-form-item>

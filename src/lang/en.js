@@ -70,6 +70,7 @@ export default {
     agreementDetail: 'Agreement Detail',
     guideDetail: 'Guide Detail',
     editAdvert: 'Publish/Edit Advert',
+    editAdvertList: 'Publish/Edit Discover Advert',
     editDevice: 'Edit Device',
     deviceDetail: 'Device Detail',
     amountDetails: 'Amount Details',
@@ -235,7 +236,11 @@ export default {
     CNContent: 'Chinese Content',
     ENContent: 'English Content',
     THAIContent: 'Thai Content',
-    setFrame: 'Bullet Window on Home Page'
+    setFrame: 'Bullet Window on Home Page',
+    titleEmpty: 'Please enter a title',
+    contentEmpty: 'Please enter content',
+    titleLength: 'Enter up to 30 characters',
+    contentLength: 'Enter up to 100 characters'
   },
   agent: {
     pass: 'Setting Password'
@@ -392,7 +397,8 @@ export default {
     small: 'Cabinet Machine',
     timeSlot: 'Time Slot',
     addDevice: 'Add Device',
-    eject: 'eject'
+    eject: 'eject',
+    terminalPrice: 'Rental price'
   },
   date: {
     sunday: 'Sunday',
@@ -420,6 +426,16 @@ export default {
     cashMoney: 'Withdrawal Amount',
     depositMoney: 'Deposit'
   },
+  address: {
+    zhName: 'Chinese name',
+    thaiName: 'Thai name',
+    enName: 'English name',
+    level: 'level',
+    editAddr: 'Edit address'
+  },
+  setUp: {
+    baseName: 'Foundation setup'
+  },
   status: {
     pass: 'Pass',
     reject: 'Reject',
@@ -437,6 +453,9 @@ export default {
     detail: 'Detail',
     save: 'Save',
     delete: 'Delete',
-    deleteMsg: 'Verify deletion of current data？'
+    deleteMsg: 'Verify deletion of current data？',
+    proName: 'Province',
+    cityName: 'City',
+    areaName: 'District / county'
   }
 }
