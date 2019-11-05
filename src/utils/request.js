@@ -22,7 +22,7 @@ service.interceptors.request.use(
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       var language = getLanguage()
-      if (language == null || language == '' || language == 'null' || language == 'undefined' || language == undefined) {
+      if (language == null || language === '' || language === 'null' || language === 'undefined' || language === undefined) {
         language = 'CN'
       }
       config.headers.common['languageToken'] = language
@@ -56,7 +56,7 @@ service.interceptors.response.use(
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === '1001') {
         // to re-login
-        MessageBox.confirm('Please login again,'+res.msg, 'Confirm logout', {
+        MessageBox.confirm('Please login again,' + res.msg, 'Confirm logout', {
           confirmButtonText: 'Re-Login',
           cancelButtonText: 'Cancel',
           type: 'warning'
@@ -69,11 +69,9 @@ service.interceptors.response.use(
         Message({
           message: res.msg || 'Error',
           type: 'warning',
-          duration: 1.5 * 1000,
-          onClose: () => {
-            return Promise.reject(res.msg || 'Error')
-          }
+          duration: 1.5 * 1000
         })
+        return Promise.reject(res.msg || 'Error')
       }
     } else {
       return res
