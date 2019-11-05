@@ -15,3 +15,11 @@ export function editAddress(query) {
     params: query
   })
 }
+
+export function addAddress(query) {
+  return request({
+    url: '/address/addAddress',
+    method: 'post',
+    params: query
+  })
+}

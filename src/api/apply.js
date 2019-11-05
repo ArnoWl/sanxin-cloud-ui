@@ -142,3 +142,11 @@ export function resetAgentLoginPass(query) {
     params: query
   })
 }
+
+export function validCode(query) {
+  return request({
+    url: '/business/validCode',
+    method: 'post',
+    params: query
+  })
+}

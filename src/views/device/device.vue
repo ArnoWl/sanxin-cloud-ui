@@ -38,6 +38,11 @@
           <span>{{ scope.row.code }}</span>
         </template>
       </el-table-column>
+      <el-table-column :label="$t('device.terminalPrice')" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.terminalPrice }} / h</span>
+        </template>
+      </el-table-column>
       <el-table-column :label="$t('device.typeName')" align="center">
         <template slot-scope="scope">
           <span v-if="scope.row.type == 1">{{ $t('device.large') }}</span>

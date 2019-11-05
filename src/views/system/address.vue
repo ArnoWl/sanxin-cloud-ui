@@ -13,6 +13,10 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('permission.search') }}
       </el-button>
+
+      <el-button type="primary" icon="el-icon-edit" @click="handleFirstAdd()">
+        {{ $t('address.addTopAddress') }}
+      </el-button>
     </div>
     <el-table
       :key="tableKey"
@@ -55,6 +59,9 @@
           <el-button v-if="scope.row.status == 0" size="small" type="success" @click="handleStatus(scope.row, 1)">
             {{ $t('status.effective') }}
           </el-button>
+          <el-button v-if="scope.row.level > 0 && scope.row.level < 3" size="small" type="success" @click="handleAdd(scope.row)">
+            {{ $t('address.addChild') }}
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -62,7 +69,7 @@
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
     <!--弹出框-->
-    <el-dialog :title="$t('address.editAddr')" :visible.sync="dialogFormVisible">
+    <el-dialog v-loading="loading" :title="$t('address.editAddr')" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
         <el-input v-model="temp.id" type="hidden" readonly />
         <el-form-item :label="$t('address.zhName')" prop="name">
@@ -71,7 +78,7 @@
         <el-form-item :label="$t('address.thaiName')" prop="name">
           <el-input v-model="temp.nameThai" />
         </el-form-item>
-        <el-form-item :label="$t('address.zhName')" prop="name">
+        <el-form-item :label="$t('address.enName')" prop="name">
           <el-input v-model="temp.nameEn" />
         </el-form-item>
       </el-form>
@@ -84,13 +91,36 @@
         </el-button>
       </div>
     </el-dialog>
+
+    <el-dialog v-loading="loading" :title="$t('address.addChild')" :visible.sync="dialogAddFormVisible">
+      <el-form ref="dataAddForm" :model="addTemp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
+        <el-input v-model="addTemp.id" type="hidden" readonly />
+        <el-form-item :label="$t('address.zhName')" prop="name">
+          <el-input v-model="addTemp.name" />
+        </el-form-item>
+        <el-form-item :label="$t('address.thaiName')" prop="name">
+          <el-input v-model="addTemp.nameThai" />
+        </el-form-item>
+        <el-form-item :label="$t('address.enName')" prop="name">
+          <el-input v-model="addTemp.nameEn" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogAddFormVisible = false">
+          {{ $t('table.cancel') }}
+        </el-button>
+        <el-button type="primary" @click="addData()">
+          {{ $t('table.confirm') }}
+        </el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import Pagination from '@/components/Pagination'
 import { addressList, handleAddressStatus } from '@/api/system'
-import { addressListByPid, editAddress } from '@/api/address'
+import { addressListByPid, editAddress, addAddress } from '@/api/address'
 import waves from '@/directive/waves' // waves directive
 
 export default {
@@ -102,6 +132,7 @@ export default {
       tableKey: 0,
       list: null,
       listLoading: true,
+      loading: false,
       listQuery: {
         page: 1,
         limit: 20,
@@ -115,7 +146,14 @@ export default {
         nameThai: '',
         nameEn: ''
       },
+      addTemp: {
+        parentid: null,
+        name: '',
+        nameThai: '',
+        nameEn: ''
+      },
       dialogFormVisible: false,
+      dialogAddFormVisible: false,
       proList: [],
       cityList: [],
       areaList: []
@@ -166,6 +204,20 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
+    handleAdd(row) {
+      this.addTemp.parentid = row.id // copy obj
+      this.dialogAddFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataAddForm'].clearValidate()
+      })
+    },
+    handleFirstAdd() {
+      this.addTemp.parentid = 0 // copy obj
+      this.dialogAddFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataAddForm'].clearValidate()
+      })
+    },
     handleStatus(row, status) {
       const query = {
         id: row.id,
@@ -195,6 +247,7 @@ export default {
             'nameThai': this.temp.nameThai,
             'nameEn': this.temp.nameEn
           }
+          this.loading = true
           editAddress(params).then((res) => {
             const data = res
             if (data.status) {
@@ -203,7 +256,26 @@ export default {
             } else {
               this.$notify({ title: 'ERROR', message: data.msg, type: 'error', duration: 2000 })
             }
+            this.loading = false
             this.dialogFormVisible = false
+          })
+        }
+      })
+    },
+    addData() {
+      this.$refs['dataAddForm'].validate((valid) => {
+        if (valid) {
+          this.loading = true
+          addAddress(this.addTemp).then((res) => {
+            const data = res
+            if (data.status) {
+              this.$notify({ title: 'SUCCESS', message: data.msg, type: 'success', duration: 2000 })
+              this.getList()
+            } else {
+              this.$notify({ title: 'ERROR', message: data.msg, type: 'error', duration: 2000 })
+            }
+            this.loading = false
+            this.dialogAddFormVisible = false
           })
         }
       })

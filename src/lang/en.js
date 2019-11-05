@@ -292,7 +292,12 @@ export default {
     editPayPass: 'Reset Payment Password',
     sureReset: 'Are you sure about the reset? The initial password is 888888',
     realName: 'Full name',
-    nickName: 'Nickname'
+    nickName: 'Nickname',
+    code: 'Code',
+    lon: 'longitude',
+    lat: 'latitude',
+    scale: 'Settlement ratio',
+    email: 'Email'
   },
   customer: {
     phone: 'Contact Information',
@@ -431,7 +436,9 @@ export default {
     thaiName: 'Thai name',
     enName: 'English name',
     level: 'level',
-    editAddr: 'Edit address'
+    editAddr: 'Edit address',
+    addChild: 'Add child address',
+    addTopAddress: 'Add first level address'
   },
   setUp: {
     baseName: 'Foundation setup'

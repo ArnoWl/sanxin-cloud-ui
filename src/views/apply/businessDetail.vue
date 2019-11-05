@@ -8,6 +8,12 @@
               <el-form-item :label="$t('business.nickName')" prop="nickName">
                 <el-input v-model="postForm.nickName" />
               </el-form-item>
+              <el-form-item :label="$t('business.code')" prop="code">
+                <el-input v-model="postForm.code" />
+              </el-form-item>
+              <el-form-item :label="$t('business.scale')" prop="scale">
+                <el-input v-model="postForm.scale" type="number" />
+              </el-form-item>
               <el-form-item :label="$t('business.realName')" prop="realName">
                 <el-input v-model="postForm.realName" />
               </el-form-item>
@@ -20,11 +26,20 @@
               <el-form-item :label="$t('advert.addressDetail')" prop="addressDetail">
                 <el-input v-model="postForm.addressDetail" />
               </el-form-item>
+              <el-form-item :label="$t('business.lon')" prop="addressDetail">
+                <el-input v-model="postForm.lonVal" type="number" />
+              </el-form-item>
+              <el-form-item :label="$t('business.lat')" prop="addressDetail">
+                <el-input v-model="postForm.latVal" type="number" />
+              </el-form-item>
               <el-form-item :label="$t('advert.companyName')" prop="companyName">
                 <el-input v-model="postForm.companyName" />
               </el-form-item>
               <el-form-item :label="$t('advert.licenseCode')" prop="licenseCode">
                 <el-input v-model="postForm.licenseCode" />
+              </el-form-item>
+              <el-form-item :label="$t('business.email')" prop="email">
+                <el-input v-model="postForm.email" />
               </el-form-item>
               <el-form-item :label="$t('advert.statusName')">
                 <el-tag v-if="postForm.status === 1" type="info" size="small">{{ $t('status.apply') }}</el-tag>
@@ -188,7 +203,7 @@
 </template>
 
 <script>
-import { handleBusinessStatus, getBusinessDetail, handleEditBusiness } from '@/api/apply'
+import { handleBusinessStatus, getBusinessDetail, handleEditBusiness, validCode } from '@/api/apply'
 import { getLanguage, getToken } from '@/utils/auth'
 const defaultConfig = require('@/api/globalconfig.js')
 const defaultForm = {
@@ -210,6 +225,11 @@ export default {
     var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('请输入姓名'))
+      }
+    }
+    var checkEmail = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入邮件'))
       }
     }
     var checkNickName = (rule, value, callback) => {
@@ -236,6 +256,16 @@ export default {
       if (!value) {
         return callback(new Error('请输入营业执照号'))
       }
+    }
+    var numberVal = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入编号'))
+      }
+      validCode({ bid: this.postForm.id, code: value }).then(res => {
+        if (res.status && res.data > 0) {
+          return callback(new Error('门店编号被使用'))
+        }
+      })
     }
     return {
       postForm: Object.assign({}, defaultForm),
@@ -268,7 +298,9 @@ export default {
         phone: [{ validator: checkPhone, trigger: 'blur' }],
         addressDetail: [{ validator: checkAddressDetail, trigger: 'blur' }],
         companyName: [{ validator: checkCompanyName, trigger: 'blur' }],
-        licenseCode: [{ validator: checkLicenseCode, trigger: 'blur' }]
+        licenseCode: [{ validator: checkLicenseCode, trigger: 'blur' }],
+        code: [{ validator: numberVal, trigger: 'blur' }],
+        email: [{ validator: checkEmail, trigger: 'blur' }]
       },
       headers: {
         'languageToken': getLanguage(),

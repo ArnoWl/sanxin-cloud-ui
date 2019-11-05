@@ -292,7 +292,12 @@ export default {
     editPayPass: '重置支付密码',
     sureReset: '确定重置吗？初始密码为888888',
     realName: '姓名',
-    nickName: '昵称'
+    nickName: '昵称',
+    code: '编号',
+    lon: '经度',
+    lat: '纬度',
+    scale: '结算比例',
+    email: '邮箱'
   },
   customer: {
     phone: '联系方式',
@@ -433,7 +438,9 @@ export default {
     thaiName: '泰文名称',
     enName: '英文名称',
     level: 'level',
-    editAddr: '编辑地址'
+    editAddr: '编辑地址',
+    addChild: '新增下级',
+    addTopAddress: '新增一级地址'
   },
   setUp: {
     baseName: '基础设置'
