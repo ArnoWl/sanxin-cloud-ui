@@ -8,6 +8,12 @@
               <el-form-item :label="$t('business.nickName')" prop="nickName">
                 <el-input v-model="postForm.nickName" />
               </el-form-item>
+              <el-form-item :label="$t('business.code')" prop="code">
+                <el-input v-model="postForm.code" />
+              </el-form-item>
+              <el-form-item :label="$t('business.scale')" prop="scale">
+                <el-input v-model="postForm.scale" type="number" />
+              </el-form-item>
               <el-form-item :label="$t('business.realName')" prop="realName">
                 <el-input v-model="postForm.realName" />
               </el-form-item>
@@ -15,16 +21,33 @@
                 <el-input v-model="postForm.phone" />
               </el-form-item>
               <el-form-item :label="$t('advert.address')">
-                <el-input v-model="postForm.address" />
+                <el-select v-model="postForm.proId" :placeholder="$t('status.proName')" filterable clearable class="filter-item" style="width: 130px" @change="proChange()">
+                  <el-option v-for="item in proList" :key="item.id" :label="item.translation" :value="item.id" />
+                </el-select>
+                <el-select v-model="postForm.cityId" :placeholder="$t('status.cityName')" filterable clearable class="filter-item" style="width: 130px" @change="cityChange()">
+                  <el-option v-for="item in cityList" :key="item.id" :label="item.translation" :value="item.id" />
+                </el-select>
+                <el-select v-model="postForm.areaId" :placeholder="$t('status.areaName')" filterable clearable class="filter-item" style="width: 130px">
+                  <el-option v-for="item in areaList" :key="item.id" :label="item.translation" :value="item.id" />
+                </el-select>
               </el-form-item>
               <el-form-item :label="$t('advert.addressDetail')" prop="addressDetail">
                 <el-input v-model="postForm.addressDetail" />
+              </el-form-item>
+              <el-form-item :label="$t('business.lon')" prop="addressDetail">
+                <el-input v-model="postForm.lonVal" type="number" />
+              </el-form-item>
+              <el-form-item :label="$t('business.lat')" prop="addressDetail">
+                <el-input v-model="postForm.latVal" type="number" />
               </el-form-item>
               <el-form-item :label="$t('advert.companyName')" prop="companyName">
                 <el-input v-model="postForm.companyName" />
               </el-form-item>
               <el-form-item :label="$t('advert.licenseCode')" prop="licenseCode">
                 <el-input v-model="postForm.licenseCode" />
+              </el-form-item>
+              <el-form-item :label="$t('business.email')" prop="email">
+                <el-input v-model="postForm.email" />
               </el-form-item>
             </div>
           </div>
@@ -62,8 +85,8 @@
         <el-tab-pane :label="$t('business.businessMsg')" name="v-directive">
           <el-form-item :label="$t('business.cardType')">
             <el-radio-group v-model="postForm.cardType" size="small">
-              <el-radio label="1" border>身份证</el-radio>
-              <el-radio label="2" border>护照</el-radio>
+              <el-radio label="1" border>{{ $t('business.idCard') }}</el-radio>
+              <el-radio label="2" border>{{ $t('business.passPort') }}</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-row v-if="postForm.cardType == 1" :span="12">
@@ -75,10 +98,12 @@
                   name="file"
                   :show-file-list="false"
                   :on-success="handleCardFrontSuccess"
+                  :before-upload="beforeCardFrontUpload"
                   :headers="headers"
                 >
                   <img v-if="postForm.cardFront" :src="postForm.cardFront" class="avatar">
                   <i v-else class="el-icon-plus avatar-uploader-icon" />
+                  <loadingAnimation ref="cardFront" :animation-type="2" class="loadingAnimation" />
                 </el-upload>
               </el-form-item>
             </el-col>
@@ -90,10 +115,12 @@
                   name="file"
                   :show-file-list="false"
                   :on-success="handleCardBackSuccess"
+                  :before-upload="beforeCardBackUpload"
                   :headers="headers"
                 >
                   <img v-if="postForm.cardBack" :src="postForm.cardBack" class="avatar">
                   <i v-else class="el-icon-plus avatar-uploader-icon" />
+                  <loadingAnimation ref="cardBack" :animation-type="2" class="loadingAnimation" />
                 </el-upload>
               </el-form-item>
             </el-col>
@@ -106,10 +133,12 @@
                 name="file"
                 :show-file-list="false"
                 :on-success="handlePassPortSuccess"
+                :before-upload="beforePassPortUpload"
                 :headers="headers"
               >
                 <img v-if="postForm.passPort" :src="postForm.passPort" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon" />
+                <loadingAnimation ref="passPort" :animation-type="2" class="loadingAnimation" />
               </el-upload>
             </el-form-item>
           </el-row>
@@ -120,10 +149,12 @@
               name="file"
               :show-file-list="false"
               :on-success="handleLicenseSuccess"
+              :before-upload="beforeLicenseUpload"
               :headers="headers"
             >
               <img v-if="postForm.licenseImg" :src="postForm.licenseImg" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
+              <loadingAnimation ref="license" :animation-type="2" class="loadingAnimation" />
             </el-upload>
           </el-form-item>
           <el-form-item :label="$t('advert.companyImg')" style="margin-bottom: 20px;">
@@ -133,10 +164,12 @@
               name="file"
               :show-file-list="false"
               :on-success="handleCompanySuccess"
+              :before-upload="beforeCompanyUpload"
               :headers="headers"
             >
               <img v-if="postForm.companyImg" :src="postForm.companyImg" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
+              <loadingAnimation ref="company" :animation-type="2" class="loadingAnimation" />
             </el-upload>
           </el-form-item>
           <el-form-item :label="$t('business.headUrl')" style="margin-bottom: 20px;">
@@ -146,10 +179,12 @@
               name="file"
               :show-file-list="false"
               :on-success="handleHeadUrlSuccess"
+              :before-upload="beforeHeadUrlUpload"
               :headers="headers"
             >
               <img v-if="postForm.headUrl" :src="postForm.headUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
+              <loadingAnimation ref="headUrl" :animation-type="2" class="loadingAnimation" />
             </el-upload>
           </el-form-item>
           <el-form-item :label="$t('business.coverUrl')">
@@ -176,8 +211,10 @@
 </template>
 
 <script>
-import { handleSaveBusiness } from '@/api/apply'
+import { handleSaveBusiness, validCode } from '@/api/apply'
 import { getLanguage, getToken } from '@/utils/auth'
+import { addressListByPid } from '@/api/address'
+import loadingAnimation from '@/components/loading/loadingAnimation'
 const defaultConfig = require('@/api/globalconfig.js')
 const defaultForm = {
   nickName: '', // 姓名
@@ -198,6 +235,9 @@ const defaultForm = {
 }
 export default {
   name: 'AdvertDetail',
+  components: {
+    loadingAnimation
+  },
   data() {
     var checkName = (rule, value, callback) => {
       if (!value) {
@@ -229,6 +269,16 @@ export default {
         return callback(new Error('请输入营业执照号'))
       }
     }
+    var numberVal = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入编号'))
+      }
+      validCode({ bid: this.postForm.id, code: value }).then(res => {
+        if (res.status && res.data > 0) {
+          return callback(new Error('门店编号被使用'))
+        }
+      })
+    }
     return {
       postForm: Object.assign({}, defaultForm),
       loading: false,
@@ -237,6 +287,9 @@ export default {
       param: {}, // 表单要提交的数据
       coverUrlList: [],
       hourTime: [],
+      proList: [],
+      cityList: [],
+      areaList: [],
       dateList: [
         { value: 7, name: this.$t('date.sunday') },
         { value: 1, name: this.$t('date.monday') },
@@ -260,7 +313,8 @@ export default {
         phone: [{ validator: checkPhone, trigger: 'blur' }],
         addressDetail: [{ validator: checkAddressDetail, trigger: 'blur' }],
         companyName: [{ validator: checkCompanyName, trigger: 'blur' }],
-        licenseCode: [{ validator: checkLicenseCode, trigger: 'blur' }]
+        licenseCode: [{ validator: checkLicenseCode, trigger: 'blur' }],
+        code: [{ validator: numberVal, trigger: 'blur' }]
       },
       headers: {
         'languageToken': getLanguage(),
@@ -270,31 +324,77 @@ export default {
   },
   created() {
     this.tempRoute = Object.assign({}, this.$route)
+    this.getProList()
   },
   methods: {
+    beforeCardFrontUpload(file) {
+      this.$refs.cardFront.show()
+    },
     handleCardFrontSuccess(res, file) {
       this.postForm.cardFront = file.response.data
+      this.$refs.cardFront.close()
+    },
+    beforeCardBackUpload(file) {
+      this.$refs.cardBack.show()
     },
     handleCardBackSuccess(res, file) {
       this.postForm.cardBack = file.response.data
+      this.$refs.cardBack.close()
+    },
+    beforeLicenseUpload(file) {
+      this.$refs.license.show()
     },
     handleLicenseSuccess(res, file) {
       this.postForm.licenseImg = file.response.data
+      this.$refs.license.close()
+    },
+    beforeCompanyUpload(file) {
+      this.$refs.company.show()
     },
     handleCompanySuccess(res, file) {
       this.postForm.companyImg = file.response.data
+      this.$refs.company.close()
+    },
+    beforePassPortUpload(file) {
+      this.$refs.passPort.show()
     },
     handlePassPortSuccess(res, file) {
       this.postForm.passPort = file.response.data
+      this.$refs.passPort.close()
+    },
+    beforeHeadUrlUpload(file) {
+      this.$refs.headUrl.show()
     },
     handleHeadUrlSuccess(res, file) {
       this.postForm.headUrl = file.response.data
+      this.$refs.headUrl.close()
     },
     handleRemove(file, fileList) {
       this.coverUrlList = fileList
     },
     handlePictureCardPreview(file) {
       this.coverUrlList.push({ name: file.data, url: file.data })
+    },
+    getProList() {
+      addressListByPid().then(response => {
+        this.proList = response.data
+      })
+    },
+    proChange() {
+      const config = {
+        pid: this.postForm.proId
+      }
+      addressListByPid(config).then(response => {
+        this.cityList = response.data
+      })
+    },
+    cityChange() {
+      const config = {
+        pid: this.postForm.cityId
+      }
+      addressListByPid(config).then(response => {
+        this.areaList = response.data
+      })
     },
     onSave(formName) {
       // 下面append的东西就会到form表单数据的fields中；

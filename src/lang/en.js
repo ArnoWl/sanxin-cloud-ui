@@ -240,7 +240,10 @@ export default {
     titleEmpty: 'Please enter a title',
     contentEmpty: 'Please enter content',
     titleLength: 'Enter up to 30 characters',
-    contentLength: 'Enter up to 100 characters'
+    contentLength: 'Enter up to 100 characters',
+    showType: 'Display type',
+    showImg: 'Show pictures',
+    homeTipsImg: 'Home prompt chart'
   },
   agent: {
     pass: 'Setting Password'
@@ -297,7 +300,8 @@ export default {
     lon: 'longitude',
     lat: 'latitude',
     scale: 'Settlement ratio',
-    email: 'Email'
+    email: 'Email',
+    idCard: 'ID Card'
   },
   customer: {
     phone: 'Contact Information',

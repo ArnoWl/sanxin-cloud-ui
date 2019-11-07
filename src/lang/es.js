@@ -240,7 +240,10 @@ export default {
     titleEmpty: 'กรุณาป้อนชื่อ',
     contentEmpty: 'โปรดระบุเนื้อหา',
     titleLength: 'ใส่อักขระบิตมากที่สุด',
-    contentLength: 'ป้อนอักขระ 100bit สูงสุด'
+    contentLength: 'ป้อนอักขระ 100bit สูงสุด',
+    showType: 'ประเภทของการแสดง',
+    showImg: 'แสดงภาพ',
+    homeTipsImg: 'แผนที่หน้าแรก'
   },
   agent: {
     pass: 'ตั้งค่ารหัสผ่าน'
@@ -299,7 +302,8 @@ export default {
     scale: 'อัตราส่วนการตั้งถิ่นฐาน',
     email: 'จดหมายอิเล็กทรอนิกส์',
     addChild: 'เพิ่มที่อยู่ย่อย',
-    addTopAddress: 'เพิ่มที่อยู่ระดับแรก'
+    addTopAddress: 'เพิ่มที่อยู่ระดับแรก',
+    idCard: 'บัตรประจำตัวประชาชน'
   },
   customer: {
     phone: 'รายละเอียดการติดต่อ',

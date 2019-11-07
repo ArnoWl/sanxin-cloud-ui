@@ -240,7 +240,10 @@ export default {
     titleEmpty: '请输入标题',
     contentEmpty: '请输入内容',
     titleLength: '最多输入30位字符',
-    contentLength: '最多输入100位字符'
+    contentLength: '最多输入100位字符',
+    showType: '展示类型',
+    showImg: '展示图片',
+    homeTipsImg: '首页提示图'
   },
   agent: {
     pass: '设置密码'
@@ -297,7 +300,8 @@ export default {
     lon: '经度',
     lat: '纬度',
     scale: '结算比例',
-    email: '邮箱'
+    email: '邮箱',
+    idCard: '身份证'
   },
   customer: {
     phone: '联系方式',

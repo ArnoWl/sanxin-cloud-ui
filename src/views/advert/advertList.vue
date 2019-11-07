@@ -42,6 +42,16 @@
           <span>{{ scope.row.sort }}</span>
         </template>
       </el-table-column>
+      <el-table-column :label="$t('business.lon')" width="160px" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.lonVal }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('business.lat')" width="160px" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.latVal }}</span>
+        </template>
+      </el-table-column>
       <el-table-column :label="$t('advert.advertTime')" width="160px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>

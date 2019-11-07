@@ -18,26 +18,34 @@
           <el-form-item v-if="postForm.event === 'externalLink'" :label="$t('advert.url')" prop="url">
             <el-input v-model="postForm.url" />
           </el-form-item>
-          <el-form-item :label="$t('advert.eventName')" prop="eventName">
+          <el-form-item :label="$t('advert.showType')" prop="showType">
             <el-select v-model="postForm.type" class="filter-item" placeholder="Please select">
               <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
           </el-form-item>
-          <el-form-item :label="$t('advert.frameImg')" style="margin-bottom: 20px;">
+          <el-form-item :label="$t('advert.showImg')" style="margin-bottom: 20px;">
             <el-upload
               class="avatar-uploader"
               :action="actionUrl"
               name="file"
               :show-file-list="false"
               :on-success="handleImgSuccess"
+              :before-upload="beforeAvatarUpload"
               :headers="headers"
             >
               <img v-if="postForm.img" :src="postForm.img" class="avatar-img">
               <i v-else class="el-icon-plus avatar-uploader-img" />
+              <loadingAnimation ref="imgLodding" :animation-type="2" class="loadingAnimation" />
             </el-upload>
           </el-form-item>
+          <el-form-item :label="$t('business.lon')" prop="addressDetail">
+            <el-input v-model="postForm.lonVal" type="number" />
+          </el-form-item>
+          <el-form-item :label="$t('business.lat')" prop="addressDetail">
+            <el-input v-model="postForm.latVal" type="number" />
+          </el-form-item>
           <el-form-item :label="$t('advert.sort')" prop="sort">
-            <el-input v-model="postForm.sort" type="number" />
+            <el-input v-model="postForm.sort" @keyup.native="integer" />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSave()">{{ $t('status.save') }}</el-button>
@@ -45,17 +53,22 @@
         </div>
       </div>
     </el-form>
+
   </div>
 </template>
 
 <script>
 import { getAdvertFindDetail, queryEventType, handleEditAdvertFind } from '@/api/advert'
 import { getLanguage, getToken } from '@/utils/auth'
+import loadingAnimation from '@/components/loading/loadingAnimation'
 const defaultConfig = require('@/api/globalconfig.js')
 const defaultForm = {
 }
 export default {
   name: 'AdvertDetail',
+  components: {
+    loadingAnimation
+  },
   data() {
     return {
       postForm: Object.assign({}, defaultForm),
@@ -67,9 +80,14 @@ export default {
         {
           id: 1,
           name: 'portrait'
+        },
+        {
+          id: 2,
+          name: 'wheel'
         }
       ],
       loading: false,
+      uploading: false,
       id: 0,
       param: {}, // 表单要提交的数据
       eventType: {},
@@ -149,8 +167,12 @@ export default {
     handleRemove(file, fileList) {
       this.coverUrlList = fileList
     },
+    beforeAvatarUpload(file) {
+      this.$refs.imgLodding.show()
+    },
     handleImgSuccess(res, file) {
       this.postForm.img = file.response.data
+      this.$refs.imgLodding.close()
     },
     beforeUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 2
@@ -158,6 +180,10 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isLt2M
+    },
+    integer() {
+      this.postForm.sort = this.postForm.sort.replace(/[^\.\d]/g, '')
+      this.postForm.sort = this.postForm.sort.replace('.', '')
     },
     onSave() {
       this.postForm.createTime = null
@@ -185,6 +211,12 @@ export default {
 </script>
 
 <style>
+  .loadingAnimation{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -211,14 +243,14 @@ export default {
   .avatar-uploader-img {
     font-size: 28px;
     color: #8c939d;
-    width: 266px;
-    height: 342px;
+    width: 350px;
+    height: 150px;
     line-height: 342px;
     text-align: center;
   }
   .avatar-img {
-    width: 266px;
-    height: 342px;
+    width: 350px;
+    height: 150px;
     display: block;
   }
 </style>

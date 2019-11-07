@@ -52,6 +52,21 @@
           <el-form-item v-if="postForm.event === 'externalLink'" :label="$t('advert.url')" prop="url">
             <el-input v-model="postForm.url" />
           </el-form-item>
+          <el-form-item :label="$t('advert.homeTipsImg')" style="margin-bottom: 20px;">
+            <el-upload
+              class="avatar-uploader"
+              :action="actionUrl"
+              name="file"
+              :show-file-list="false"
+              :on-success="handleTipImgSuccess"
+              :before-upload="beforeMinUpload"
+              :headers="headers"
+            >
+              <img v-if="postForm.minPicture" :src="postForm.minPicture" class="avatar-img-tip">
+              <i v-else class="el-icon-plus avatar-uploader-img-tip" />
+              <loadingAnimation ref="min" :animation-type="2" class="loadingAnimation" />
+            </el-upload>
+          </el-form-item>
           <el-form-item :label="$t('advert.frameImg')" style="margin-bottom: 20px;">
             <el-upload
               class="avatar-uploader"
@@ -59,10 +74,12 @@
               name="file"
               :show-file-list="false"
               :on-success="handleFrameImgSuccess"
+              :before-upload="beforeFrameUpload"
               :headers="headers"
             >
               <img v-if="postForm.frameImg" :src="postForm.frameImg" class="avatar-img">
               <i v-else class="el-icon-plus avatar-uploader-img" />
+              <loadingAnimation ref="frame" :animation-type="2" class="loadingAnimation" />
             </el-upload>
           </el-form-item>
           <el-form-item>
@@ -76,6 +93,7 @@
 
 <script>
 import { getAdvertContentDetail, queryEventType, handleEditAdvertContent } from '@/api/advert'
+import loadingAnimation from '@/components/loading/loadingAnimation'
 import { getLanguage, getToken } from '@/utils/auth'
 const defaultConfig = require('@/api/globalconfig.js')
 const defaultForm = {
@@ -83,6 +101,9 @@ const defaultForm = {
 }
 export default {
   name: 'AdvertDetail',
+  components: {
+    loadingAnimation
+  },
   data() {
     return {
       postForm: Object.assign({}, defaultForm),
@@ -90,6 +111,7 @@ export default {
       id: 0,
       param: {}, // 表单要提交的数据
       eventType: {},
+      uploading: false,
       dataForm: {
         cnTitle: '',
         enTitle: '',
@@ -166,9 +188,19 @@ export default {
     handleRemove(file, fileList) {
       this.coverUrlList = fileList
     },
+    beforeFrameUpload(file) {
+      this.$refs.frame.show()
+    },
+    beforeMinUpload(file) {
+      this.$refs.min.show()
+    },
     handleFrameImgSuccess(res, file) {
       this.postForm.frameImg = file.response.data
-      console.log(this.postForm)
+      this.$refs.frame.close()
+    },
+    handleTipImgSuccess(res, file) {
+      this.postForm.minPicture = file.response.data
+      this.$refs.min.close()
     },
     handleImgSuccess(res, file) {
       this.postForm.img = file.response.data
@@ -205,6 +237,12 @@ export default {
 </script>
 
 <style>
+  .loadingAnimation{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -236,9 +274,23 @@ export default {
     line-height: 342px;
     text-align: center;
   }
+  .avatar-uploader-img-tip {
+    font-size: 28px;
+    color: #8c939d;
+    width: 340px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+  }
   .avatar-img {
     width: 266px;
     height: 342px;
+    display: block;
+  }
+
+  .avatar-img-tip {
+    width: 340px;
+    height: 70px;
     display: block;
   }
 </style>
