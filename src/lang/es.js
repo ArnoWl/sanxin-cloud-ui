@@ -243,7 +243,10 @@ export default {
     contentLength: 'ป้อนอักขระ 100bit สูงสุด',
     showType: 'ประเภทของการแสดง',
     showImg: 'แสดงภาพ',
-    homeTipsImg: 'แผนที่หน้าแรก'
+    homeTipsImg: 'แผนที่หน้าแรก',
+    urlEmpty: 'โปรดระบุการเชื่อมโยง',
+    busCode: 'หมายเลขร้าน',
+    busCodeEmpty: 'กรุณาใส่หมายเลขร้าน'
   },
   agent: {
     pass: 'ตั้งค่ารหัสผ่าน'

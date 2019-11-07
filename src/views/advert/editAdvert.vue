@@ -52,6 +52,9 @@
           <el-form-item v-if="postForm.event === 'externalLink'" :label="$t('advert.url')" prop="url">
             <el-input v-model="postForm.url" />
           </el-form-item>
+          <el-form-item v-if="postForm.event === 'business'" :label="$t('advert.busCode')" prop="busCode">
+            <el-input v-model="postForm.url" />
+          </el-form-item>
           <el-form-item :label="$t('advert.homeTipsImg')" style="margin-bottom: 20px;">
             <el-upload
               class="avatar-uploader"
@@ -152,7 +155,10 @@ export default {
           { min: 0, max: 100, message: this.$t('advert.contentLength'), trigger: 'blur' }
         ],
         url: [
-          { required: true, message: '请输入链接', trigger: 'blur' }
+          { required: true, message: this.$t('advert.urlEmpty'), trigger: 'blur' }
+        ],
+        busCode: [
+          { required: true, message: this.$t('advert.busCodeEmpty'), trigger: 'blur' }
         ]
       }
     }
@@ -204,13 +210,6 @@ export default {
     },
     handleImgSuccess(res, file) {
       this.postForm.img = file.response.data
-    },
-    beforeUpload(file) {
-      const isLt2M = file.size / 1024 / 1024 < 2
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isLt2M
     },
     onSave() {
       this.postForm.createTime = null

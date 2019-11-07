@@ -243,7 +243,10 @@ export default {
     contentLength: '最多输入100位字符',
     showType: '展示类型',
     showImg: '展示图片',
-    homeTipsImg: '首页提示图'
+    homeTipsImg: '首页提示图',
+    urlEmpty: '请输入链接',
+    busCode: '店铺编号',
+    busCodeEmpty: '请输入店铺编号'
   },
   agent: {
     pass: '设置密码'

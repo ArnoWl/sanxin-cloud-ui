@@ -243,7 +243,10 @@ export default {
     contentLength: 'Enter up to 100 characters',
     showType: 'Display type',
     showImg: 'Show pictures',
-    homeTipsImg: 'Home prompt chart'
+    homeTipsImg: 'Home prompt chart',
+    urlEmpty: 'Please enter a link',
+    busCode: 'Business Code',
+    busCodeEmpty: 'Please enter business code'
   },
   agent: {
     pass: 'Setting Password'

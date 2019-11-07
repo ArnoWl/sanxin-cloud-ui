@@ -18,6 +18,9 @@
           <el-form-item v-if="postForm.event === 'externalLink'" :label="$t('advert.url')" prop="url">
             <el-input v-model="postForm.url" />
           </el-form-item>
+          <el-form-item v-if="postForm.event === 'business'" :label="$t('advert.busCode')" prop="busCode">
+            <el-input v-model="postForm.url" />
+          </el-form-item>
           <el-form-item :label="$t('advert.showType')" prop="showType">
             <el-select v-model="postForm.type" class="filter-item" placeholder="Please select">
               <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id" />
@@ -107,31 +110,34 @@ export default {
       actionUrl: defaultConfig.baseURL + 'uploadOne',
       rules: {
         cnTitle: [
-          { required: true, message: '请输入标题', trigger: 'blur' },
-          { min: 0, max: 20, message: '最多输入20位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.titleEmpty'), trigger: 'blur' },
+          { min: 0, max: 30, message: this.$t('advert.titleLength'), trigger: 'blur' }
         ],
         enTitle: [
-          { required: true, message: '请输入标题', trigger: 'blur' },
-          { min: 0, max: 20, message: '最多输入20位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.titleEmpty'), trigger: 'blur' },
+          { min: 0, max: 30, message: this.$t('advert.titleLength'), trigger: 'blur' }
         ],
         thaiTitle: [
-          { required: true, message: '请输入标题', trigger: 'blur' },
-          { min: 0, max: 20, message: '最多输入20位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.titleEmpty'), trigger: 'blur' },
+          { min: 0, max: 30, message: this.$t('advert.titleLength'), trigger: 'blur' }
         ],
         cnContent: [
-          { required: true, message: '请输入内容', trigger: 'blur' },
-          { min: 0, max: 100, message: '最多输入100位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.contentEmpty'), trigger: 'blur' },
+          { min: 0, max: 100, message: this.$t('advert.contentLength'), trigger: 'blur' }
         ],
         enContent: [
-          { required: true, message: '请输入内容', trigger: 'blur' },
-          { min: 0, max: 100, message: '最多输入100位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.contentEmpty'), trigger: 'blur' },
+          { min: 0, max: 100, message: this.$t('advert.contentLength'), trigger: 'blur' }
         ],
         thaiContent: [
-          { required: true, message: '请输入内容', trigger: 'blur' },
-          { min: 0, max: 100, message: '最多输入100位字符', trigger: 'blur' }
+          { required: true, message: this.$t('advert.contentEmpty'), trigger: 'blur' },
+          { min: 0, max: 100, message: this.$t('advert.contentLength'), trigger: 'blur' }
         ],
         url: [
-          { required: true, message: '请输入链接', trigger: 'blur' }
+          { required: true, message: this.$t('advert.urlEmpty'), trigger: 'blur' }
+        ],
+        busCode: [
+          { required: true, message: this.$t('advert.busCodeEmpty'), trigger: 'blur' }
         ]
       }
     }
@@ -173,13 +179,6 @@ export default {
     handleImgSuccess(res, file) {
       this.postForm.img = file.response.data
       this.$refs.imgLodding.close()
-    },
-    beforeUpload(file) {
-      const isLt2M = file.size / 1024 / 1024 < 2
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isLt2M
     },
     integer() {
       this.postForm.sort = this.postForm.sort.replace(/[^\.\d]/g, '')
