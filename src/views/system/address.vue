@@ -14,7 +14,7 @@
         {{ $t('permission.search') }}
       </el-button>
 
-      <el-button type="primary" icon="el-icon-edit" @click="handleFirstAdd()">
+      <el-button v-waves class="filter-item" type="primary" icon="el-icon-edit" @click="handleFirstAdd()">
         {{ $t('address.addTopAddress') }}
       </el-button>
     </div>

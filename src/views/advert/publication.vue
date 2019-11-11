@@ -17,7 +17,7 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('table.search') }}
       </el-button>
-      <el-button type="primary" icon="el-icon-edit">
+      <el-button v-waves class="filter-item" type="primary" icon="el-icon-edit">
         <router-link :to="'/advert/editAdvert/-1'">
           {{ $t('advert.addAdvert') }}
         </router-link>

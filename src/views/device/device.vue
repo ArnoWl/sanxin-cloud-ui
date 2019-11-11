@@ -11,7 +11,7 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('table.search') }}
       </el-button>
-      <el-button type="primary" icon="el-icon-edit">
+      <el-button v-waves class="filter-item" type="primary" icon="el-icon-edit">
         <router-link :to="'/device/editDevice/-1'">
           {{ $t('device.addDevice') }}
         </router-link>
