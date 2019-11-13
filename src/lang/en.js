@@ -76,7 +76,8 @@ export default {
     amountDetails: 'Amount Details',
     depositDetails: 'Deposit Details',
     timeDetails: 'Time Details',
-    orderDetail: 'Order Details'
+    orderDetail: 'Order Details',
+    password: 'Change Password'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -84,7 +85,9 @@ export default {
     logOut: 'Log Out',
     profile: 'Profile',
     theme: 'Theme',
-    size: 'Global Size'
+    size: 'Global Size',
+    updatePass: 'Change Password',
+    updateHeadUrl: 'Upload your Avatar'
   },
   login: {
     title: 'Login Form',
@@ -450,6 +453,14 @@ export default {
   setUp: {
     baseName: 'Foundation setup'
   },
+  system: {
+    password: 'Password',
+    confirmPassword: 'Confirm password',
+    passwordEmpty: 'Please input a password',
+    confirmPasswordEmpty: 'Please enter the password again',
+    confirmPasswordError: 'Please confirm whether the password is correct',
+    passwordLength: 'Password length is 6-20 bits'
+  },
   status: {
     pass: 'Pass',
     reject: 'Reject',
@@ -470,6 +481,7 @@ export default {
     deleteMsg: 'Verify deletion of current data？',
     proName: 'Province',
     cityName: 'City',
-    areaName: 'District / county'
+    areaName: 'District / county',
+    add: 'Newly added'
   }
 }

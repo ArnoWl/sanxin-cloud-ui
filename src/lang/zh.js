@@ -76,7 +76,8 @@ export default {
     amountDetails: '金额明细',
     depositDetails: '押金明细',
     timeDetails: '时长明细',
-    orderDetail: '订单详情'
+    orderDetail: '订单详情',
+    password: '修改密码'
   },
   navbar: {
     dashboard: '首页',
@@ -84,7 +85,9 @@ export default {
     logOut: '退出登录',
     profile: '个人中心',
     theme: '换肤',
-    size: '布局大小'
+    size: '布局大小',
+    updatePass: '修改密码',
+    updateHeadUrl: '上传头像'
   },
   login: {
     title: '系统登录',
@@ -452,6 +455,14 @@ export default {
   setUp: {
     baseName: '基础设置'
   },
+  system: {
+    password: '密码',
+    confirmPassword: '确认密码',
+    passwordEmpty: '请输入密码',
+    confirmPasswordEmpty: '请再次输入密码',
+    confirmPasswordError: '请确认密码是否无误',
+    passwordLength: '密码长度为6-20位'
+  },
   status: {
     pass: '通过',
     reject: '驳回',
@@ -472,6 +483,7 @@ export default {
     deleteMsg: '确认删除当前数据？',
     proName: '省份',
     cityName: '城市',
-    areaName: '区/县'
+    areaName: '区/县',
+    add: '新增'
   }
 }

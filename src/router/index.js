@@ -46,6 +46,7 @@ export const constantRoutes = [
   },
   {
     path: '/login',
+    name: 'login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
@@ -171,6 +172,20 @@ export const constantRoutes = [
         component: () => import('@/views/system/guideDetail'),
         name: 'GuideDetail',
         meta: { title: 'guideDetail' },
+        hidden: true
+      },
+      {
+        path: 'avatarUpload',
+        component: () => import('@/views/system/avatarUpload'),
+        name: 'AvatarUpload',
+        meta: { title: 'avatarUpload' },
+        hidden: true
+      },
+      {
+        path: 'password',
+        component: () => import('@/views/system/password'),
+        name: 'Password',
+        meta: { title: 'password' },
         hidden: true
       }
     ]

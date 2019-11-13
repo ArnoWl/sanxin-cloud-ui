@@ -29,3 +29,19 @@ export function logout() {
     method: 'post'
   })
 }
+
+export function updateHeadUrl(params) {
+  return request({
+    url: '/user/updateHeadUrl',
+    method: 'post',
+    params: params
+  })
+}
+
+export function updatePassword(params) {
+  return request({
+    url: '/user/updatePassword',
+    method: 'post',
+    params: params
+  })
+}

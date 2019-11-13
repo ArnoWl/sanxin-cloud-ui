@@ -1,5 +1,10 @@
 <template>
   <div class="app-container">
+    <div class="filter-container">
+      <el-button v-waves class="filter-item" type="primary" @click="showAdd()">
+        {{ $t('status.add') }}
+      </el-button>
+    </div>
     <el-table
       :key="tableKey"
       v-loading="listLoading"
@@ -106,6 +111,14 @@ export default {
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.dataForm = Object.assign({}, row)
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
+    },
+    showAdd() {
+      this.dialogStatus = 'create'
+      this.dialogFormVisible = true
+      this.dataForm = Object.assign({}, [])
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })

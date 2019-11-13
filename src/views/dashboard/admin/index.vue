@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import GithubCorner from '@/components/GithubCorner'
+// import GithubCorner from '@/components/GithubCorner'
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
 import { queryCashStatistics } from '@/api/homePage'
@@ -55,7 +55,6 @@ import { queryCashStatistics } from '@/api/homePage'
 export default {
   name: 'DashboardAdmin',
   components: {
-    GithubCorner,
     PanelGroup,
     LineChart
     // RaddarChart,

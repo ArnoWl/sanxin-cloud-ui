@@ -66,6 +66,7 @@ import { getLanguage, getToken } from '@/utils/auth'
 import loadingAnimation from '@/components/loading/loadingAnimation'
 const defaultConfig = require('@/api/globalconfig.js')
 const defaultForm = {
+  img: ''
 }
 export default {
   name: 'AdvertDetail',
@@ -244,7 +245,7 @@ export default {
     color: #8c939d;
     width: 350px;
     height: 150px;
-    line-height: 342px;
+    line-height: 150px;
     text-align: center;
   }
   .avatar-img {

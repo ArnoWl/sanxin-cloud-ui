@@ -37,6 +37,13 @@
           <span>{{ scope.row.event }}</span>
         </template>
       </el-table-column>
+      <el-table-column :label="$t('advert.showType')" align="center">
+        <template slot-scope="scope">
+          <span v-if="scope.row.type == 0">transverse</span>
+          <span v-if="scope.row.type == 1">portrait</span>
+          <span v-if="scope.row.type == 2">wheel</span>
+        </template>
+      </el-table-column>
       <el-table-column :label="$t('advert.sort')" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.sort }}</span>

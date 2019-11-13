@@ -76,15 +76,18 @@ export default {
     amountDetails: 'รายละเอียดจำนวนเงิน',
     depositDetails: 'รายละเอียดการฝาก',
     timeDetails: 'ระยะเวลา',
-    orderDetail: 'รายละเอียดการสั่งซื้อ'
+    orderDetail: 'รายละเอียดการสั่งซื้อ',
+    password: 'เปลี่ยนรหัสผ่าน'
   },
   navbar: {
-    dashboard: 'Dashboard',
+    dashboard: 'หน้าแรก',
     github: 'Github',
-    logOut: 'Log Out',
+    logOut: 'ออกจากระบบ',
     profile: 'Profile',
     theme: 'Theme',
-    size: 'Global Size'
+    size: 'Global Size',
+    updatePass: 'เปลี่ยนรหัสผ่าน',
+    updateHeadUrl: 'อัพโหลดรูปของคุณ'
   },
   login: {
     title: 'Login Form',
@@ -452,6 +455,14 @@ export default {
   setUp: {
     baseName: 'การตั้งค่าพื้นฐาน'
   },
+  system: {
+    password: 'รหัสผ่าน',
+    confirmPassword: 'ยืนยันรหัสผ่าน',
+    passwordEmpty: 'กรุณาใส่รหัสผ่าน',
+    confirmPasswordEmpty: 'กรุณาใส่รหัสผ่านอีกครั้ง',
+    confirmPasswordError: 'กรุณายืนยันรหัสผ่านของคุณ',
+    passwordLength: 'ความยาวของรหัสผ่านเป็น 6-20 บิต'
+  },
   status: {
     pass: 'ผ่าน',
     reject: 'ปฏิเสธ',
@@ -472,6 +483,7 @@ export default {
     deleteMsg: 'ตรวจสอบการลบข้อมูลปัจจุบัน？',
     proName: 'จังหวัด',
     cityName: 'นคร',
-    areaName: 'อำเภอและเมือง'
+    areaName: 'อำเภอและเมือง',
+    add: 'ใหม่'
   }
 }
